@@ -8,13 +8,17 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class ModItems {
-    public static final Item COFFEE_BERRIES = new Item(new Item.Settings().food(ModFoodComponents.COFFEE_BERRIES).group(ItemGroup.FOOD));
-    public static final Item COFFEE_BOTTLE = new CoffeeBottleItem(new Item.Settings().food(ModFoodComponents.COFFEE_BOTTLE).maxCount(16).group(ItemGroup.FOOD));
+    public static final Item COFFEE_BEANS = new Item(new Item.Settings().group(ItemGroup.MISC));
     public static final Item GROUND_COFFEE = new Item(new Item.Settings().group(ItemGroup.MISC));
 
+    public static final Item COFFEE_BERRIES = new Item(new Item.Settings().food(ModFoodComponents.COFFEE_BERRIES).group(ItemGroup.FOOD));
+    public static final Item COFFEE_BOTTLE = new CoffeeBottleItem(new Item.Settings().food(ModFoodComponents.COFFEE_BOTTLE).maxCount(16).group(ItemGroup.FOOD));
+
     public static void register() {
+        Registry.register(Registry.ITEM, new Identifier(Caffeinated.MODID, "coffee_beans"), COFFEE_BEANS);
+        Registry.register(Registry.ITEM, new Identifier(Caffeinated.MODID, "ground_coffee"), GROUND_COFFEE);
+
         Registry.register(Registry.ITEM, new Identifier(Caffeinated.MODID, "coffee_berries"), COFFEE_BERRIES);
         Registry.register(Registry.ITEM, new Identifier(Caffeinated.MODID, "coffee_bottle"), COFFEE_BOTTLE);
-        Registry.register(Registry.ITEM, new Identifier(Caffeinated.MODID, "ground_coffee"), GROUND_COFFEE);
     }
 }

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "coffee_beans",
+  "ingredients": [
+    {
+      "item": "caffeinated:coffee_berries"
+    }
+  ],
+  "result": {
+    "item": "caffeinated:coffee_beans"
+  }
+}
