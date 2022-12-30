@@ -9,7 +9,7 @@ import net.minecraft.util.registry.Registry;
 
 public class ModItems {
     public static final Item COFFEE_BERRIES = new Item(new Item.Settings().food(ModFoodComponents.COFFEE_BERRIES).group(ItemGroup.FOOD));
-    public static final Item COFFEE_BOTTLE = new CoffeeBottleItem(new Item.Settings().food(ModFoodComponents.COFFEE_BOTTLE).group(ItemGroup.FOOD));
+    public static final Item COFFEE_BOTTLE = new CoffeeBottleItem(new Item.Settings().food(ModFoodComponents.COFFEE_BOTTLE).maxCount(16).group(ItemGroup.FOOD));
 
     public static void register() {
         Registry.register(Registry.ITEM, new Identifier(Caffeinated.MODID, "coffee_berries"), COFFEE_BERRIES);
