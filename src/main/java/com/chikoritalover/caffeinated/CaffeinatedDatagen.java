@@ -26,6 +26,7 @@ public class CaffeinatedDatagen implements DataGeneratorEntrypoint {
         public void generateItemModels(ItemModelGenerator itemModelGenerator) {
             itemModelGenerator.register(ModItems.COFFEE_BERRIES, Models.GENERATED);
             itemModelGenerator.register(ModItems.COFFEE_BOTTLE, Models.GENERATED);
+            itemModelGenerator.register(ModItems.GROUND_COFFEE, Models.GENERATED);
         }
     }
 }
