@@ -1,0 +1,11 @@
+{
+  "item.coffee_bottle.drink": {
+    "subtitle": "subtitles.item.coffee_bottle.drink",
+    "sounds": [
+      "caffeinated:item/coffee_bottle/drink1",
+      "caffeinated:item/coffee_bottle/drink2",
+      "caffeinated:item/coffee_bottle/drink3",
+      "caffeinated:item/coffee_bottle/drink4"
+    ]
+  }
+}

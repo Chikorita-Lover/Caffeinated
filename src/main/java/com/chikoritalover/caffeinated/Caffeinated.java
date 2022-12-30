@@ -1,6 +1,8 @@
 package com.chikoritalover.caffeinated;
 
 import com.chikoritalover.caffeinated.registry.ModItems;
+import com.chikoritalover.caffeinated.registry.ModSoundEvents;
+import com.chikoritalover.caffeinated.registry.ModStatusEffects;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,5 +17,7 @@ public class Caffeinated implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		ModItems.register();
+		ModSoundEvents.register();
+		ModStatusEffects.register();
 	}
 }

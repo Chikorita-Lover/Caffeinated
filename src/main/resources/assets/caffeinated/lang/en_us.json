@@ -1,3 +1,8 @@
 {
-  "item.caffeinated.coffee_berries": "Coffee Berries"
+  "effect.caffeinated.caffeine": "Caffeine",
+
+  "item.caffeinated.coffee_berries": "Coffee Berries",
+  "item.caffeinated.coffee_bottle": "Coffee Bottle",
+
+  "subtitles.item.coffee_bottle.drink": "Slurping"
 }
