@@ -1,4 +1,11 @@
 {
+  "block.coffee_shrub.pick_berries": {
+    "subtitle": "subtitles.block.sweet_berry_bush.pick_berries",
+    "sounds": [
+      "item/sweet_berries/pick_from_bush1",
+      "item/sweet_berries/pick_from_bush2"
+    ]
+  },
   "item.coffee_bottle.drink": {
     "subtitle": "subtitles.item.coffee_bottle.drink",
     "sounds": [

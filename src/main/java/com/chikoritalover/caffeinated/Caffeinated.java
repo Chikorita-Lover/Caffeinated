@@ -1,5 +1,6 @@
 package com.chikoritalover.caffeinated;
 
+import com.chikoritalover.caffeinated.registry.ModBlocks;
 import com.chikoritalover.caffeinated.registry.ModItems;
 import com.chikoritalover.caffeinated.registry.ModSoundEvents;
 import com.chikoritalover.caffeinated.registry.ModStatusEffects;
@@ -16,6 +17,7 @@ public class Caffeinated implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		ModBlocks.register();
 		ModItems.register();
 		ModSoundEvents.register();
 		ModStatusEffects.register();

@@ -16,6 +16,9 @@
   "icon": "assets/caffeinated/icon.png",
   "environment": "*",
   "entrypoints": {
+    "client": [
+      "com.chikoritalover.caffeinated.CaffeinatedClient"
+    ],
     "fabric-datagen": [
       "com.chikoritalover.caffeinated.CaffeinatedDatagen"
     ],
