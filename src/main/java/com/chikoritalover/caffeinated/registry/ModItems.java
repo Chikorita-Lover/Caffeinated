@@ -2,6 +2,7 @@ package com.chikoritalover.caffeinated.registry;
 
 import com.chikoritalover.caffeinated.Caffeinated;
 import com.chikoritalover.caffeinated.item.CoffeeBottleItem;
+import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.item.AliasedBlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -21,5 +22,11 @@ public class ModItems {
 
         Registry.register(Registry.ITEM, new Identifier(Caffeinated.MODID, "coffee_berries"), COFFEE_BERRIES);
         Registry.register(Registry.ITEM, new Identifier(Caffeinated.MODID, "coffee_bottle"), COFFEE_BOTTLE);
+    }
+
+    public static void registerCompostingChances() {
+        CompostingChanceRegistry.INSTANCE.add(COFFEE_BEANS, 0.5F);
+        CompostingChanceRegistry.INSTANCE.add(GROUND_COFFEE, 0.5F);
+        CompostingChanceRegistry.INSTANCE.add(COFFEE_BERRIES, 0.65F);
     }
 }

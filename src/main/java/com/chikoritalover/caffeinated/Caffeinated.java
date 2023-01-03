@@ -19,6 +19,7 @@ public class Caffeinated implements ModInitializer {
 	public void onInitialize() {
 		ModBlocks.register();
 		ModItems.register();
+		ModItems.registerCompostingChances();
 		ModSoundEvents.register();
 		ModStatusEffects.register();
 	}
