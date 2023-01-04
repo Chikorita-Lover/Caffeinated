@@ -39,6 +39,24 @@ public class FloweringCoffeeShrubBlock extends TallPlantBlock implements Fertili
         return true;
     }
 
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        int i = state.get(AGE);
+        if (i < 3 && random.nextInt(11) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
+            grow(world, random, pos, state);
+            BlockState blockState = world.getBlockState(pos);
+
+            world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(blockState));
+            if (blockState.get(HALF) == DoubleBlockHalf.LOWER) {
+                world.setBlockState(pos.up(), blockState.cycle(HALF), 2);
+                world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos.up(), GameEvent.Emitter.of(blockState.cycle(HALF)));
+            } else {
+                world.setBlockState(pos.down(), blockState.cycle(HALF), 2);
+                world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos.down(), GameEvent.Emitter.of(blockState.cycle(HALF)));
+            }
+        }
+
+    }
+
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         int i = state.get(AGE);
         BlockState aboveState = world.getBlockState(pos.up());
