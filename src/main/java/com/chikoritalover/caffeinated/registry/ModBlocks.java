@@ -4,6 +4,7 @@ import com.chikoritalover.caffeinated.Caffeinated;
 import com.chikoritalover.caffeinated.block.CoffeeCauldronBlock;
 import com.chikoritalover.caffeinated.block.CoffeeShrubBlock;
 import com.chikoritalover.caffeinated.block.FloweringCoffeeShrubBlock;
+import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -23,5 +24,10 @@ public class ModBlocks {
 
         Registry.register(Registry.BLOCK, new Identifier(Caffeinated.MODID, "coffee_shrub"), COFFEE_SHRUB);
         Registry.register(Registry.BLOCK, new Identifier(Caffeinated.MODID, "flowering_coffee_shrub"), FLOWERING_COFFEE_SHRUB);
+    }
+
+    public static void registerFlammableBlocks() {
+        FlammableBlockRegistry.getDefaultInstance().add(COFFEE_SHRUB, 60, 15);
+        FlammableBlockRegistry.getDefaultInstance().add(FLOWERING_COFFEE_SHRUB, 60, 15);
     }
 }
