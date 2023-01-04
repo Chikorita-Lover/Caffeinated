@@ -59,8 +59,7 @@ public class FloweringCoffeeShrubBlock extends TallPlantBlock implements Fertili
 
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         int i = state.get(AGE);
-        BlockState aboveState = world.getBlockState(pos.up());
-        boolean bl = i == 3 && !aboveState.getMaterial().isReplaceable();
+        boolean bl = i == 3;
         if (!bl && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
             return ActionResult.PASS;
         } else if (i == 3) {
