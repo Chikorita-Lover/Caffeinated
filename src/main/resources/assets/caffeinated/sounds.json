@@ -1,11 +1,9 @@
 {
-  "block.coffee_cauldron.bubble": {
-    "subtitle": "subtitles.block.coffee_cauldron.bubble",
+  "block.cauldron.bubble": {
+    "subtitle": "subtitles.block.cauldron.bubble",
     "sounds": [
-      "caffeinated:block/coffee_cauldron/bubble1",
-      "caffeinated:block/coffee_cauldron/bubble2",
-      "caffeinated:block/coffee_cauldron/bubble3",
-      "caffeinated:block/coffee_cauldron/bubble4"
+      "caffeinated:block/cauldron/bubble1",
+      "caffeinated:block/cauldron/bubble2"
     ]
   },
   "block.coffee_shrub.pick_berries": {

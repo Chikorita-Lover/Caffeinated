@@ -9,8 +9,8 @@ import net.minecraft.block.LeveledCauldronBlock;
 import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -31,11 +31,13 @@ public class CoffeeCauldronBlock extends LeveledCauldronBlock {
 
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         if (CampfireBlock.isLitCampfireInRange(world, pos)) {
+            int level = state.get(LEVEL);
+
             double d = pos.getX() + random.nextDouble() * 0.5 + 0.25;
-            double e = pos.getY() + 0.375 + state.get(LEVEL) * 0.1875;
+            double e = pos.getY() + 0.375 + level * 0.1875;
             double f = pos.getZ() + random.nextDouble() * 0.5 + 0.25;
             if (random.nextDouble() < 0.15) {
-                world.playSound(d, e, f, ModSoundEvents.BLOCK_COFFEE_CAULDRON_BUBBLE, SoundCategory.BLOCKS, 1.0F, 1.0F, true);
+                world.playSound(d, e, f, ModSoundEvents.BLOCK_CAULDRON_BUBBLE, SoundCategory.BLOCKS, 0.2F, 2.5F - level * 0.5F, true);
             }
 
             world.addParticle(ModParticleTypes.COFFEE_POP, d, e, f, 0.0, 0.0, 0.0);
