@@ -6,6 +6,130 @@
       "caffeinated:block/cauldron/bubble2"
     ]
   },
+  "block.coffee_bean_block.break": {
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      {
+        "name": "caffeinated:block/coffee_bean_block/break1",
+        "pitch": 0.8,
+        "volume": 1.0
+      },
+      {
+        "name": "caffeinated:block/coffee_bean_block/break2",
+        "pitch": 0.8,
+        "volume": 1.0
+      },
+      {
+        "name": "caffeinated:block/coffee_bean_block/break3",
+        "pitch": 0.8,
+        "volume": 1.0
+      },
+      {
+        "name": "caffeinated:block/coffee_bean_block/break4",
+        "pitch": 0.8,
+        "volume": 1.0
+      }
+    ]
+  },
+  "block.coffee_bean_block.fall": {
+    "sounds": [
+      {
+        "name": "caffeinated:block/coffee_bean_block/step1",
+        "pitch": 0.75,
+        "volume": 0.5
+      },
+      {
+        "name": "caffeinated:block/coffee_bean_block/step2",
+        "pitch": 0.75,
+        "volume": 0.5
+      },
+      {
+        "name": "caffeinated:block/coffee_bean_block/step3",
+        "pitch": 0.75,
+        "volume": 0.5
+      },
+      {
+        "name": "caffeinated:block/coffee_bean_block/step4",
+        "pitch": 0.75,
+        "volume": 0.5
+      }
+    ]
+  },
+  "block.coffee_bean_block.hit": {
+    "subtitle": "subtitles.block.generic.hit",
+    "sounds": [
+      {
+        "name": "caffeinated:block/coffee_bean_block/step1",
+        "pitch": 0.5,
+        "volume": 0.25
+      },
+      {
+        "name": "caffeinated:block/coffee_bean_block/step2",
+        "pitch": 0.5,
+        "volume": 0.25
+      },
+      {
+        "name": "caffeinated:block/coffee_bean_block/step3",
+        "pitch": 0.5,
+        "volume": 0.25
+      },
+      {
+        "name": "caffeinated:block/coffee_bean_block/step4",
+        "pitch": 0.5,
+        "volume": 0.25
+      }
+    ]
+  },
+  "block.coffee_bean_block.place": {
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      {
+        "name": "caffeinated:block/coffee_bean_block/break1",
+        "pitch": 0.8,
+        "volume": 1.0
+      },
+      {
+        "name": "caffeinated:block/coffee_bean_block/break2",
+        "pitch": 0.8,
+        "volume": 1.0
+      },
+      {
+        "name": "caffeinated:block/coffee_bean_block/break3",
+        "pitch": 0.8,
+        "volume": 1.0
+      },
+      {
+        "name": "caffeinated:block/coffee_bean_block/break4",
+        "pitch": 0.8,
+        "volume": 1.0
+      }
+    ]
+  },
+  "block.coffee_bean_block.step": {
+    "subtitle": "subtitles.block.generic.footsteps",
+    "sounds": [
+      {
+        "name": "caffeinated:block/coffee_bean_block/step1",
+        "pitch": 1.0,
+        "volume": 0.3
+      },
+      {
+        "name": "caffeinated:block/coffee_bean_block/step2",
+        "pitch": 1.0,
+        "volume": 0.3
+      },
+      {
+        "name": "caffeinated:block/coffee_bean_block/step3",
+        "pitch": 1.0,
+        "volume": 0.3
+      },
+      {
+        "name": "caffeinated:block/coffee_bean_block/step4",
+        "pitch": 1.0,
+        "volume": 0.3
+      }
+    ]
+  },
   "block.coffee_shrub.pick_berries": {
     "subtitle": "subtitles.block.sweet_berry_bush.pick_berries",
     "sounds": [

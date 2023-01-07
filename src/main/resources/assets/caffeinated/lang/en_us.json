@@ -2,6 +2,7 @@
   "advancements.husbandry.brew_coffee.title": "Wake Up and Smell the Coffee",
   "advancements.husbandry.brew_coffee.description": "Brew a Coffee Bottle in a Cauldron over a Campfire",
 
+  "block.caffeinated.coffee_bean_block": "Coffee Bean Block",
   "block.caffeinated.coffee_cauldron": "Coffee Cauldron",
   "block.caffeinated.coffee_shrub": "Coffee Shrub",
   "block.caffeinated.flowering_coffee_shrub": "Flowering Coffee Shrub",
