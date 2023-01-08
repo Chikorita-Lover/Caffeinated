@@ -40,5 +40,6 @@ public class Caffeinated implements ModInitializer {
 		ModParticleTypes.register();
 		ModSoundEvents.register();
 		ModStatusEffects.register();
+		ModTradeOffers.register();
 	}
 }
