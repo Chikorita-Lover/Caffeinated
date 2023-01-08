@@ -57,6 +57,24 @@
       "item/sweet_berries/pick_from_bush2"
     ]
   },
+  "block.ground_coffee_block.break": {
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      "caffeinated:block/ground_coffee_block/break1",
+      "caffeinated:block/ground_coffee_block/break2",
+      "caffeinated:block/ground_coffee_block/break3",
+      "caffeinated:block/ground_coffee_block/break4"
+    ]
+  },
+  "block.ground_coffee_block.place": {
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      "caffeinated:block/ground_coffee_block/break1",
+      "caffeinated:block/ground_coffee_block/break2",
+      "caffeinated:block/ground_coffee_block/break3",
+      "caffeinated:block/ground_coffee_block/break4"
+    ]
+  },
   "item.coffee_bottle.drink": {
     "subtitle": "subtitles.item.coffee_bottle.drink",
     "sounds": [

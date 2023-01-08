@@ -16,6 +16,9 @@ public class ModSoundEvents {
 
     public static final SoundEvent BLOCK_COFFEE_SHRUB_PICK_BERRIES = register("block.coffee_shrub.pick_berries");
 
+    public static final SoundEvent BLOCK_GROUND_COFFEE_BREAK = register("block.ground_coffee_block.break");
+    public static final SoundEvent BLOCK_GROUND_COFFEE_PLACE = register("block.ground_coffee_block.place");
+
     public static final SoundEvent ITEM_COFFEE_BOTTLE_DRINK = register("item.coffee_bottle.drink");
 
     private static SoundEvent register(String id) {
