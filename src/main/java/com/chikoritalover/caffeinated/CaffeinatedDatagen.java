@@ -75,7 +75,7 @@ public class CaffeinatedDatagen implements DataGeneratorEntrypoint {
 
         @Override
         protected void generateRecipes(Consumer<RecipeJsonProvider> exporter) {
-            offerReversibleCompactingRecipes(exporter, ModItems.COFFEE_BEANS, ModBlocks.COFFEE_BEAN_BLOCK, "coffee_bean_block", null, "coffee_beans_from_block", null);
+            offerReversibleCompactingRecipes(exporter, ModItems.COFFEE_BEANS, ModBlocks.COFFEE_BEAN_BLOCK, "coffee_bean_block", null, "coffee_beans_from_block", "coffee_beans");
 
             offerReversibleCompactingRecipes(exporter, ModItems.GROUND_COFFEE, ModBlocks.GROUND_COFFEE_BLOCK, "ground_coffee_block", null, "ground_coffee_from_block", "ground_coffee");
 
