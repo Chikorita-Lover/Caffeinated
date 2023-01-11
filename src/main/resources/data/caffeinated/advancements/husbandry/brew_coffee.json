@@ -14,24 +14,29 @@
     "announce_to_chat": true,
     "hidden": false
   },
-  "parent": "minecraft:husbandry/plant_seed",
+  "parent": "minecraft:husbandry/root",
   "criteria": {
-    "has_coffee_bottle": {
-      "trigger": "minecraft:inventory_changed",
+    "brew_coffee": {
+      "trigger": "minecraft:item_used_on_block",
       "conditions": {
-        "items": [
-          {
-            "items": [
-              "caffeinated:coffee_bottle"
+        "item": {
+          "items": [
+            "minecraft:glass_bottle"
+          ]
+        },
+        "location": {
+          "block": {
+            "blocks": [
+              "caffeinated:coffee_cauldron"
             ]
           }
-        ]
+        }
       }
     }
   },
   "requirements": [
     [
-      "has_coffee_bottle"
+      "brew_coffee"
     ]
   ]
 }
