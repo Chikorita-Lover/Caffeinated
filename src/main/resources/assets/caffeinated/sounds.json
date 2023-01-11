@@ -1,4 +1,11 @@
 {
+  "block.cauldron.brew": {
+    "subtitle": "subtitles.block.cauldron.brew",
+    "sounds": [
+      "minecraft:block/brewing_stand/brew1",
+      "minecraft:block/brewing_stand/brew2"
+    ]
+  },
   "block.cauldron.bubble": {
     "subtitle": "subtitles.block.cauldron.bubble",
     "sounds": [
@@ -82,6 +89,12 @@
       "caffeinated:item/coffee_bottle/drink2",
       "caffeinated:item/coffee_bottle/drink3",
       "caffeinated:item/coffee_bottle/drink4"
+    ]
+  },
+  "item.ground_coffee.splash": {
+    "subtitle": "subtitles.item.ground_coffee.splash",
+    "sounds": [
+      "caffeinated:item/ground_coffee/splash"
     ]
   }
 }
