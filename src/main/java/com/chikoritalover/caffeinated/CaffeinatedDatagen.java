@@ -81,9 +81,9 @@ public class CaffeinatedDatagen implements DataGeneratorEntrypoint {
 
             offerReversibleCompactingRecipes(exporter, ModItems.GROUND_COFFEE, ModBlocks.GROUND_COFFEE_BLOCK, "ground_coffee_block", null, "ground_coffee_from_block", "ground_coffee");
 
-            offerShapelessRecipe(exporter, ModItems.COFFEE_BEANS, ModItems.COFFEE_BERRIES, "coffee_beans", 1);
+            ShapelessRecipeJsonBuilder.create(ModItems.COFFEE_BEANS).input(ModItems.COFFEE_BERRIES).group("coffee_beans").criterion(hasItem(ModItems.COFFEE_BERRIES), conditionsFromItem(ModItems.COFFEE_BERRIES)).offerTo(exporter, new Identifier(Caffeinated.MODID, "coffee_beans_from_coffee_berries"));
 
-            offerShapelessRecipe(exporter, ModItems.GROUND_COFFEE, ModItems.COFFEE_BEANS, "ground_coffee", 2);
+            ShapedRecipeJsonBuilder.create(ModItems.GROUND_COFFEE).input('#', ModItems.COFFEE_BEANS).pattern("###").group("ground_coffee").criterion(hasItem(ModItems.COFFEE_BEANS), conditionsFromItem(ModItems.COFFEE_BEANS)).offerTo(exporter, new Identifier(Caffeinated.MODID, "ground_coffee_from_coffee_beans"));
         }
 
         public static void offerReversibleCompactingRecipes(Consumer<RecipeJsonProvider> exporter, ItemConvertible input, ItemConvertible compacted, String compactingRecipeName, @Nullable String compactingRecipeGroup, String reverseRecipeName, @Nullable String reverseRecipeGroup) {

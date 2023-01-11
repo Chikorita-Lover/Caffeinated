@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:coffee_beans_from_coffee_berries"
+        "recipe": "caffeinated:coffee_beans_from_coffee_berries"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:coffee_beans_from_coffee_berries"
+      "caffeinated:coffee_beans_from_coffee_berries"
     ]
   }
 }
