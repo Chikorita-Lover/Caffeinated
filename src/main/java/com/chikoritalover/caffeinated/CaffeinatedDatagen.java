@@ -53,6 +53,7 @@ public class CaffeinatedDatagen implements DataGeneratorEntrypoint {
         public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
             blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.COFFEE_BEAN_BLOCK);
             blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.GROUND_COFFEE_BLOCK);
+            blockStateModelGenerator.registerSingleton(ModBlocks.COFFEE_BERRY_CRATE, new TextureMap().put(TextureKey.SIDE, new Identifier(Caffeinated.MODID, "block/coffee_berry_crate_side")).put(TextureKey.TOP, new Identifier(Caffeinated.MODID, "block/coffee_berry_crate_top")).put(TextureKey.BOTTOM, new Identifier("farmersdelight", "block/crate_bottom")), Models.CUBE_BOTTOM_TOP);
 
             blockStateModelGenerator.blockStateCollector.accept(VariantsBlockStateSupplier.create(ModBlocks.COFFEE_CAULDRON).coordinate(BlockStateVariantMap.create(LeveledCauldronBlock.LEVEL).register(1, BlockStateVariant.create().put(VariantSettings.MODEL, Models.TEMPLATE_CAULDRON_LEVEL1.upload(ModBlocks.COFFEE_CAULDRON, "_level1", TextureMap.cauldron(new Identifier(Caffeinated.MODID, "block/coffee")), blockStateModelGenerator.modelCollector))).register(2, BlockStateVariant.create().put(VariantSettings.MODEL, Models.TEMPLATE_CAULDRON_LEVEL2.upload(ModBlocks.COFFEE_CAULDRON, "_level2", TextureMap.cauldron(new Identifier(Caffeinated.MODID, "block/coffee")), blockStateModelGenerator.modelCollector))).register(3, BlockStateVariant.create().put(VariantSettings.MODEL, Models.TEMPLATE_CAULDRON_FULL.upload(ModBlocks.COFFEE_CAULDRON, "_full", TextureMap.cauldron(new Identifier(Caffeinated.MODID, "block/coffee")), blockStateModelGenerator.modelCollector)))));
 
@@ -80,6 +81,8 @@ public class CaffeinatedDatagen implements DataGeneratorEntrypoint {
             offerReversibleCompactingRecipes(exporter, ModItems.COFFEE_BEANS, ModBlocks.COFFEE_BEAN_BLOCK, "coffee_bean_block", null, "coffee_beans_from_block", "coffee_beans");
 
             offerReversibleCompactingRecipes(exporter, ModItems.GROUND_COFFEE, ModBlocks.GROUND_COFFEE_BLOCK, "ground_coffee_block", null, "ground_coffee_from_block", "ground_coffee");
+
+            ShapelessRecipeJsonBuilder.create(ModItems.COFFEE_BERRIES, 9).input(ModBlocks.COFFEE_BERRY_CRATE).criterion(hasItem(ModBlocks.COFFEE_BERRY_CRATE), conditionsFromItem(ModBlocks.COFFEE_BERRY_CRATE)).offerTo(exporter);
 
             ShapelessRecipeJsonBuilder.create(ModItems.COFFEE_BEANS).input(ModItems.COFFEE_BERRIES).group("coffee_beans").criterion(hasItem(ModItems.COFFEE_BERRIES), conditionsFromItem(ModItems.COFFEE_BERRIES)).offerTo(exporter, new Identifier(Caffeinated.MODID, "coffee_beans_from_coffee_berries"));
 

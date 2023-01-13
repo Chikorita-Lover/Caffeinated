@@ -14,6 +14,7 @@ import net.minecraft.util.registry.Registry;
 public class ModBlocks {
     public static final Block COFFEE_BEAN_BLOCK = new Block(AbstractBlock.Settings.of(Material.WOOD, MapColor.SPRUCE_BROWN).sounds(ModBlockSoundGroup.COFFEE_BEAN_BLOCK).strength(1.8F, 3.0F));
     public static final Block GROUND_COFFEE_BLOCK = new SandBlock(8473899, AbstractBlock.Settings.of(Material.AGGREGATE, MapColor.SPRUCE_BROWN).strength(0.5F).sounds(ModBlockSoundGroup.GROUND_COFFEE_BLOCK));
+    public static final Block COFFEE_BERRY_CRATE = new Block(AbstractBlock.Settings.of(Material.WOOD).sounds(BlockSoundGroup.WOOD).strength(2.0F, 3.0F));
 
     public static final Block COFFEE_CAULDRON = new CoffeeCauldronBlock(AbstractBlock.Settings.copy(Blocks.CAULDRON), ModCauldronBehavior.COFFEE_CAULDRON_BEHAVIOR);
     public static final Block GROUND_COFFEE_CAULDRON = new GroundCoffeeCauldronBlock(AbstractBlock.Settings.copy(Blocks.CAULDRON).ticksRandomly(), ModCauldronBehavior.GROUND_COFFEE_CAULDRON_BEHAVIOR);
@@ -24,6 +25,7 @@ public class ModBlocks {
     public static void register() {
         Registry.register(Registry.BLOCK, new Identifier(Caffeinated.MODID, "coffee_bean_block"), COFFEE_BEAN_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(Caffeinated.MODID, "ground_coffee_block"), GROUND_COFFEE_BLOCK);
+        Registry.register(Registry.BLOCK, new Identifier(Caffeinated.MODID, "coffee_berry_crate"), COFFEE_BERRY_CRATE);
 
         Registry.register(Registry.BLOCK, new Identifier(Caffeinated.MODID, "coffee_cauldron"), COFFEE_CAULDRON);
         Registry.register(Registry.BLOCK, new Identifier(Caffeinated.MODID, "ground_coffee_cauldron"), GROUND_COFFEE_CAULDRON);

@@ -3,6 +3,7 @@ package com.chikoritalover.caffeinated.registry;
 import com.chikoritalover.caffeinated.Caffeinated;
 import com.chikoritalover.caffeinated.item.CoffeeBottleItem;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.AliasedBlockItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -13,6 +14,7 @@ import net.minecraft.util.registry.Registry;
 public class ModItems {
     public static final Item COFFEE_BEAN_BLOCK = new BlockItem(ModBlocks.COFFEE_BEAN_BLOCK, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS));
     public static final Item GROUND_COFFEE_BLOCK = new BlockItem(ModBlocks.GROUND_COFFEE_BLOCK, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS));
+    public static final Item COFFEE_BERRY_CRATE = new BlockItem(ModBlocks.COFFEE_BERRY_CRATE, new Item.Settings().group(FabricLoader.getInstance().isModLoaded("farmersdelight") ? ItemGroup.DECORATIONS : null));
 
     public static final Item COFFEE_BEANS = new AliasedBlockItem(ModBlocks.COFFEE_SHRUB, new Item.Settings().group(ItemGroup.MISC));
     public static final Item GROUND_COFFEE = new Item(new Item.Settings().group(ItemGroup.MISC));
@@ -23,6 +25,7 @@ public class ModItems {
     public static void register() {
         Registry.register(Registry.ITEM, new Identifier(Caffeinated.MODID, "coffee_bean_block"), COFFEE_BEAN_BLOCK);
         Registry.register(Registry.ITEM, new Identifier(Caffeinated.MODID, "ground_coffee_block"), GROUND_COFFEE_BLOCK);
+        Registry.register(Registry.ITEM, new Identifier(Caffeinated.MODID, "coffee_berry_crate"), COFFEE_BERRY_CRATE);
 
         Registry.register(Registry.ITEM, new Identifier(Caffeinated.MODID, "coffee_beans"), COFFEE_BEANS);
         Registry.register(Registry.ITEM, new Identifier(Caffeinated.MODID, "ground_coffee"), GROUND_COFFEE);
