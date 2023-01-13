@@ -11,6 +11,12 @@ version = project.mod_version
 group = project.maven_group
 
 repositories {
+	maven {
+		url "https://cursemaven.com"
+		content {
+			includeGroup "curse.maven"
+		}
+	}
 	// Add repositories to retrieve artifacts from in here.
 	// You should only use this when depending on other mods because
 	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
@@ -29,7 +35,8 @@ dependencies {
 
 	// Uncomment the following line to enable the deprecated Fabric API modules. 
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
-
+	modCompileOnly("curse.maven:farmersdelight-482834:${project.farmersdelight_version}")
+	modRuntimeOnly("curse.maven:modmenu-308702:${project.modmenu_version}")
 	// modImplementation "net.fabricmc.fabric-api:fabric-api-deprecated:${project.fabric_version}"
 }
 
