@@ -1,6 +1,7 @@
 package com.chikoritalover.caffeinated.registry;
 
 import com.chikoritalover.caffeinated.Caffeinated;
+import com.chikoritalover.caffeinated.integration.farmersdelight.FarmersDelightItemGroup;
 import com.chikoritalover.caffeinated.item.CoffeeBottleItem;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.loader.api.FabricLoader;
@@ -10,11 +11,12 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import org.jetbrains.annotations.Nullable;
 
 public class ModItems {
     public static final Item COFFEE_BEAN_BLOCK = new BlockItem(ModBlocks.COFFEE_BEAN_BLOCK, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS));
     public static final Item GROUND_COFFEE_BLOCK = new BlockItem(ModBlocks.GROUND_COFFEE_BLOCK, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS));
-    public static final Item COFFEE_BERRY_CRATE = new BlockItem(ModBlocks.COFFEE_BERRY_CRATE, new Item.Settings().group(FabricLoader.getInstance().isModLoaded("farmersdelight") ? ItemGroup.DECORATIONS : null));
+    public static final Item COFFEE_BERRY_CRATE = new BlockItem(ModBlocks.COFFEE_BERRY_CRATE, new Item.Settings().group(getFarmersDelightItemGroup()));
 
     public static final Item COFFEE_BEANS = new AliasedBlockItem(ModBlocks.COFFEE_SHRUB, new Item.Settings().group(ItemGroup.MISC));
     public static final Item GROUND_COFFEE = new Item(new Item.Settings().group(ItemGroup.MISC));
@@ -40,5 +42,10 @@ public class ModItems {
         CompostingChanceRegistry.INSTANCE.add(COFFEE_BEANS, 0.5F);
         CompostingChanceRegistry.INSTANCE.add(GROUND_COFFEE, 0.5F);
         CompostingChanceRegistry.INSTANCE.add(COFFEE_BERRIES, 0.65F);
+    }
+
+    @Nullable
+    public static ItemGroup getFarmersDelightItemGroup() {
+        return FabricLoader.getInstance().isModLoaded("farmersdelight") ? FarmersDelightItemGroup.getFarmersDelightItemGroup() : null;
     }
 }
