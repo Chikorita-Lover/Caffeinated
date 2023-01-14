@@ -9,11 +9,9 @@ import net.minecraft.block.LeveledCauldronBlock;
 import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.particle.ParticleEffect;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
@@ -40,7 +38,11 @@ public class CoffeeCauldronBlock extends LeveledCauldronBlock {
                 world.playSound(d, e, f, ModSoundEvents.BLOCK_CAULDRON_BUBBLE, SoundCategory.BLOCKS, 0.2F, 2.5F - level * 0.5F, true);
             }
 
-            world.addParticle(ModParticleTypes.COFFEE_POP, d, e, f, 0.0, 0.0, 0.0);
+            world.addParticle(getPopParticleEffect(), d, e, f, 0.0, 0.0, 0.0);
         }
+    }
+
+    public ParticleEffect getPopParticleEffect() {
+        return ModParticleTypes.COFFEE_POP;
     }
 }

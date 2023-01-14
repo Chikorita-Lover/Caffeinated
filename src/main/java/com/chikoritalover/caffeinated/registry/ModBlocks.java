@@ -17,7 +17,7 @@ public class ModBlocks {
     public static final Block COFFEE_BERRY_CRATE = new Block(AbstractBlock.Settings.of(Material.WOOD).sounds(BlockSoundGroup.WOOD).strength(2.0F, 3.0F));
 
     public static final Block COFFEE_CAULDRON = new CoffeeCauldronBlock(AbstractBlock.Settings.copy(Blocks.CAULDRON), ModCauldronBehavior.COFFEE_CAULDRON_BEHAVIOR);
-    public static final Block GROUND_COFFEE_CAULDRON = new GroundCoffeeCauldronBlock(AbstractBlock.Settings.copy(Blocks.CAULDRON).ticksRandomly(), ModCauldronBehavior.GROUND_COFFEE_CAULDRON_BEHAVIOR);
+    public static final Block GROUND_COFFEE_CAULDRON = new GroundCoffeeCauldronBlock(AbstractBlock.Settings.copy(Blocks.CAULDRON).ticksRandomly());
 
     public static final Block COFFEE_SHRUB = new CoffeeShrubBlock(AbstractBlock.Settings.of(Material.PLANT).ticksRandomly().noCollision().sounds(BlockSoundGroup.AZALEA));
     public static final Block FLOWERING_COFFEE_SHRUB = new FloweringCoffeeShrubBlock(AbstractBlock.Settings.of(Material.PLANT).ticksRandomly().noCollision().sounds(BlockSoundGroup.FLOWERING_AZALEA));
