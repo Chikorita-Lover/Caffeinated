@@ -1,18 +1,20 @@
 package com.chikoritalover.caffeinated.block;
 
+import com.chikoritalover.caffeinated.registry.ModBlockTags;
 import com.chikoritalover.caffeinated.registry.ModParticleTypes;
 import com.chikoritalover.caffeinated.registry.ModSoundEvents;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.CampfireBlock;
-import net.minecraft.block.LeveledCauldronBlock;
+import net.minecraft.block.*;
 import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.state.property.Properties;
+import net.minecraft.tag.BlockTags;
+import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
@@ -28,7 +30,7 @@ public class CoffeeCauldronBlock extends LeveledCauldronBlock {
     }
 
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        if (CampfireBlock.isLitCampfireInRange(world, pos)) {
+        if (isLitFireInRange(world, pos)) {
             int level = state.get(LEVEL);
 
             double d = pos.getX() + random.nextDouble() * 0.5 + 0.25;
@@ -39,6 +41,19 @@ public class CoffeeCauldronBlock extends LeveledCauldronBlock {
             }
 
             world.addParticle(getPopParticleEffect(), d, e, f, 0.0, 0.0, 0.0);
+        }
+    }
+
+    public static boolean isLitFireInRange(World world, BlockPos pos) {
+        BlockPos blockPos = pos.down();
+        BlockState blockState = world.getBlockState(blockPos);
+
+        boolean bl = blockState.isIn(ModBlockTags.LIT_FIRES);
+
+        if (blockState.contains(Properties.LIT)) {
+            return bl && blockState.get(Properties.LIT);
+        } else {
+            return bl;
         }
     }
 

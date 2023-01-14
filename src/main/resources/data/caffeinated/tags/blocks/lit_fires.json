@@ -1,0 +1,9 @@
+{
+  "values": [
+    "#minecraft:campfires",
+    {
+      "id": "farmersdelight:stove",
+      "required": false
+    }
+  ]
+}

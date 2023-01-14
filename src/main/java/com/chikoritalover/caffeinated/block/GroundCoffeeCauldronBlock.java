@@ -3,6 +3,7 @@ package com.chikoritalover.caffeinated.block;
 import com.chikoritalover.caffeinated.registry.ModBlocks;
 import com.chikoritalover.caffeinated.registry.ModCauldronBehavior;
 import com.chikoritalover.caffeinated.registry.ModSoundEvents;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CampfireBlock;
 import net.minecraft.particle.ParticleEffect;
@@ -11,6 +12,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 
 public class GroundCoffeeCauldronBlock extends CoffeeCauldronBlock {
@@ -18,12 +20,22 @@ public class GroundCoffeeCauldronBlock extends CoffeeCauldronBlock {
         super(settings, ModCauldronBehavior.GROUND_COFFEE_CAULDRON_BEHAVIOR);
     }
 
-    public boolean hasRandomTicks(BlockState state) {
-        return true;
+    @Override
+    public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
+        if (isLitFireInRange(world, pos)) {
+            world.createAndScheduleBlockTick(pos, ModBlocks.GROUND_COFFEE_CAULDRON, 200);
+        }
     }
 
-    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if (CampfireBlock.isLitCampfireInRange(world, pos)) {
+    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
+        if (isLitFireInRange(world, pos)) {
+            world.createAndScheduleBlockTick(pos, ModBlocks.GROUND_COFFEE_CAULDRON, 200);
+        }
+    }
+
+    @Override
+    public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        if (isLitFireInRange(world, pos)) {
             BlockState blockState = ModBlocks.COFFEE_CAULDRON.getDefaultState().with(LEVEL, state.get(LEVEL));
 
             world.setBlockState(pos, blockState);
