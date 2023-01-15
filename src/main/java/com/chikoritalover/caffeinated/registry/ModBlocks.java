@@ -22,6 +22,8 @@ public class ModBlocks {
     public static final Block COFFEE_SHRUB = new CoffeeShrubBlock(AbstractBlock.Settings.of(Material.PLANT).ticksRandomly().noCollision().sounds(BlockSoundGroup.AZALEA));
     public static final Block FLOWERING_COFFEE_SHRUB = new FloweringCoffeeShrubBlock(AbstractBlock.Settings.of(Material.PLANT).ticksRandomly().noCollision().sounds(BlockSoundGroup.FLOWERING_AZALEA));
 
+    public static final Block POTTED_COFFEE_SHRUB = new FlowerPotBlock(COFFEE_SHRUB, AbstractBlock.Settings.of(Material.DECORATION).breakInstantly().nonOpaque());
+
     public static void register() {
         Registry.register(Registry.BLOCK, new Identifier(Caffeinated.MODID, "coffee_bean_block"), COFFEE_BEAN_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(Caffeinated.MODID, "ground_coffee_block"), GROUND_COFFEE_BLOCK);
@@ -32,6 +34,8 @@ public class ModBlocks {
 
         Registry.register(Registry.BLOCK, new Identifier(Caffeinated.MODID, "coffee_shrub"), COFFEE_SHRUB);
         Registry.register(Registry.BLOCK, new Identifier(Caffeinated.MODID, "flowering_coffee_shrub"), FLOWERING_COFFEE_SHRUB);
+
+        Registry.register(Registry.BLOCK, new Identifier(Caffeinated.MODID, "potted_coffee_shrub"), POTTED_COFFEE_SHRUB);
     }
 
     public static void registerFlammableBlocks() {

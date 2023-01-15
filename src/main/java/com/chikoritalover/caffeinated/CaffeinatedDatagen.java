@@ -34,7 +34,7 @@ public class CaffeinatedDatagen implements DataGeneratorEntrypoint {
             super(generator);
         }
 
-        public final void registerCoffeeShrub(BlockStateModelGenerator blockStateModelGenerator, Block crop, Property<Integer> ageProperty, int... ageTextureIndices) {
+        public final void registerCoffeeShrub(BlockStateModelGenerator blockStateModelGenerator, Block crop, Block pottedCrop, Property<Integer> ageProperty, int... ageTextureIndices) {
             if (ageProperty.getValues().size() != ageTextureIndices.length) {
                 throw new IllegalArgumentException();
             } else {
@@ -47,6 +47,10 @@ public class CaffeinatedDatagen implements DataGeneratorEntrypoint {
                 blockStateModelGenerator.registerItemModel(crop.asItem());
                 blockStateModelGenerator.blockStateCollector.accept(VariantsBlockStateSupplier.create(crop).coordinate(blockStateVariantMap));
             }
+
+            TextureMap textureMap = TextureMap.plant(TextureMap.getSubId(crop, "_stage1"));
+            Identifier identifier = BlockStateModelGenerator.TintType.NOT_TINTED.getFlowerPotCrossModel().upload(pottedCrop, textureMap, blockStateModelGenerator.modelCollector);
+            blockStateModelGenerator.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(pottedCrop, identifier));
         }
 
         @Override
@@ -59,7 +63,7 @@ public class CaffeinatedDatagen implements DataGeneratorEntrypoint {
 
             blockStateModelGenerator.blockStateCollector.accept(VariantsBlockStateSupplier.create(ModBlocks.GROUND_COFFEE_CAULDRON).coordinate(BlockStateVariantMap.create(LeveledCauldronBlock.LEVEL).register(1, BlockStateVariant.create().put(VariantSettings.MODEL, Models.TEMPLATE_CAULDRON_LEVEL1.upload(ModBlocks.GROUND_COFFEE_CAULDRON, "_level1", TextureMap.cauldron(new Identifier(Caffeinated.MODID, "block/ground_coffee_cauldron")), blockStateModelGenerator.modelCollector))).register(2, BlockStateVariant.create().put(VariantSettings.MODEL, Models.TEMPLATE_CAULDRON_LEVEL2.upload(ModBlocks.GROUND_COFFEE_CAULDRON, "_level2", TextureMap.cauldron(new Identifier(Caffeinated.MODID, "block/ground_coffee_cauldron")), blockStateModelGenerator.modelCollector))).register(3, BlockStateVariant.create().put(VariantSettings.MODEL, Models.TEMPLATE_CAULDRON_FULL.upload(ModBlocks.GROUND_COFFEE_CAULDRON, "_full", TextureMap.cauldron(new Identifier(Caffeinated.MODID, "block/ground_coffee_cauldron")), blockStateModelGenerator.modelCollector)))));
 
-            registerCoffeeShrub(blockStateModelGenerator, ModBlocks.COFFEE_SHRUB, Properties.AGE_3, 0, 0, 1, 1);
+            registerCoffeeShrub(blockStateModelGenerator, ModBlocks.COFFEE_SHRUB, ModBlocks.POTTED_COFFEE_SHRUB, Properties.AGE_3, 0, 0, 1, 1);
         }
 
         @Override
