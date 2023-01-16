@@ -23,6 +23,7 @@ public class ModItems {
 
     public static final Item COFFEE_BERRIES = new Item(new Item.Settings().food(ModFoodComponents.COFFEE_BERRIES).group(ItemGroup.FOOD));
     public static final Item COFFEE_BOTTLE = new CoffeeBottleItem(new Item.Settings().food(ModFoodComponents.COFFEE_BOTTLE).maxCount(16).group(ItemGroup.FOOD));
+    public static final Item TIRAMISU = new Item(new Item.Settings().food(ModFoodComponents.TIRAMISU).group(ItemGroup.FOOD));
 
     public static void register() {
         Registry.register(Registry.ITEM, new Identifier(Caffeinated.MODID, "coffee_bean_block"), COFFEE_BEAN_BLOCK);
@@ -34,6 +35,7 @@ public class ModItems {
 
         Registry.register(Registry.ITEM, new Identifier(Caffeinated.MODID, "coffee_berries"), COFFEE_BERRIES);
         Registry.register(Registry.ITEM, new Identifier(Caffeinated.MODID, "coffee_bottle"), COFFEE_BOTTLE);
+        Registry.register(Registry.ITEM, new Identifier(Caffeinated.MODID, "tiramisu"), TIRAMISU);
     }
 
     public static void registerCompostingChances() {
@@ -42,6 +44,7 @@ public class ModItems {
         CompostingChanceRegistry.INSTANCE.add(COFFEE_BEANS, 0.5F);
         CompostingChanceRegistry.INSTANCE.add(GROUND_COFFEE, 0.5F);
         CompostingChanceRegistry.INSTANCE.add(COFFEE_BERRIES, 0.65F);
+        CompostingChanceRegistry.INSTANCE.add(TIRAMISU, 1.0F);
     }
 
     @Nullable
