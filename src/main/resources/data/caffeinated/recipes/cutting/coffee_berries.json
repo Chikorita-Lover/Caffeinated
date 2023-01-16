@@ -7,7 +7,8 @@
   ],
   "result": [
     {
-      "item": "caffeinated:coffee_beans"
+      "item": "caffeinated:coffee_beans",
+      "count": 2
     }
   ],
   "tool": {
