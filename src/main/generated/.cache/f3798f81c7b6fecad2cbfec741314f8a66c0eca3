@@ -1,4 +1,4 @@
-// 1.19.2	2023-01-16T11:04:07.018219	Models
+// 1.19.2	2023-01-18T13:04:33.4067783	Models
 da4528a3cfafc1ab21e5814b64029c10ec357178 assets\caffeinated\blockstates\ground_coffee_block.json
 26f35f3a03b0d53578efd2c555721b08353d75f0 assets\caffeinated\blockstates\coffee_cauldron.json
 b1a481861132973fe035c9b9ce7613e15938034c assets\caffeinated\models\block\coffee_berry_crate.json
@@ -25,4 +25,5 @@ ee814f36f99a123b06cf2e7bcb08415b97595925 assets\caffeinated\models\block\potted_
 0dab1d0bc7608970cc968c8f8569497fae0b2295 assets\caffeinated\models\item\ground_coffee.json
 58f78eb6198fba07304fece9e3c7bb6247a13229 assets\caffeinated\models\item\coffee_bottle.json
 e4c8f2b75d3ecafc48e0a48ec6940b6dac0eb258 assets\caffeinated\models\item\coffee_beans.json
+66ab3c0788a1452c84c9c06f8ffe0bf7828a9620 assets\caffeinated\models\item\java_banner_pattern.json
 1564a118add7b691cd3d6b1b6d06641507f0a7e2 assets\caffeinated\models\item\coffee_berries.json

@@ -2,26 +2,9 @@ package com.chikoritalover.caffeinated;
 
 import com.chikoritalover.caffeinated.registry.*;
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.LeveledCauldronBlock;
-import net.minecraft.block.cauldron.CauldronBehavior;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsage;
-import net.minecraft.item.Items;
-import net.minecraft.potion.PotionUtil;
-import net.minecraft.potion.Potions;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.stat.Stats;
-import net.minecraft.util.ActionResult;
-import net.minecraft.world.event.GameEvent;
+import net.minecraft.util.registry.Registry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Map;
 
 public class Caffeinated implements ModInitializer {
 	// This logger is used to write text to the console and the log file.
@@ -32,9 +15,10 @@ public class Caffeinated implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		ModCauldronBehavior.register();
+		ModBannerPatterns.initAndGetDefault(Registry.BANNER_PATTERN);
 		ModBlocks.register();
 		ModBlocks.registerFlammableBlocks();
+		ModCauldronBehavior.register();
 		ModItems.register();
 		ModItems.registerCompostingChances();
 		ModParticleTypes.register();

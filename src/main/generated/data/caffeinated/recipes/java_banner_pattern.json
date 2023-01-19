@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:paper"
+    },
+    {
+      "item": "caffeinated:coffee_bottle"
+    }
+  ],
+  "result": {
+    "item": "caffeinated:java_banner_pattern"
+  }
+}

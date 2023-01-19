@@ -70,6 +70,7 @@ public class CaffeinatedDatagen implements DataGeneratorEntrypoint {
         @Override
         public void generateItemModels(ItemModelGenerator itemModelGenerator) {
             itemModelGenerator.register(ModItems.GROUND_COFFEE, Models.GENERATED);
+            itemModelGenerator.register(ModItems.JAVA_BANNER_PATTERN, Models.GENERATED);
 
             itemModelGenerator.register(ModItems.COFFEE_BERRIES, Models.GENERATED);
             itemModelGenerator.register(ModItems.COFFEE_BOTTLE, Models.GENERATED);
@@ -93,6 +94,8 @@ public class CaffeinatedDatagen implements DataGeneratorEntrypoint {
             ShapelessRecipeJsonBuilder.create(ModItems.COFFEE_BEANS).input(ModItems.COFFEE_BERRIES).group("coffee_beans").criterion(hasItem(ModItems.COFFEE_BERRIES), conditionsFromItem(ModItems.COFFEE_BERRIES)).offerTo(exporter, new Identifier(Caffeinated.MODID, "coffee_beans_from_coffee_berries"));
 
             ShapedRecipeJsonBuilder.create(ModItems.GROUND_COFFEE).input('#', ModItems.COFFEE_BEANS).pattern("###").group("ground_coffee").criterion(hasItem(ModItems.COFFEE_BEANS), conditionsFromItem(ModItems.COFFEE_BEANS)).offerTo(exporter, new Identifier(Caffeinated.MODID, "ground_coffee_from_coffee_beans"));
+
+            ShapelessRecipeJsonBuilder.create(ModItems.JAVA_BANNER_PATTERN).input(Items.PAPER).input(ModItems.COFFEE_BOTTLE).criterion(hasItem(ModItems.COFFEE_BOTTLE), conditionsFromItem(ModItems.COFFEE_BOTTLE)).offerTo(exporter);
 
             ShapedRecipeJsonBuilder.create(ModItems.TIRAMISU, 2).input('#', ModItems.COFFEE_BOTTLE).input('C', Items.COCOA_BEANS).input('E', Items.EGG).input('M', Items.MILK_BUCKET).input('W', Items.WHEAT).pattern("C#C").pattern("EME").pattern("WWW").group("tiramisu").criterion(hasItem(ModItems.COFFEE_BOTTLE), conditionsFromItem(ModItems.COFFEE_BOTTLE)).offerTo(exporter);
         }
