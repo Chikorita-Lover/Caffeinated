@@ -2,6 +2,8 @@
   "advancements.husbandry.brew_coffee.title": "Wake Up and Smell the Coffee",
   "advancements.husbandry.brew_coffee.description": "Brew a Coffee Bottle in a Cauldron over a Campfire",
 
+  "biome.caffeinated.coffee_forest": "Coffee Forest",
+
   "block.caffeinated.coffee_bean_block": "Coffee Bean Block",
   "block.caffeinated.coffee_berry_crate": "Coffee Berry Crate",
   "block.caffeinated.coffee_cauldron": "Coffee Cauldron",

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:random_selector",
+  "config": {
+    "default": {
+      "feature": "minecraft:patch_grass_jungle",
+      "placement": []
+    },
+    "features": [
+      {
+        "chance": 0.1,
+        "feature": "minecraft:mega_jungle_tree_checked"
+      },
+      {
+        "chance": 0.2,
+        "feature": "minecraft:mega_pine_checked"
+      },
+      {
+        "chance": 0.15,
+        "feature": "minecraft:jungle_tree"
+      }
+    ]
+  }
+}
