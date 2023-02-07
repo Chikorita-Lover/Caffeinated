@@ -21,7 +21,7 @@ public class ModItems {
     public static final Item JAVA_BANNER_PATTERN = new BannerPatternItem(ModBannerPatternTags.JAVA_PATTERN_ITEM, (new Item.Settings()).maxCount(1).group(ItemGroup.MISC));
 
     public static final Item COFFEE_BERRIES = new Item(new Item.Settings().food(ModFoodComponents.COFFEE_BERRIES).group(ItemGroup.FOOD));
-    public static final Item COFFEE_BOTTLE = new CoffeeBottleItem(new Item.Settings().food(ModFoodComponents.COFFEE_BOTTLE).maxCount(16).group(ItemGroup.FOOD));
+    public static final Item COFFEE_BOTTLE = new CoffeeBottleItem(new Item.Settings().food(ModFoodComponents.COFFEE_BOTTLE).maxCount(16).group(ItemGroup.FOOD).recipeRemainder(Items.GLASS_BOTTLE));
     public static final Item TIRAMISU = new Item(new Item.Settings().food(ModFoodComponents.TIRAMISU).group(ItemGroup.FOOD));
 
     public static void register() {
