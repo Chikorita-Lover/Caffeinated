@@ -1,0 +1,24 @@
+package com.chikoritalover.caffeinated.mixin;
+
+import com.chikoritalover.caffeinated.registry.ModEntityTypeTags;
+import com.chikoritalover.caffeinated.registry.ModItemTags;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+@Mixin(Item.class)
+public class ItemMixin {
+    @Inject(method = "finishUsing", at = @At(value = "HEAD"))
+    public void finishUsing(ItemStack stack, World world, LivingEntity user, CallbackInfoReturnable<ItemStack> info) {
+        if (stack.isIn(ModItemTags.COFFEE_FOOD) && user.getType().isIn(ModEntityTypeTags.COFFEE_INFLICTS_POISON)) {
+            user.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 900));
+        }
+    }
+}
