@@ -84,6 +84,8 @@ publishing {
 }
 
 loom {
+	accessWidenerPath = file("src/main/resources/caffeinated.accesswidener")
+
 	runs {
 		datagenClient {
 			inherit client

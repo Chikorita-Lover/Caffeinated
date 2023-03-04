@@ -4,6 +4,7 @@
   "package": "com.chikoritalover.caffeinated.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "GrowCropsGoalMixin",
     "ItemMixin",
     "PlayerEntityMixin"
   ],
