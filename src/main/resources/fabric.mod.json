@@ -3,10 +3,9 @@
   "id": "caffeinated",
   "version": "${version}",
   "name": "Caffeinated",
-  "description": "Adds new coffee items with unique uses to improve various aspects of the base game.",
+  "description": "Adds new coffee shrubs and items that provide a new caffeine effect.",
   "authors": [
-    "Chikorita Lover",
-    "ExDrill"
+    "Chikorita Lover"
   ],
   "contact": {
     "homepage": "https://github.com/Chikorita-Lover/Caffeinated",
