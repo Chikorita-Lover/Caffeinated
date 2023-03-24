@@ -66,7 +66,7 @@ public class ModCauldronBehavior {
             if (!world.isClient) {
                 Item item = stack.getItem();
                 player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, new ItemStack(ModItems.COFFEE_BOTTLE)));
-                player.incrementStat(Stats.USE_CAULDRON);
+                player.incrementStat(ModStats.COFFEE_TAKEN);
                 player.incrementStat(Stats.USED.getOrCreateStat(item));
                 LeveledCauldronBlock.decrementFluidLevel(state, world, pos);
                 world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
@@ -79,7 +79,6 @@ public class ModCauldronBehavior {
             if (state.get(LeveledCauldronBlock.LEVEL) != 3 && stack.getItem() == ModItems.COFFEE_BOTTLE) {
                 if (!world.isClient) {
                     player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, new ItemStack(Items.GLASS_BOTTLE)));
-                    player.incrementStat(Stats.USE_CAULDRON);
                     player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
                     world.setBlockState(pos, state.cycle(LeveledCauldronBlock.LEVEL));
                     world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
