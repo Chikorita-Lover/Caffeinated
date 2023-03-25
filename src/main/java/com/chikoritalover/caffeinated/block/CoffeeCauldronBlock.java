@@ -3,26 +3,31 @@ package com.chikoritalover.caffeinated.block;
 import com.chikoritalover.caffeinated.registry.ModBlockTags;
 import com.chikoritalover.caffeinated.registry.ModParticleTypes;
 import com.chikoritalover.caffeinated.registry.ModSoundEvents;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.LeveledCauldronBlock;
 import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.tag.BlockTags;
-import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 import java.util.Map;
 
 public class CoffeeCauldronBlock extends LeveledCauldronBlock {
+    public static final BooleanProperty REWARD_EXPERIENCE;
+
     public CoffeeCauldronBlock(Settings settings, Map<Item, CauldronBehavior> behaviorMap) {
         super(settings, null, behaviorMap);
+        this.setDefaultState(this.stateManager.getDefaultState().with(REWARD_EXPERIENCE, false));
     }
 
     public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
@@ -59,5 +64,15 @@ public class CoffeeCauldronBlock extends LeveledCauldronBlock {
 
     public ParticleEffect getPopParticleEffect() {
         return ModParticleTypes.COFFEE_POP;
+    }
+
+    @Override
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+        super.appendProperties(builder);
+        builder.add(REWARD_EXPERIENCE);
+    }
+
+    static {
+        REWARD_EXPERIENCE = BooleanProperty.of("reward_experience");
     }
 }

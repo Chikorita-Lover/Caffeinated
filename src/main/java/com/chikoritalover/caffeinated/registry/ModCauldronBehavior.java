@@ -1,20 +1,24 @@
 package com.chikoritalover.caffeinated.registry;
 
+import com.chikoritalover.caffeinated.block.CoffeeCauldronBlock;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LeveledCauldronBlock;
 import net.minecraft.block.cauldron.CauldronBehavior;
+import net.minecraft.entity.ExperienceOrbEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
 import net.minecraft.item.Items;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.event.GameEvent;
 
 import java.util.Map;
@@ -71,6 +75,11 @@ public class ModCauldronBehavior {
                 LeveledCauldronBlock.decrementFluidLevel(state, world, pos);
                 world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 world.emitGameEvent(null, GameEvent.FLUID_PICKUP, pos);
+                if (state.get(CoffeeCauldronBlock.REWARD_EXPERIENCE)) {
+                    state = world.getBlockState(pos);
+                    ExperienceOrbEntity.spawn((ServerWorld) world, Vec3d.ofCenter(pos), world.getRandom().nextBetween(1, 3));
+                    world.setBlockState(pos, state.cycle(CoffeeCauldronBlock.REWARD_EXPERIENCE));
+                }
             }
 
             return ActionResult.success(world.isClient);

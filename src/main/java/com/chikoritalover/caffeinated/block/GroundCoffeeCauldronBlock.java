@@ -36,7 +36,7 @@ public class GroundCoffeeCauldronBlock extends CoffeeCauldronBlock {
     @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (isLitFireInRange(world, pos)) {
-            BlockState blockState = ModBlocks.COFFEE_CAULDRON.getDefaultState().with(LEVEL, state.get(LEVEL));
+            BlockState blockState = ModBlocks.COFFEE_CAULDRON.getDefaultState().with(LEVEL, state.get(LEVEL)).with(CoffeeCauldronBlock.REWARD_EXPERIENCE, true);
 
             world.setBlockState(pos, blockState);
             world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(blockState));
