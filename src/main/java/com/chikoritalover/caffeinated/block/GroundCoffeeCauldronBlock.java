@@ -5,7 +5,6 @@ import com.chikoritalover.caffeinated.registry.ModCauldronBehavior;
 import com.chikoritalover.caffeinated.registry.ModSoundEvents;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.CampfireBlock;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
@@ -21,15 +20,20 @@ public class GroundCoffeeCauldronBlock extends CoffeeCauldronBlock {
     }
 
     @Override
+    public ParticleEffect getPopParticleEffect() {
+        return ParticleTypes.BUBBLE_POP;
+    }
+
+    @Override
     public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
         if (isLitFireInRange(world, pos)) {
-            world.createAndScheduleBlockTick(pos, ModBlocks.GROUND_COFFEE_CAULDRON, 200);
+            world.scheduleBlockTick(pos, ModBlocks.GROUND_COFFEE_CAULDRON, 200);
         }
     }
 
     public void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
         if (isLitFireInRange(world, pos)) {
-            world.createAndScheduleBlockTick(pos, ModBlocks.GROUND_COFFEE_CAULDRON, 200);
+            world.scheduleBlockTick(pos, ModBlocks.GROUND_COFFEE_CAULDRON, 200);
         }
     }
 
@@ -43,10 +47,5 @@ public class GroundCoffeeCauldronBlock extends CoffeeCauldronBlock {
 
             world.playSound(null, pos, ModSoundEvents.BLOCK_CAULDRON_BREW, SoundCategory.BLOCKS, 1.0F, 1.0F);
         }
-    }
-
-    @Override
-    public ParticleEffect getPopParticleEffect() {
-        return ParticleTypes.BUBBLE_POP;
     }
 }

@@ -22,10 +22,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldView;
 import net.minecraft.world.event.GameEvent;
 
 public class FloweringCoffeeShrubBlock extends TallPlantBlock implements Fertilizable {
-    public static final IntProperty AGE;
+    public static final IntProperty AGE = Properties.AGE_3;
 
     public FloweringCoffeeShrubBlock(Settings settings) {
         super(settings);
@@ -90,7 +91,7 @@ public class FloweringCoffeeShrubBlock extends TallPlantBlock implements Fertili
     }
 
     @Override
-    public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
         return state.get(AGE) < 3;
     }
 
@@ -108,9 +109,5 @@ public class FloweringCoffeeShrubBlock extends TallPlantBlock implements Fertili
         } else {
             world.setBlockState(pos.down(), state.with(AGE, i).cycle(HALF), 2);
         }
-    }
-
-    static {
-        AGE = Properties.AGE_3;
     }
 }

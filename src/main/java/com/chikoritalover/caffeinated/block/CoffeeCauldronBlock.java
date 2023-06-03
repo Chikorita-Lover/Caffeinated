@@ -23,11 +23,28 @@ import net.minecraft.world.World;
 import java.util.Map;
 
 public class CoffeeCauldronBlock extends LeveledCauldronBlock {
-    public static final BooleanProperty REWARD_EXPERIENCE;
+    public static final BooleanProperty REWARD_EXPERIENCE = BooleanProperty.of("reward_experience");
 
     public CoffeeCauldronBlock(Settings settings, Map<Item, CauldronBehavior> behaviorMap) {
         super(settings, null, behaviorMap);
         this.setDefaultState(this.stateManager.getDefaultState().with(REWARD_EXPERIENCE, false));
+    }
+
+    public static boolean isLitFireInRange(World world, BlockPos pos) {
+        BlockPos blockPos = pos.down();
+        BlockState blockState = world.getBlockState(blockPos);
+
+        boolean bl = blockState.isIn(ModBlockTags.LIT_FIRES);
+
+        if (blockState.contains(Properties.LIT)) {
+            return bl && blockState.get(Properties.LIT);
+        } else {
+            return bl;
+        }
+    }
+
+    public ParticleEffect getPopParticleEffect() {
+        return ModParticleTypes.COFFEE_POP;
     }
 
     public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
@@ -49,30 +66,9 @@ public class CoffeeCauldronBlock extends LeveledCauldronBlock {
         }
     }
 
-    public static boolean isLitFireInRange(World world, BlockPos pos) {
-        BlockPos blockPos = pos.down();
-        BlockState blockState = world.getBlockState(blockPos);
-
-        boolean bl = blockState.isIn(ModBlockTags.LIT_FIRES);
-
-        if (blockState.contains(Properties.LIT)) {
-            return bl && blockState.get(Properties.LIT);
-        } else {
-            return bl;
-        }
-    }
-
-    public ParticleEffect getPopParticleEffect() {
-        return ModParticleTypes.COFFEE_POP;
-    }
-
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         super.appendProperties(builder);
         builder.add(REWARD_EXPERIENCE);
-    }
-
-    static {
-        REWARD_EXPERIENCE = BooleanProperty.of("reward_experience");
     }
 }

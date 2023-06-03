@@ -1,54 +1,75 @@
 package com.chikoritalover.caffeinated.registry;
 
 import com.chikoritalover.caffeinated.Caffeinated;
-import com.chikoritalover.caffeinated.integration.farmersdelight.FarmersDelightItemGroup;
 import com.chikoritalover.caffeinated.item.CoffeeBottleItem;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
-import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.*;
-import net.minecraft.tag.BannerPatternTags;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
-import org.jetbrains.annotations.Nullable;
 
 public class ModItems {
-    public static final Item COFFEE_BEAN_BLOCK = new BlockItem(ModBlocks.COFFEE_BEAN_BLOCK, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS));
-    public static final Item GROUND_COFFEE_BLOCK = new BlockItem(ModBlocks.GROUND_COFFEE_BLOCK, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS));
-    public static final Item COFFEE_BERRY_CRATE = new BlockItem(ModBlocks.COFFEE_BERRY_CRATE, new Item.Settings().group(getFarmersDelightItemGroup()));
+    public static final Item COFFEE_BERRIES = register("coffee_berries", new Item(new Item.Settings().food(ModFoodComponents.COFFEE_BERRIES)));
+    public static final Item COFFEE_BEANS = register("coffee_beans", new AliasedBlockItem(ModBlocks.COFFEE_SHRUB, new Item.Settings()));
+    public static final Item GROUND_COFFEE = register("ground_coffee", new Item(new Item.Settings()));
+    public static final Item COFFEE_BOTTLE = register("coffee_bottle", new CoffeeBottleItem(new Item.Settings().food(ModFoodComponents.COFFEE_BOTTLE).maxCount(16).recipeRemainder(Items.GLASS_BOTTLE)));
+    public static final Item JAVA_BANNER_PATTERN = register("java_banner_pattern", new BannerPatternItem(ModBannerPatternTags.JAVA_PATTERN_ITEM, (new Item.Settings()).maxCount(1)));
+    public static final Item TIRAMISU = register("tiramisu", new Item(new Item.Settings().food(ModFoodComponents.TIRAMISU)));
 
-    public static final Item COFFEE_BEANS = new AliasedBlockItem(ModBlocks.COFFEE_SHRUB, new Item.Settings().group(ItemGroup.MISC));
-    public static final Item GROUND_COFFEE = new Item(new Item.Settings().group(ItemGroup.MISC));
-    public static final Item JAVA_BANNER_PATTERN = new BannerPatternItem(ModBannerPatternTags.JAVA_PATTERN_ITEM, (new Item.Settings()).maxCount(1).group(ItemGroup.MISC));
+    public static Item register(Block block) {
+        return register(new BlockItem(block, new Item.Settings()));
+    }
 
-    public static final Item COFFEE_BERRIES = new Item(new Item.Settings().food(ModFoodComponents.COFFEE_BERRIES).group(ItemGroup.FOOD));
-    public static final Item COFFEE_BOTTLE = new CoffeeBottleItem(new Item.Settings().food(ModFoodComponents.COFFEE_BOTTLE).maxCount(16).group(ItemGroup.FOOD).recipeRemainder(Items.GLASS_BOTTLE));
-    public static final Item TIRAMISU = new Item(new Item.Settings().food(ModFoodComponents.TIRAMISU).group(ItemGroup.FOOD));
+    private static Item register(BlockItem item) {
+        return register(item.getBlock(), item);
+    }
+
+    private static Item register(Block block, Item item) {
+        return register(Registries.BLOCK.getId(block), item);
+    }
+
+    private static Item register(String id, Item item) {
+        return register(new Identifier(Caffeinated.MODID, id), item);
+    }
+
+    private static Item register(Identifier id, Item item) {
+        if (item instanceof BlockItem) {
+            ((BlockItem)item).appendBlocks(Item.BLOCK_ITEMS, item);
+        }
+
+        return Registry.register(Registries.ITEM, id, item);
+    }
 
     public static void register() {
-        Registry.register(Registry.ITEM, new Identifier(Caffeinated.MODID, "coffee_bean_block"), COFFEE_BEAN_BLOCK);
-        Registry.register(Registry.ITEM, new Identifier(Caffeinated.MODID, "ground_coffee_block"), GROUND_COFFEE_BLOCK);
-        Registry.register(Registry.ITEM, new Identifier(Caffeinated.MODID, "coffee_berry_crate"), COFFEE_BERRY_CRATE);
-
-        Registry.register(Registry.ITEM, new Identifier(Caffeinated.MODID, "coffee_beans"), COFFEE_BEANS);
-        Registry.register(Registry.ITEM, new Identifier(Caffeinated.MODID, "ground_coffee"), GROUND_COFFEE);
-        Registry.register(Registry.ITEM, new Identifier(Caffeinated.MODID, "java_banner_pattern"), JAVA_BANNER_PATTERN);
-
-        Registry.register(Registry.ITEM, new Identifier(Caffeinated.MODID, "coffee_berries"), COFFEE_BERRIES);
-        Registry.register(Registry.ITEM, new Identifier(Caffeinated.MODID, "coffee_bottle"), COFFEE_BOTTLE);
-        Registry.register(Registry.ITEM, new Identifier(Caffeinated.MODID, "tiramisu"), TIRAMISU);
+        registerCompostingChances();
+        registerItemGroups();
     }
 
     public static void registerCompostingChances() {
-        CompostingChanceRegistry.INSTANCE.add(COFFEE_BEAN_BLOCK, 0.65F);
-        CompostingChanceRegistry.INSTANCE.add(GROUND_COFFEE_BLOCK, 0.65F);
+        CompostingChanceRegistry.INSTANCE.add(ModBlocks.COFFEE_BEAN_BLOCK, 0.65F);
+        CompostingChanceRegistry.INSTANCE.add(ModBlocks.GROUND_COFFEE_BLOCK, 0.65F);
         CompostingChanceRegistry.INSTANCE.add(COFFEE_BEANS, 0.5F);
         CompostingChanceRegistry.INSTANCE.add(GROUND_COFFEE, 0.5F);
         CompostingChanceRegistry.INSTANCE.add(COFFEE_BERRIES, 0.65F);
         CompostingChanceRegistry.INSTANCE.add(TIRAMISU, 1.0F);
     }
 
-    @Nullable
-    public static ItemGroup getFarmersDelightItemGroup() {
-        return FabricLoader.getInstance().isModLoaded("farmersdelight") ? FarmersDelightItemGroup.getFarmersDelightItemGroup() : null;
+    public static void registerItemGroups() {
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.NATURAL).register(entries -> {
+            entries.addAfter(Blocks.HONEYCOMB_BLOCK, ModBlocks.COFFEE_BEAN_BLOCK, ModBlocks.GROUND_COFFEE_BLOCK);
+            entries.addAfter(Items.SWEET_BERRIES, COFFEE_BEANS);
+        });
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(entries -> {
+            entries.addAfter(Items.GLOW_BERRIES, COFFEE_BERRIES);
+            entries.addAfter(Items.PUMPKIN_PIE, TIRAMISU);
+            entries.addAfter(Items.HONEY_BOTTLE, COFFEE_BOTTLE);
+        });
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
+            entries.addAfter(Items.WHEAT, COFFEE_BEANS, GROUND_COFFEE);
+            entries.addAfter(Items.PIGLIN_BANNER_PATTERN, JAVA_BANNER_PATTERN);
+        });
     }
 }

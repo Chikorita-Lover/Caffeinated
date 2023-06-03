@@ -18,4 +18,7 @@ public class ModBlockSoundGroup {
             SoundEvents.BLOCK_ROOTED_DIRT_HIT,
             SoundEvents.BLOCK_ROOTED_DIRT_FALL
     );
+
+    public static void register() {
+    }
 }

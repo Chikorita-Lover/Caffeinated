@@ -18,12 +18,13 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldView;
 import net.minecraft.world.event.GameEvent;
 
 public class CoffeeShrubBlock extends PlantBlock implements Fertilizable {
-    public static final IntProperty AGE;
-    private static final VoxelShape SMALL_SHAPE;
-    private static final VoxelShape LARGE_SHAPE;
+    public static final IntProperty AGE = Properties.AGE_3;
+    private static final VoxelShape SMALL_SHAPE = Block.createCuboidShape(3.0, 0.0, 3.0, 13.0, 11.0, 13.0);
+    private static final VoxelShape LARGE_SHAPE = Block.createCuboidShape(1.0, 0.0, 1.0, 15.0, 16.0, 15.0);
 
     public CoffeeShrubBlock(AbstractBlock.Settings settings) {
         super(settings);
@@ -68,7 +69,7 @@ public class CoffeeShrubBlock extends PlantBlock implements Fertilizable {
         builder.add(AGE);
     }
 
-    public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
         int i = state.get(AGE);
         BlockState aboveState = world.getBlockState(pos.up());
         return i < 3 || aboveState.getMaterial().isReplaceable();
@@ -84,11 +85,5 @@ public class CoffeeShrubBlock extends PlantBlock implements Fertilizable {
         if (state.get(AGE) == 3) {
             world.setBlockState(pos.up(), state2.cycle(Properties.DOUBLE_BLOCK_HALF), 2);
         }
-    }
-
-    static {
-        AGE = Properties.AGE_3;
-        SMALL_SHAPE = Block.createCuboidShape(3.0, 0.0, 3.0, 13.0, 11.0, 13.0);
-        LARGE_SHAPE = Block.createCuboidShape(1.0, 0.0, 1.0, 15.0, 16.0, 15.0);
     }
 }

@@ -10,8 +10,8 @@ import net.minecraft.loot.condition.LootCondition;
 import net.minecraft.loot.condition.RandomChanceLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,18 +24,22 @@ public class Caffeinated implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		ModBannerPatterns.initAndGetDefault(Registry.BANNER_PATTERN);
+		ModBannerPatterns.initAndGetDefault(Registries.BANNER_PATTERN);
 		ModBlocks.register();
-		ModBlocks.registerFlammableBlocks();
 		ModCauldronBehavior.register();
 		ModItems.register();
-		ModItems.registerCompostingChances();
 		ModParticleTypes.register();
 		ModPlacedFeatures.register();
 		ModSoundEvents.register();
 		ModStats.register();
 		ModStatusEffects.register();
 		ModTradeOffers.register();
+		ModBlockSoundGroup.register();
+		ModEntityTypeTags.register();
+		ModBlockTags.register();
+		ModItemTags.register();
+		ModBannerPatternTags.register();
+		ModBannerPatterns.register();
 
 		registerLootTableEvents();
 	}

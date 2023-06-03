@@ -1,9 +1,10 @@
 package com.chikoritalover.caffeinated.registry;
 
 import com.chikoritalover.caffeinated.Caffeinated;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 public class ModSoundEvents {
     public static final SoundEvent BLOCK_CAULDRON_BREW = register("block.cauldron.brew");
@@ -24,8 +25,9 @@ public class ModSoundEvents {
     public static final SoundEvent ITEM_GROUND_COFFEE_SPLASH = register("item.ground_coffee.splash");
 
     private static SoundEvent register(String id) {
-        return Registry.register(Registry.SOUND_EVENT, new Identifier(Caffeinated.MODID, id), new SoundEvent(new Identifier(Caffeinated.MODID, id)));
+        return Registry.register(Registries.SOUND_EVENT, new Identifier(Caffeinated.MODID, id), SoundEvent.of(new Identifier(Caffeinated.MODID, id)));
     }
 
-    public static void register() {}
+    public static void register() {
+    }
 }

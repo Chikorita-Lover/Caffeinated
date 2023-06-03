@@ -21,7 +21,7 @@ public class GrowCropsGoalMixin {
     @Final
     BeeEntity field_20373;
 
-    @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/BlockState;isIn(Lnet/minecraft/tag/TagKey;)Z", shift = At.Shift.AFTER), locals = LocalCapture.CAPTURE_FAILHARD)
+    @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/BlockState;isIn(Lnet/minecraft/registry/tag/TagKey;)Z", shift = At.Shift.AFTER), locals = LocalCapture.CAPTURE_FAILHARD)
     public void tick(CallbackInfo info, int i, BlockPos blockPos, BlockState blockState, Block block) {
         boolean bl = false;
 

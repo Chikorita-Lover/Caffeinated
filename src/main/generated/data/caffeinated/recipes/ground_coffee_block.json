@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "key": {
     "#": {
       "item": "caffeinated:ground_coffee"
@@ -12,5 +13,6 @@
   ],
   "result": {
     "item": "caffeinated:ground_coffee_block"
-  }
+  },
+  "show_notification": true
 }
