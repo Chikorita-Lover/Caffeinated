@@ -24,28 +24,28 @@ public class Caffeinated implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		ModBannerPatterns.initAndGetDefault(Registries.BANNER_PATTERN);
-		ModBlocks.register();
-		ModCauldronBehavior.register();
-		ModItems.register();
-		ModParticleTypes.register();
-		ModPlacedFeatures.register();
-		ModSoundEvents.register();
-		ModStats.register();
-		ModStatusEffects.register();
-		ModTradeOffers.register();
-		ModBlockSoundGroup.register();
-		ModEntityTypeTags.register();
-		ModBlockTags.register();
-		ModItemTags.register();
-		ModBannerPatternTags.register();
-		ModBannerPatterns.register();
+		CaffeinatedBannerPatterns.initAndGetDefault(Registries.BANNER_PATTERN);
+		CaffeinatedBlocks.register();
+		CaffeinatedCauldronBehavior.register();
+		CaffeinatedItems.register();
+		CaffeinatedParticleTypes.register();
+		CaffeinatedPlacedFeatures.register();
+		CaffeinatedSoundEvents.register();
+		CaffeinatedStats.register();
+		CaffeinatedStatusEffects.register();
+		CaffeinatedTradeOffers.register();
+		CaffeinatedBlockSoundGroup.register();
+		CaffeinatedEntityTypeTags.register();
+		CaffeinatedBlockTags.register();
+		CaffeinatedItemTags.register();
+		CaffeinatedBannerPatternTags.register();
+		CaffeinatedBannerPatterns.register();
 
 		registerLootTableEvents();
 	}
 
 	public void registerLootTableEvents() {
-		addLootTablePool(1, 1, 0.5F, LootTables.JUNGLE_TEMPLE_CHEST, ModItems.COFFEE_BEANS, 1, 3);
+		addLootTablePool(1, 1, 0.5F, LootTables.JUNGLE_TEMPLE_CHEST, CaffeinatedItems.COFFEE_BEANS, 1, 3);
 	}
 
 	private void addLootTablePool(int minRolls, int maxRolls, float chance, Identifier lootTable, ItemConvertible item) {

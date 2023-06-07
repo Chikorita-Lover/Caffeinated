@@ -1,7 +1,7 @@
 package com.chikoritalover.caffeinated.block;
 
-import com.chikoritalover.caffeinated.registry.ModItems;
-import com.chikoritalover.caffeinated.registry.ModSoundEvents;
+import com.chikoritalover.caffeinated.registry.CaffeinatedItems;
+import com.chikoritalover.caffeinated.registry.CaffeinatedSoundEvents;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Fertilizable;
@@ -33,7 +33,7 @@ public class FloweringCoffeeShrubBlock extends TallPlantBlock implements Fertili
     }
 
     public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
-        return new ItemStack(ModItems.COFFEE_BEANS);
+        return new ItemStack(CaffeinatedItems.COFFEE_BEANS);
     }
 
     public boolean hasRandomTicks(BlockState state) {
@@ -65,8 +65,8 @@ public class FloweringCoffeeShrubBlock extends TallPlantBlock implements Fertili
             return ActionResult.PASS;
         } else if (i == 3) {
             int j = 1 + world.random.nextInt(2);
-            dropStack(world, pos, new ItemStack(ModItems.COFFEE_BERRIES, j + (bl ? 1 : 0)));
-            world.playSound(null, pos, ModSoundEvents.BLOCK_COFFEE_SHRUB_PICK_BERRIES, SoundCategory.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
+            dropStack(world, pos, new ItemStack(CaffeinatedItems.COFFEE_BERRIES, j + (bl ? 1 : 0)));
+            world.playSound(null, pos, CaffeinatedSoundEvents.BLOCK_COFFEE_SHRUB_PICK_BERRIES, SoundCategory.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
             BlockState blockState = state.with(AGE, 0);
 
             world.setBlockState(pos, blockState, 2);

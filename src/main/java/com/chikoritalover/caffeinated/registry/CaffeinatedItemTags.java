@@ -6,7 +6,7 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 
-public class ModItemTags {
+public class CaffeinatedItemTags {
     public static final TagKey<Item> COFFEE_FOOD = of("coffee_food");
 
     private static TagKey<Item> of(String id) {

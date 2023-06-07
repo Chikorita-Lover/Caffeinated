@@ -20,7 +20,7 @@
       "com.chikoritalover.caffeinated.CaffeinatedClient"
     ],
     "fabric-datagen": [
-      "com.chikoritalover.caffeinated.CaffeinatedDatagen"
+      "com.chikoritalover.caffeinated.CaffeinatedDataGenerator"
     ],
     "main": [
       "com.chikoritalover.caffeinated.Caffeinated"
@@ -30,9 +30,9 @@
     "caffeinated.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.14.11",
+    "fabricloader": ">=0.14.21",
     "fabric-api": "*",
-    "minecraft": "~1.19.2",
+    "minecraft": "~1.20.0",
     "java": ">=17"
   },
   "suggests": {

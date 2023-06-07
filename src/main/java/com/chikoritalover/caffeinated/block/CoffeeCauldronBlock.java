@@ -1,8 +1,8 @@
 package com.chikoritalover.caffeinated.block;
 
-import com.chikoritalover.caffeinated.registry.ModBlockTags;
-import com.chikoritalover.caffeinated.registry.ModParticleTypes;
-import com.chikoritalover.caffeinated.registry.ModSoundEvents;
+import com.chikoritalover.caffeinated.registry.CaffeinatedBlockTags;
+import com.chikoritalover.caffeinated.registry.CaffeinatedParticleTypes;
+import com.chikoritalover.caffeinated.registry.CaffeinatedSoundEvents;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -34,7 +34,7 @@ public class CoffeeCauldronBlock extends LeveledCauldronBlock {
         BlockPos blockPos = pos.down();
         BlockState blockState = world.getBlockState(blockPos);
 
-        boolean bl = blockState.isIn(ModBlockTags.LIT_FIRES);
+        boolean bl = blockState.isIn(CaffeinatedBlockTags.LIT_FIRES);
 
         if (blockState.contains(Properties.LIT)) {
             return bl && blockState.get(Properties.LIT);
@@ -44,7 +44,7 @@ public class CoffeeCauldronBlock extends LeveledCauldronBlock {
     }
 
     public ParticleEffect getPopParticleEffect() {
-        return ModParticleTypes.COFFEE_POP;
+        return CaffeinatedParticleTypes.COFFEE_POP;
     }
 
     public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
@@ -59,7 +59,7 @@ public class CoffeeCauldronBlock extends LeveledCauldronBlock {
             double e = pos.getY() + 0.375 + level * 0.1875;
             double f = pos.getZ() + random.nextDouble() * 0.5 + 0.25;
             if (random.nextDouble() < 0.15) {
-                world.playSound(d, e, f, ModSoundEvents.BLOCK_CAULDRON_BUBBLE, SoundCategory.BLOCKS, 0.2F, 2.5F - level * 0.5F, true);
+                world.playSound(d, e, f, CaffeinatedSoundEvents.BLOCK_CAULDRON_BUBBLE, SoundCategory.BLOCKS, 0.2F, 2.5F - level * 0.5F, true);
             }
 
             world.addParticle(getPopParticleEffect(), d, e, f, 0.0, 0.0, 0.0);

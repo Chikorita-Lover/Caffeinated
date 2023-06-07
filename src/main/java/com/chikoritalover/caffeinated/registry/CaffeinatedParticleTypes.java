@@ -7,7 +7,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
-public class ModParticleTypes {
+public class CaffeinatedParticleTypes {
     public static final DefaultParticleType COFFEE_POP = FabricParticleTypes.simple();
 
     public static void register() {

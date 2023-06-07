@@ -10,7 +10,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.PlacedFeature;
 
-public class ModPlacedFeatures {
+public class CaffeinatedPlacedFeatures {
     public static final RegistryKey<PlacedFeature> PATCH_COFFEE_SHRUB = RegistryKey.of(RegistryKeys.PLACED_FEATURE, new Identifier(Caffeinated.MODID, "patch_coffee_shrub"));
 
     public static void register() {

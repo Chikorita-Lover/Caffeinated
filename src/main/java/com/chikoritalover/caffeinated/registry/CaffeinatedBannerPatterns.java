@@ -7,7 +7,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 
-public class ModBannerPatterns {
+public class CaffeinatedBannerPatterns {
     public static final RegistryKey<BannerPattern> JAVA = of("java");
 
     private static RegistryKey<BannerPattern> of(String id) {

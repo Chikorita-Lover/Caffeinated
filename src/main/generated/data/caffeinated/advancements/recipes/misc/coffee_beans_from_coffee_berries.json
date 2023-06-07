@@ -30,5 +30,6 @@
     "recipes": [
       "caffeinated:coffee_beans_from_coffee_berries"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

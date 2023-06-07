@@ -11,13 +11,13 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
-public class ModItems {
-    public static final Item COFFEE_BERRIES = register("coffee_berries", new Item(new Item.Settings().food(ModFoodComponents.COFFEE_BERRIES)));
-    public static final Item COFFEE_BEANS = register("coffee_beans", new AliasedBlockItem(ModBlocks.COFFEE_SHRUB, new Item.Settings()));
+public class CaffeinatedItems {
+    public static final Item COFFEE_BERRIES = register("coffee_berries", new Item(new Item.Settings().food(CaffeinatedFoodComponents.COFFEE_BERRIES)));
+    public static final Item COFFEE_BEANS = register("coffee_beans", new AliasedBlockItem(CaffeinatedBlocks.COFFEE_SHRUB, new Item.Settings()));
     public static final Item GROUND_COFFEE = register("ground_coffee", new Item(new Item.Settings()));
-    public static final Item COFFEE_BOTTLE = register("coffee_bottle", new CoffeeBottleItem(new Item.Settings().food(ModFoodComponents.COFFEE_BOTTLE).maxCount(16).recipeRemainder(Items.GLASS_BOTTLE)));
-    public static final Item JAVA_BANNER_PATTERN = register("java_banner_pattern", new BannerPatternItem(ModBannerPatternTags.JAVA_PATTERN_ITEM, (new Item.Settings()).maxCount(1)));
-    public static final Item TIRAMISU = register("tiramisu", new Item(new Item.Settings().food(ModFoodComponents.TIRAMISU)));
+    public static final Item COFFEE_BOTTLE = register("coffee_bottle", new CoffeeBottleItem(new Item.Settings().food(CaffeinatedFoodComponents.COFFEE_BOTTLE).maxCount(16).recipeRemainder(Items.GLASS_BOTTLE)));
+    public static final Item JAVA_BANNER_PATTERN = register("java_banner_pattern", new BannerPatternItem(CaffeinatedBannerPatternTags.JAVA_PATTERN_ITEM, (new Item.Settings()).maxCount(1)));
+    public static final Item TIRAMISU = register("tiramisu", new Item(new Item.Settings().food(CaffeinatedFoodComponents.TIRAMISU)));
 
     public static Item register(Block block) {
         return register(new BlockItem(block, new Item.Settings()));
@@ -49,8 +49,8 @@ public class ModItems {
     }
 
     public static void registerCompostingChances() {
-        CompostingChanceRegistry.INSTANCE.add(ModBlocks.COFFEE_BEAN_BLOCK, 0.65F);
-        CompostingChanceRegistry.INSTANCE.add(ModBlocks.GROUND_COFFEE_BLOCK, 0.65F);
+        CompostingChanceRegistry.INSTANCE.add(CaffeinatedBlocks.COFFEE_BEAN_BLOCK, 0.65F);
+        CompostingChanceRegistry.INSTANCE.add(CaffeinatedBlocks.GROUND_COFFEE_BLOCK, 0.65F);
         CompostingChanceRegistry.INSTANCE.add(COFFEE_BEANS, 0.5F);
         CompostingChanceRegistry.INSTANCE.add(GROUND_COFFEE, 0.5F);
         CompostingChanceRegistry.INSTANCE.add(COFFEE_BERRIES, 0.65F);
@@ -59,7 +59,7 @@ public class ModItems {
 
     public static void registerItemGroups() {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.NATURAL).register(entries -> {
-            entries.addAfter(Blocks.HONEYCOMB_BLOCK, ModBlocks.COFFEE_BEAN_BLOCK, ModBlocks.GROUND_COFFEE_BLOCK);
+            entries.addAfter(Blocks.HONEYCOMB_BLOCK, CaffeinatedBlocks.COFFEE_BEAN_BLOCK, CaffeinatedBlocks.GROUND_COFFEE_BLOCK);
             entries.addAfter(Items.SWEET_BERRIES, COFFEE_BEANS);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(entries -> {

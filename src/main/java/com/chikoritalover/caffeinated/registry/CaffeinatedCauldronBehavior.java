@@ -23,13 +23,13 @@ import net.minecraft.world.event.GameEvent;
 
 import java.util.Map;
 
-public class ModCauldronBehavior {
+public class CaffeinatedCauldronBehavior {
     public static final Map<Item, CauldronBehavior> COFFEE_CAULDRON_BEHAVIOR = CauldronBehavior.createMap();
     public static final Map<Item, CauldronBehavior> GROUND_COFFEE_CAULDRON_BEHAVIOR = CauldronBehavior.createMap();
 
     public static void register() {
-        CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.put(ModItems.COFFEE_BOTTLE, (state, world, pos, player, hand, stack) -> {
-            if (stack.getItem() != ModItems.COFFEE_BOTTLE) {
+        CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.put(CaffeinatedItems.COFFEE_BOTTLE, (state, world, pos, player, hand, stack) -> {
+            if (stack.getItem() != CaffeinatedItems.COFFEE_BOTTLE) {
                 return ActionResult.PASS;
             } else {
                 if (!world.isClient) {
@@ -37,7 +37,7 @@ public class ModCauldronBehavior {
                     player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, new ItemStack(Items.GLASS_BOTTLE)));
                     player.incrementStat(Stats.USE_CAULDRON);
                     player.incrementStat(Stats.USED.getOrCreateStat(item));
-                    world.setBlockState(pos, ModBlocks.COFFEE_CAULDRON.getDefaultState());
+                    world.setBlockState(pos, CaffeinatedBlocks.COFFEE_CAULDRON.getDefaultState());
                     world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
                     world.emitGameEvent(null, GameEvent.FLUID_PLACE, pos);
                 }
@@ -46,8 +46,8 @@ public class ModCauldronBehavior {
             }
         });
 
-        CauldronBehavior.WATER_CAULDRON_BEHAVIOR.put(ModItems.GROUND_COFFEE, (state, world, pos, player, hand, stack) -> {
-            if (stack.getItem() != ModItems.GROUND_COFFEE) {
+        CauldronBehavior.WATER_CAULDRON_BEHAVIOR.put(CaffeinatedItems.GROUND_COFFEE, (state, world, pos, player, hand, stack) -> {
+            if (stack.getItem() != CaffeinatedItems.GROUND_COFFEE) {
                 return ActionResult.PASS;
             } else {
                 IntProperty level3 = Properties.LEVEL_3;
@@ -57,8 +57,8 @@ public class ModCauldronBehavior {
                     player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, new ItemStack(Blocks.AIR)));
                     player.incrementStat(Stats.USE_CAULDRON);
                     player.incrementStat(Stats.USED.getOrCreateStat(item));
-                    world.setBlockState(pos, ModBlocks.GROUND_COFFEE_CAULDRON.getDefaultState().with(level3, state.get(level3)));
-                    world.playSound(null, pos, ModSoundEvents.ITEM_GROUND_COFFEE_SPLASH, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                    world.setBlockState(pos, CaffeinatedBlocks.GROUND_COFFEE_CAULDRON.getDefaultState().with(level3, state.get(level3)));
+                    world.playSound(null, pos, CaffeinatedSoundEvents.ITEM_GROUND_COFFEE_SPLASH, SoundCategory.BLOCKS, 1.0F, 1.0F);
                     world.emitGameEvent(null, GameEvent.FLUID_PLACE, pos);
                 }
 
@@ -69,8 +69,8 @@ public class ModCauldronBehavior {
         COFFEE_CAULDRON_BEHAVIOR.put(Items.GLASS_BOTTLE, (state, world, pos, player, hand, stack) -> {
             if (!world.isClient) {
                 Item item = stack.getItem();
-                player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, new ItemStack(ModItems.COFFEE_BOTTLE)));
-                player.incrementStat(ModStats.COFFEE_TAKEN);
+                player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, new ItemStack(CaffeinatedItems.COFFEE_BOTTLE)));
+                player.incrementStat(CaffeinatedStats.COFFEE_TAKEN);
                 player.incrementStat(Stats.USED.getOrCreateStat(item));
                 LeveledCauldronBlock.decrementFluidLevel(state, world, pos);
                 world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
@@ -84,8 +84,8 @@ public class ModCauldronBehavior {
 
             return ActionResult.success(world.isClient);
         });
-        COFFEE_CAULDRON_BEHAVIOR.put(ModItems.COFFEE_BOTTLE, (state, world, pos, player, hand, stack) -> {
-            if (state.get(LeveledCauldronBlock.LEVEL) != 3 && stack.getItem() == ModItems.COFFEE_BOTTLE) {
+        COFFEE_CAULDRON_BEHAVIOR.put(CaffeinatedItems.COFFEE_BOTTLE, (state, world, pos, player, hand, stack) -> {
+            if (state.get(LeveledCauldronBlock.LEVEL) != 3 && stack.getItem() == CaffeinatedItems.COFFEE_BOTTLE) {
                 if (!world.isClient) {
                     player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, new ItemStack(Items.GLASS_BOTTLE)));
                     player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));

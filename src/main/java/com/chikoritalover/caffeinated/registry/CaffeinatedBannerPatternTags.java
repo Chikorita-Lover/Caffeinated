@@ -6,7 +6,7 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 
-public class ModBannerPatternTags {
+public class CaffeinatedBannerPatternTags {
     public static final TagKey<BannerPattern> JAVA_PATTERN_ITEM = of("pattern_item/java");
 
     private static TagKey<BannerPattern> of(String id) {

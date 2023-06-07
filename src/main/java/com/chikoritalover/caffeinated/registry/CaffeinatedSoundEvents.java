@@ -6,7 +6,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 
-public class ModSoundEvents {
+public class CaffeinatedSoundEvents {
     public static final SoundEvent BLOCK_CAULDRON_BREW = register("block.cauldron.brew");
     public static final SoundEvent BLOCK_CAULDRON_BUBBLE = register("block.cauldron.bubble");
 

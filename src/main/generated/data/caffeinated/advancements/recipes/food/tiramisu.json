@@ -30,5 +30,6 @@
     "recipes": [
       "caffeinated:tiramisu"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -6,7 +6,7 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 
-public class ModBlockTags {
+public class CaffeinatedBlockTags {
     public static final TagKey<Block> LIT_FIRES = of("lit_fires");
 
     private static TagKey<Block> of(String id) {

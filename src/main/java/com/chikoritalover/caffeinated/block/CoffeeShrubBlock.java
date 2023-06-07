@@ -1,7 +1,7 @@
 package com.chikoritalover.caffeinated.block;
 
-import com.chikoritalover.caffeinated.registry.ModBlocks;
-import com.chikoritalover.caffeinated.registry.ModItems;
+import com.chikoritalover.caffeinated.registry.CaffeinatedBlocks;
+import com.chikoritalover.caffeinated.registry.CaffeinatedItems;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -32,7 +32,7 @@ public class CoffeeShrubBlock extends PlantBlock implements Fertilizable {
     }
 
     public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
-        return new ItemStack(ModItems.COFFEE_BEANS);
+        return new ItemStack(CaffeinatedItems.COFFEE_BEANS);
     }
 
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
@@ -46,7 +46,7 @@ public class CoffeeShrubBlock extends PlantBlock implements Fertilizable {
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         int i = state.get(AGE);
         BlockState aboveState = world.getBlockState(pos.up());
-        if ((i < 3 || aboveState.getMaterial().isReplaceable()) && random.nextInt(5) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
+        if ((i < 3 || aboveState.isReplaceable()) && random.nextInt(5) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
             grow(world, random, pos, state);
             BlockState state2 = world.getBlockState(pos);
             world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(state2));
@@ -57,7 +57,7 @@ public class CoffeeShrubBlock extends PlantBlock implements Fertilizable {
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         int i = state.get(AGE);
         BlockState aboveState = world.getBlockState(pos.up());
-        boolean bl = i == 3 && !aboveState.getMaterial().isReplaceable();
+        boolean bl = i == 3 && !aboveState.isReplaceable();
         if (!bl && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
             return ActionResult.PASS;
         } else {
@@ -72,7 +72,7 @@ public class CoffeeShrubBlock extends PlantBlock implements Fertilizable {
     public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
         int i = state.get(AGE);
         BlockState aboveState = world.getBlockState(pos.up());
-        return i < 3 || aboveState.getMaterial().isReplaceable();
+        return i < 3 || aboveState.isReplaceable();
     }
 
     public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
@@ -80,7 +80,7 @@ public class CoffeeShrubBlock extends PlantBlock implements Fertilizable {
     }
 
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-        BlockState state2 = state.get(AGE) < 3 ? state.cycle(AGE) : ModBlocks.FLOWERING_COFFEE_SHRUB.getDefaultState();
+        BlockState state2 = state.get(AGE) < 3 ? state.cycle(AGE) : CaffeinatedBlocks.FLOWERING_COFFEE_SHRUB.getDefaultState();
         world.setBlockState(pos, state2, 2);
         if (state.get(AGE) == 3) {
             world.setBlockState(pos.up(), state2.cycle(Properties.DOUBLE_BLOCK_HALF), 2);

@@ -7,7 +7,7 @@ import net.minecraft.stat.StatFormatter;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Identifier;
 
-public class ModStats {
+public class CaffeinatedStats {
     public static final Identifier COFFEE_TAKEN = register("coffee_taken", StatFormatter.DEFAULT);
 
     private static Identifier register(String id, StatFormatter formatter) {

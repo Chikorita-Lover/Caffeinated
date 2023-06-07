@@ -8,7 +8,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
-public class ModStatusEffects {
+public class CaffeinatedStatusEffects {
     public static final StatusEffect CAFFEINE = register("caffeine", StatusEffectCategory.BENEFICIAL, 4927777);
 
     private static StatusEffect register(String id, StatusEffectCategory category, int i){

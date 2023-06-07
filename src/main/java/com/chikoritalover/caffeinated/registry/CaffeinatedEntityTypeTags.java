@@ -6,7 +6,7 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 
-public class ModEntityTypeTags {
+public class CaffeinatedEntityTypeTags {
     public static final TagKey<EntityType<?>> COFFEE_INFLICTS_POISON = of("coffee_inflicts_poison");
 
     private static TagKey<EntityType<?>> of(String id) {

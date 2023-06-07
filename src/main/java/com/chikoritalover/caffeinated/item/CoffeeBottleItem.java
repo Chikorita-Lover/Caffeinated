@@ -1,6 +1,6 @@
 package com.chikoritalover.caffeinated.item;
 
-import com.chikoritalover.caffeinated.registry.ModSoundEvents;
+import com.chikoritalover.caffeinated.registry.CaffeinatedSoundEvents;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffects;
@@ -59,11 +59,11 @@ public class CoffeeBottleItem extends Item {
     }
 
     public SoundEvent getDrinkSound() {
-        return ModSoundEvents.ITEM_COFFEE_BOTTLE_DRINK;
+        return CaffeinatedSoundEvents.ITEM_COFFEE_BOTTLE_DRINK;
     }
 
     public SoundEvent getEatSound() {
-        return ModSoundEvents.ITEM_COFFEE_BOTTLE_DRINK;
+        return CaffeinatedSoundEvents.ITEM_COFFEE_BOTTLE_DRINK;
     }
 
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {

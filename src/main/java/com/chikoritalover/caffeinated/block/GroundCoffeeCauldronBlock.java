@@ -1,8 +1,8 @@
 package com.chikoritalover.caffeinated.block;
 
-import com.chikoritalover.caffeinated.registry.ModBlocks;
-import com.chikoritalover.caffeinated.registry.ModCauldronBehavior;
-import com.chikoritalover.caffeinated.registry.ModSoundEvents;
+import com.chikoritalover.caffeinated.registry.CaffeinatedBlocks;
+import com.chikoritalover.caffeinated.registry.CaffeinatedCauldronBehavior;
+import com.chikoritalover.caffeinated.registry.CaffeinatedSoundEvents;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.particle.ParticleEffect;
@@ -16,7 +16,7 @@ import net.minecraft.world.event.GameEvent;
 
 public class GroundCoffeeCauldronBlock extends CoffeeCauldronBlock {
     public GroundCoffeeCauldronBlock(Settings settings) {
-        super(settings, ModCauldronBehavior.GROUND_COFFEE_CAULDRON_BEHAVIOR);
+        super(settings, CaffeinatedCauldronBehavior.GROUND_COFFEE_CAULDRON_BEHAVIOR);
     }
 
     @Override
@@ -27,25 +27,25 @@ public class GroundCoffeeCauldronBlock extends CoffeeCauldronBlock {
     @Override
     public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
         if (isLitFireInRange(world, pos)) {
-            world.scheduleBlockTick(pos, ModBlocks.GROUND_COFFEE_CAULDRON, 200);
+            world.scheduleBlockTick(pos, CaffeinatedBlocks.GROUND_COFFEE_CAULDRON, 200);
         }
     }
 
     public void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
         if (isLitFireInRange(world, pos)) {
-            world.scheduleBlockTick(pos, ModBlocks.GROUND_COFFEE_CAULDRON, 200);
+            world.scheduleBlockTick(pos, CaffeinatedBlocks.GROUND_COFFEE_CAULDRON, 200);
         }
     }
 
     @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (isLitFireInRange(world, pos)) {
-            BlockState blockState = ModBlocks.COFFEE_CAULDRON.getDefaultState().with(LEVEL, state.get(LEVEL)).with(CoffeeCauldronBlock.REWARD_EXPERIENCE, true);
+            BlockState blockState = CaffeinatedBlocks.COFFEE_CAULDRON.getDefaultState().with(LEVEL, state.get(LEVEL)).with(CoffeeCauldronBlock.REWARD_EXPERIENCE, true);
 
             world.setBlockState(pos, blockState);
             world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(blockState));
 
-            world.playSound(null, pos, ModSoundEvents.BLOCK_CAULDRON_BREW, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            world.playSound(null, pos, CaffeinatedSoundEvents.BLOCK_CAULDRON_BREW, SoundCategory.BLOCKS, 1.0F, 1.0F);
         }
     }
 }
