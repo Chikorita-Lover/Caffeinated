@@ -1,0 +1,47 @@
+{
+  "advancements.husbandry.brew_coffee.title": "Бодренько!",
+  "advancements.husbandry.brew_coffee.description": "Заварите Бутылочку кофе в котле над костром",
+
+  "block.caffeinated.coffee_bean_block": "Блок кофейных зёрен",
+  "block.caffeinated.coffee_berry_crate": "Ящик кофейных ягод",
+  "block.caffeinated.coffee_cauldron": "Котёл с кофе",
+  "block.caffeinated.coffee_shrub": "Кофейный куст",
+  "block.caffeinated.flowering_coffee_shrub": "Цветущий кофейный куст",
+  "block.caffeinated.ground_coffee_block": "Блок молотого кофе",
+  "block.caffeinated.ground_coffee_cauldron": "Котёл молотого кофе",
+  "block.caffeinated.potted_coffee_shrub": "Кофейный куст в горшке",
+
+  "block.minecraft.banner.caffeinated.java.black": "Чёрная эмблема Java",
+  "block.minecraft.banner.caffeinated.java.red": "Красная эмблема Java",
+  "block.minecraft.banner.caffeinated.java.green": "Зеленая эмблема Java",
+  "block.minecraft.banner.caffeinated.java.brown": "Коричневая эмблема Java",
+  "block.minecraft.banner.caffeinated.java.blue": "Синяя эмблема Java",
+  "block.minecraft.banner.caffeinated.java.purple": "Фиолетовая эмблема Java",
+  "block.minecraft.banner.caffeinated.java.cyan": "Бирюзовая эмблема Java",
+  "block.minecraft.banner.caffeinated.java.light_gray": "Светло-серая эмблема Java",
+  "block.minecraft.banner.caffeinated.java.gray": "Серая Java-эмблема",
+  "block.minecraft.banner.caffeinated.java.pink": "Розовая эмблема Java",
+  "block.minecraft.banner.caffeinated.java.lime": "Лаймовая эмблема Java",
+  "block.minecraft.banner.caffeinated.java.yellow": "Желтая эмблема Java",
+  "block.minecraft.banner.caffeinated.java.light_blue": "Голубая эмблема Java",
+  "block.minecraft.banner.caffeinated.java.magenta": "Пурпурная Java-эмблема",
+  "block.minecraft.banner.caffeinated.java.orange": "Оранжевая Java-эмблема",
+  "block.minecraft.banner.caffeinated.java.white": "Белая эмблема Java",
+
+  "effect.caffeinated.caffeine": "Кофеин",
+
+  "item.caffeinated.coffee_beans": "Кофейные зерна",
+  "item.caffeinated.coffee_berries": "Кофейные ягоды",
+  "item.caffeinated.coffee_bottle": "Бутылочка кофе",
+  "item.caffeinated.ground_coffee": "Молотый кофе",
+  "item.caffeinated.java_banner_pattern": "Узор флага",
+  "item.caffeinated.java_banner_pattern.desc": "Эмблема Java",
+  "item.caffeinated.tiramisu": "Тирамису",
+
+  "subtitles.block.cauldron.brew": "Котёл варит",
+  "subtitles.block.cauldron.bubble": "Котёл кипит",
+  "subtitles.item.coffee_bottle.drink": "Прихлёбывание",
+  "subtitles.item.ground_coffee.splash": "Молотый кофе брызжет",
+
+  "stat.caffeinated.coffee_taken": "Взято кофе из котла"
+}
