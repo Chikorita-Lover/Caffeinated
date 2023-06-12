@@ -3,9 +3,13 @@
   "id": "caffeinated",
   "version": "${version}",
   "name": "Caffeinated",
-  "description": "Adds new coffee shrubs and items that provide a new caffeine effect.",
+  "description": "A vanilla-style Minecraft mod that adds coffee, a new crop with unique uses!",
   "authors": [
     "Chikorita Lover"
+  ],
+  "contributors": [
+    "ExDrill",
+    "xvein"
   ],
   "contact": {
     "homepage": "https://github.com/Chikorita-Lover/Caffeinated",
