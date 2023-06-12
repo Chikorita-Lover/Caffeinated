@@ -24,13 +24,26 @@
             "minecraft:glass_bottle"
           ]
         },
-        "location": {
-          "block": {
-            "blocks": [
-              "caffeinated:coffee_cauldron"
-            ]
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": [
+                  "caffeinated:coffee_cauldron"
+                ]
+              }
+            }
+          },
+          {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "items": [
+                "minecraft:glass_bottle"
+              ]
+            }
           }
-        }
+        ]
       }
     }
   },
@@ -38,5 +51,6 @@
     [
       "brew_coffee"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }
