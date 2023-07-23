@@ -18,6 +18,7 @@ Brewing coffee is greatly accessible in survival! All it takes is a campfire, yo
 - English
 - Spanish (Argentinian, European, Mexican; Thanks to @ExDrill)
 - Russian (Thanks to @xvein)
+- Chinese (Simplified; Thanks to @seaseii)
 
 ## 🧩Compatibility
 - [Farmer's Delight](https://modrinth.com/mod/farmers-delight-fabric)
