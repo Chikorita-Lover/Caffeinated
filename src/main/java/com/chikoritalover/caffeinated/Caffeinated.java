@@ -16,54 +16,47 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Caffeinated implements ModInitializer {
-	// This logger is used to write text to the console and the log file.
-	// It is considered best practice to use your mod id as the logger's name.
-	// That way, it's clear which mod wrote info, warnings, and errors.
-	public static final String MODID = "caffeinated";
-	public static final Logger LOGGER = LoggerFactory.getLogger("modid");
+    // This logger is used to write text to the console and the log file.
+    // It is considered best practice to use your mod id as the logger's name.
+    // That way, it's clear which mod wrote info, warnings, and errors.
+    public static final String MODID = "caffeinated";
+    public static final Logger LOGGER = LoggerFactory.getLogger("modid");
 
-	@Override
-	public void onInitialize() {
-		CaffeinatedBannerPatterns.initAndGetDefault(Registries.BANNER_PATTERN);
-		CaffeinatedBlocks.register();
-		CaffeinatedCauldronBehavior.register();
-		CaffeinatedItems.register();
-		CaffeinatedParticleTypes.register();
-		CaffeinatedPlacedFeatures.register();
-		CaffeinatedSoundEvents.register();
-		CaffeinatedStats.register();
-		CaffeinatedStatusEffects.register();
-		CaffeinatedTradeOffers.register();
-		CaffeinatedBlockSoundGroup.register();
-		CaffeinatedEntityTypeTags.register();
-		CaffeinatedBlockTags.register();
-		CaffeinatedItemTags.register();
-		CaffeinatedBannerPatternTags.register();
-		CaffeinatedBannerPatterns.register();
+    @Override
+    public void onInitialize() {
+        CaffeinatedBannerPatterns.initAndGetDefault(Registries.BANNER_PATTERN);
+        CaffeinatedBlocks.register();
+        CaffeinatedCauldronBehavior.register();
+        CaffeinatedItems.register();
+        CaffeinatedParticleTypes.register();
+        CaffeinatedPlacedFeatures.register();
+        CaffeinatedSoundEvents.register();
+        CaffeinatedStats.register();
+        CaffeinatedStatusEffects.register();
+        CaffeinatedTradeOffers.register();
+        CaffeinatedBlockSoundGroup.register();
+        CaffeinatedEntityTypeTags.register();
+        CaffeinatedBlockTags.register();
+        CaffeinatedItemTags.register();
+        CaffeinatedBannerPatternTags.register();
+        CaffeinatedBannerPatterns.register();
 
-		registerLootTableEvents();
-	}
+        registerLootTableEvents();
+    }
 
-	public void registerLootTableEvents() {
-		addLootTablePool(1, 1, 0.5F, LootTables.JUNGLE_TEMPLE_CHEST, CaffeinatedItems.COFFEE_BEANS, 1, 3);
-	}
+    public void registerLootTableEvents() {
+        addLootTablePool(1, 1, 0.5F, LootTables.JUNGLE_TEMPLE_CHEST, CaffeinatedItems.COFFEE_BEANS, 1, 3);
+    }
 
-	private void addLootTablePool(int minRolls, int maxRolls, float chance, Identifier lootTable, ItemConvertible item) {
-		addLootTablePool(minRolls, maxRolls, chance, lootTable, item, 1, 1);
-	}
+    private void addLootTablePool(int minRolls, int maxRolls, float chance, Identifier lootTable, ItemConvertible item, int minCount, int maxCount) {
+        UniformLootNumberProvider lootTableRange = UniformLootNumberProvider.create(minRolls, maxRolls);
+        LootCondition condition = RandomChanceLootCondition.builder(chance).build();
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, supplier, setter) -> {
+            if (lootTable.equals(id)) {
+                LootPool lootPool = LootPool.builder().rolls(lootTableRange).conditionally(condition).with(ItemEntry.builder(item).build()).build();
 
-	private void addLootTablePool(int minRolls, int maxRolls, float chance, Identifier lootTable, ItemConvertible item, int minCount, int maxCount) {
-		UniformLootNumberProvider lootTableRange = UniformLootNumberProvider.create(minRolls, maxRolls);
-		LootCondition condition = RandomChanceLootCondition.builder(chance).build();
-		LootTableEvents.MODIFY.register((resourceManager, lootManager, id, supplier, setter) -> {
-			if (lootTable.equals(id)) {
-				LootPool lootPool = LootPool.builder()
-						.rolls(lootTableRange)
-						.conditionally(condition)
-						.with(ItemEntry.builder(item).build()).build();
-
-				supplier.pool(lootPool);
-			}
-		});
-	}
+                supplier.pool(lootPool);
+            }
+        });
+    }
 }

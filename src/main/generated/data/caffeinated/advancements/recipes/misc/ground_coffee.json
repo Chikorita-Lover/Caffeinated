@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_coffee_berries": {
+    "has_coffee_beans": {
       "conditions": {
         "items": [
           {
             "items": [
-              "caffeinated:coffee_berries"
+              "caffeinated:coffee_beans"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "caffeinated:coffee_beans_from_coffee_berries"
+        "recipe": "caffeinated:ground_coffee"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_coffee_berries",
+      "has_coffee_beans",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "caffeinated:coffee_beans_from_coffee_berries"
+      "caffeinated:ground_coffee"
     ]
   },
   "sends_telemetry_event": false

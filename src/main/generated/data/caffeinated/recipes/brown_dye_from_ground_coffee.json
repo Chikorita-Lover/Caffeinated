@@ -1,13 +1,13 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
-  "group": "coffee_beans",
+  "group": "brown_dye",
   "ingredients": [
     {
-      "item": "caffeinated:coffee_berries"
+      "item": "caffeinated:ground_coffee"
     }
   ],
   "result": {
-    "item": "caffeinated:coffee_beans"
+    "item": "minecraft:brown_dye"
   }
 }

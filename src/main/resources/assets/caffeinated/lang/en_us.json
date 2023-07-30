@@ -1,6 +1,8 @@
 {
   "advancements.husbandry.brew_coffee.title": "Wake Up and Smell the Coffee",
-  "advancements.husbandry.brew_coffee.description": "Brew a Coffee Bottle in a Cauldron over a Campfire",
+  "advancements.husbandry.brew_coffee.description": "Brew coffee in a Cauldron over a Campfire",
+  "advancements.husbandry.eat_tiramisu.title": "I Tira-Miss-U",
+  "advancements.husbandry.eat_tiramisu.description": "Bake and take a bite of a Tiramisu",
 
   "block.caffeinated.coffee_bean_block": "Coffee Bean Block",
   "block.caffeinated.coffee_berry_crate": "Coffee Berry Crate",
@@ -10,6 +12,7 @@
   "block.caffeinated.ground_coffee_block": "Ground Coffee Block",
   "block.caffeinated.ground_coffee_cauldron": "Ground Coffee Cauldron",
   "block.caffeinated.potted_coffee_shrub": "Potted Coffee Shrub",
+  "block.caffeinated.tiramisu": "Tiramisu",
 
   "block.minecraft.banner.caffeinated.java.black": "Black Java Emblem",
   "block.minecraft.banner.caffeinated.java.blue": "Blue Java Emblem",
@@ -36,12 +39,13 @@
   "item.caffeinated.ground_coffee": "Ground Coffee",
   "item.caffeinated.java_banner_pattern": "Banner Pattern",
   "item.caffeinated.java_banner_pattern.desc": "Java Emblem",
-  "item.caffeinated.tiramisu": "Tiramisu",
+  "item.caffeinated.tiramisu_slice": "Tiramisu Slice",
 
   "subtitles.block.cauldron.brew": "Cauldron brews",
   "subtitles.block.cauldron.bubble": "Cauldron bubbles",
   "subtitles.item.coffee_bottle.drink": "Slurping",
   "subtitles.item.ground_coffee.splash": "Ground Coffee splashes",
 
-  "stat.caffeinated.coffee_taken": "Coffee Taken from Cauldron"
+  "stat.caffeinated.coffee_taken": "Coffee Taken from Cauldron",
+  "stat.caffeinated.eat_tiramisu_slice": "Tiramisu Slices Eaten"
 }

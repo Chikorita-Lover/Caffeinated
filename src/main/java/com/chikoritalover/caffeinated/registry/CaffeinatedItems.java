@@ -17,13 +17,13 @@ public class CaffeinatedItems {
     public static final Item GROUND_COFFEE = register("ground_coffee", new Item(new Item.Settings()));
     public static final Item COFFEE_BOTTLE = register("coffee_bottle", new CoffeeBottleItem(new Item.Settings().food(CaffeinatedFoodComponents.COFFEE_BOTTLE).maxCount(16).recipeRemainder(Items.GLASS_BOTTLE)));
     public static final Item JAVA_BANNER_PATTERN = register("java_banner_pattern", new BannerPatternItem(CaffeinatedBannerPatternTags.JAVA_PATTERN_ITEM, (new Item.Settings()).maxCount(1)));
-    public static final Item TIRAMISU = register("tiramisu", new Item(new Item.Settings().food(CaffeinatedFoodComponents.TIRAMISU)));
+    public static final Item TIRAMISU_SLICE = register("tiramisu_slice", new Item(new Item.Settings().food(CaffeinatedFoodComponents.TIRAMISU_SLICE)));
 
     public static Item register(Block block) {
         return register(new BlockItem(block, new Item.Settings()));
     }
 
-    private static Item register(BlockItem item) {
+    public static Item register(BlockItem item) {
         return register(item.getBlock(), item);
     }
 
@@ -36,10 +36,9 @@ public class CaffeinatedItems {
     }
 
     private static Item register(Identifier id, Item item) {
-        if (item instanceof BlockItem) {
-            ((BlockItem)item).appendBlocks(Item.BLOCK_ITEMS, item);
+        if (item instanceof BlockItem blockItem) {
+            blockItem.appendBlocks(Item.BLOCK_ITEMS, item);
         }
-
         return Registry.register(Registries.ITEM, id, item);
     }
 
@@ -54,7 +53,8 @@ public class CaffeinatedItems {
         CompostingChanceRegistry.INSTANCE.add(COFFEE_BEANS, 0.5F);
         CompostingChanceRegistry.INSTANCE.add(GROUND_COFFEE, 0.5F);
         CompostingChanceRegistry.INSTANCE.add(COFFEE_BERRIES, 0.65F);
-        CompostingChanceRegistry.INSTANCE.add(TIRAMISU, 1.0F);
+        CompostingChanceRegistry.INSTANCE.add(CaffeinatedBlocks.TIRAMISU, 1.0F);
+        CompostingChanceRegistry.INSTANCE.add(TIRAMISU_SLICE, 0.85F);
     }
 
     public static void registerItemGroups() {
@@ -64,7 +64,7 @@ public class CaffeinatedItems {
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(entries -> {
             entries.addAfter(Items.GLOW_BERRIES, COFFEE_BERRIES);
-            entries.addAfter(Items.PUMPKIN_PIE, TIRAMISU);
+            entries.addAfter(Items.CAKE, CaffeinatedBlocks.TIRAMISU, TIRAMISU_SLICE);
             entries.addAfter(Items.HONEY_BOTTLE, COFFEE_BOTTLE);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {

@@ -1,0 +1,17 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "caffeinated:tiramisu"
+    }
+  ],
+  "result": [
+    {
+      "item": "caffeinated:tiramisu_slice",
+      "count": 4
+    }
+  ],
+  "tool": {
+    "tag": "c:tools/knives"
+  }
+}

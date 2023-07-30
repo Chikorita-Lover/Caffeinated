@@ -1,17 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "misc",
-  "group": "ground_coffee",
+  "group": "tiramisu",
   "key": {
     "#": {
-      "item": "caffeinated:coffee_beans"
+      "item": "caffeinated:tiramisu_slice"
     }
   },
   "pattern": [
-    "###"
+    "##",
+    "##"
   ],
   "result": {
-    "item": "caffeinated:ground_coffee"
+    "item": "caffeinated:tiramisu"
   },
   "show_notification": true
 }

@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_coffee_beans": {
+    "has_ground_coffee": {
       "conditions": {
         "items": [
           {
             "items": [
-              "caffeinated:coffee_beans"
+              "caffeinated:ground_coffee"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "caffeinated:ground_coffee_from_coffee_beans"
+        "recipe": "caffeinated:brown_dye_from_ground_coffee"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_coffee_beans",
+      "has_ground_coffee",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "caffeinated:ground_coffee_from_coffee_beans"
+      "caffeinated:brown_dye_from_ground_coffee"
     ]
   },
   "sends_telemetry_event": false

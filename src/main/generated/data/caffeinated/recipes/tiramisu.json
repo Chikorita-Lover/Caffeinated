@@ -1,32 +1,25 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "group": "tiramisu",
-  "key": {
-    "#": {
+  "ingredients": [
+    {
       "item": "caffeinated:coffee_bottle"
     },
-    "C": {
-      "item": "minecraft:cocoa_beans"
+    {
+      "item": "minecraft:wheat"
     },
-    "E": {
-      "item": "minecraft:egg"
+    {
+      "item": "minecraft:sugar"
     },
-    "M": {
+    {
       "item": "minecraft:milk_bucket"
     },
-    "W": {
-      "item": "minecraft:wheat"
+    {
+      "item": "minecraft:egg"
     }
-  },
-  "pattern": [
-    "C#C",
-    "EME",
-    "WWW"
   ],
   "result": {
-    "count": 2,
     "item": "caffeinated:tiramisu"
-  },
-  "show_notification": true
+  }
 }

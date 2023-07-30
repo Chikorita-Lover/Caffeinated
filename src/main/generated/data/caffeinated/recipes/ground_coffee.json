@@ -7,11 +7,10 @@
     }
   },
   "pattern": [
-    "##",
-    "##"
+    "###"
   ],
   "result": {
-    "item": "caffeinated:coffee_bean_block"
+    "item": "caffeinated:ground_coffee"
   },
   "show_notification": true
 }
