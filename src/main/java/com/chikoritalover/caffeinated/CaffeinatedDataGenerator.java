@@ -12,7 +12,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.LeveledCauldronBlock;
 import net.minecraft.data.client.*;
-import net.minecraft.data.server.recipe.RecipeJsonProvider;
+import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.ItemConvertible;
@@ -22,8 +22,6 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.state.property.Property;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.function.Consumer;
 
 public class CaffeinatedDataGenerator implements DataGeneratorEntrypoint {
     @Override
@@ -86,13 +84,13 @@ public class CaffeinatedDataGenerator implements DataGeneratorEntrypoint {
             super(output);
         }
 
-        public static void offerReversibleCompactingRecipes(Consumer<RecipeJsonProvider> exporter, ItemConvertible input, ItemConvertible compacted, String compactingRecipeName, @Nullable String compactingRecipeGroup, String reverseRecipeName, @Nullable String reverseRecipeGroup) {
+        public static void offerReversibleCompactingRecipes(RecipeExporter exporter, ItemConvertible input, ItemConvertible compacted, String compactingRecipeName, @Nullable String compactingRecipeGroup, String reverseRecipeName, @Nullable String reverseRecipeGroup) {
             ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, input, 9).input(compacted).group(reverseRecipeGroup).criterion(hasItem(compacted), conditionsFromItem(compacted)).offerTo(exporter, new Identifier(Caffeinated.MODID, reverseRecipeName));
             ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, compacted).input('#', input).pattern("###").pattern("###").pattern("###").group(compactingRecipeGroup).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, new Identifier(Caffeinated.MODID, compactingRecipeName));
         }
 
         @Override
-        public void generate(Consumer<RecipeJsonProvider> exporter) {
+        public void generate(RecipeExporter exporter) {
             offerReversibleCompactingRecipes(exporter, CaffeinatedItems.COFFEE_BEANS, CaffeinatedBlocks.COFFEE_BEAN_BLOCK, "coffee_bean_block", null, "coffee_beans_from_block", "coffee_beans");
 
             offerReversibleCompactingRecipes(exporter, CaffeinatedItems.GROUND_COFFEE, CaffeinatedBlocks.GROUND_COFFEE_BLOCK, "ground_coffee_block", null, "ground_coffee_from_block", "ground_coffee");

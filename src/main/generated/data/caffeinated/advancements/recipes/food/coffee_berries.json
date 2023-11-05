@@ -22,8 +22,8 @@
   },
   "requirements": [
     [
-      "has_coffee_berry_crate",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_coffee_berry_crate"
     ]
   ],
   "rewards": {

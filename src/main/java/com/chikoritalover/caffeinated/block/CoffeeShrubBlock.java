@@ -69,7 +69,8 @@ public class CoffeeShrubBlock extends PlantBlock implements Fertilizable {
         builder.add(AGE);
     }
 
-    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
+    @Override
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state) {
         int i = state.get(AGE);
         BlockState aboveState = world.getBlockState(pos.up());
         return i < 3 || aboveState.isReplaceable();
