@@ -12,8 +12,8 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 public class CaffeinatedItems {
-    public static final Item COFFEE_BERRIES = register("coffee_berries", new Item(new Item.Settings().food(CaffeinatedFoodComponents.COFFEE_BERRIES)));
-    public static final Item COFFEE_BEANS = register("coffee_beans", new AliasedBlockItem(CaffeinatedBlocks.COFFEE_SHRUB, new Item.Settings()));
+    public static final Item COFFEE_BERRIES = register("coffee_berries", new AliasedBlockItem(CaffeinatedBlocks.COFFEE_SHRUB, new Item.Settings().food(CaffeinatedFoodComponents.COFFEE_BERRIES)));
+    public static final Item COFFEE_BEANS = register("coffee_beans", new Item(new Item.Settings()));
     public static final Item GROUND_COFFEE = register("ground_coffee", new Item(new Item.Settings()));
     public static final Item COFFEE_BOTTLE = register("coffee_bottle", new CoffeeBottleItem(new Item.Settings().food(CaffeinatedFoodComponents.COFFEE_BOTTLE).maxCount(16).recipeRemainder(Items.GLASS_BOTTLE)));
     public static final Item JAVA_BANNER_PATTERN = register("java_banner_pattern", new BannerPatternItem(CaffeinatedBannerPatternTags.JAVA_PATTERN_ITEM, (new Item.Settings()).maxCount(1)));
@@ -60,7 +60,7 @@ public class CaffeinatedItems {
     public static void registerItemGroups() {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.NATURAL).register(entries -> {
             entries.addAfter(Blocks.HONEYCOMB_BLOCK, CaffeinatedBlocks.COFFEE_BEAN_BLOCK, CaffeinatedBlocks.GROUND_COFFEE_BLOCK);
-            entries.addAfter(Items.SWEET_BERRIES, COFFEE_BEANS);
+            entries.addAfter(Items.SWEET_BERRIES, COFFEE_BERRIES);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(entries -> {
             entries.addAfter(Items.GLOW_BERRIES, COFFEE_BERRIES);

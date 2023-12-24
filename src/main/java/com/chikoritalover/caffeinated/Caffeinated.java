@@ -45,7 +45,7 @@ public class Caffeinated implements ModInitializer {
     }
 
     public void registerLootTableEvents() {
-        addLootTablePool(1, 1, 0.5F, LootTables.JUNGLE_TEMPLE_CHEST, CaffeinatedItems.COFFEE_BEANS, 1, 3);
+        addLootTablePool(1, 1, 0.5F, LootTables.JUNGLE_TEMPLE_CHEST, CaffeinatedItems.COFFEE_BERRIES, 1, 3);
     }
 
     private void addLootTablePool(int minRolls, int maxRolls, float chance, Identifier lootTable, ItemConvertible item, int minCount, int maxCount) {

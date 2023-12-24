@@ -33,7 +33,7 @@ public class FloweringCoffeeShrubBlock extends TallPlantBlock implements Fertili
     }
 
     public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
-        return new ItemStack(CaffeinatedItems.COFFEE_BEANS);
+        return new ItemStack(CaffeinatedItems.COFFEE_BERRIES);
     }
 
     public boolean hasRandomTicks(BlockState state) {

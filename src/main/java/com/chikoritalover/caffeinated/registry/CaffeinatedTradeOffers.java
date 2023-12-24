@@ -10,7 +10,7 @@ public class CaffeinatedTradeOffers {
             factories.add(new TradeOffers.BuyForOneEmeraldFactory(CaffeinatedItems.COFFEE_BERRIES, 14, 12, 20));
         });
         TradeOfferHelper.registerWanderingTraderOffers(1, factories -> {
-            factories.add(new TradeOffers.SellItemFactory(CaffeinatedItems.COFFEE_BEANS, 1, 1, 12, 1));
+            factories.add(new TradeOffers.SellItemFactory(CaffeinatedItems.COFFEE_BERRIES, 1, 1, 12, 1));
         });
     }
 }
