@@ -27,6 +27,7 @@ public class Caffeinated implements ModInitializer {
         CaffeinatedBannerPatterns.initAndGetDefault(Registries.BANNER_PATTERN);
         CaffeinatedBlocks.register();
         CaffeinatedCauldronBehavior.register();
+        CaffeinatedItemGroups.register();
         CaffeinatedItems.register();
         CaffeinatedParticleTypes.register();
         CaffeinatedPlacedFeatures.register();

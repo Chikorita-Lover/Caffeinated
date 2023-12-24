@@ -41,6 +41,8 @@
   "item.caffeinated.java_banner_pattern.desc": "Java Emblem",
   "item.caffeinated.tiramisu_slice": "Tiramisu Slice",
 
+  "itemGroup.caffeinated.caffeinated": "Caffeinated",
+
   "subtitles.block.cauldron.brew": "Cauldron brews",
   "subtitles.block.cauldron.bubble": "Cauldron bubbles",
   "subtitles.item.coffee_bottle.drink": "Slurping",

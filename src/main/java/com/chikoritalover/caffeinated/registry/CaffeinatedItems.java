@@ -44,7 +44,6 @@ public class CaffeinatedItems {
 
     public static void register() {
         registerCompostingChances();
-        registerItemGroups();
     }
 
     public static void registerCompostingChances() {
@@ -55,21 +54,5 @@ public class CaffeinatedItems {
         CompostingChanceRegistry.INSTANCE.add(COFFEE_BERRIES, 0.65F);
         CompostingChanceRegistry.INSTANCE.add(CaffeinatedBlocks.TIRAMISU, 1.0F);
         CompostingChanceRegistry.INSTANCE.add(TIRAMISU_SLICE, 0.85F);
-    }
-
-    public static void registerItemGroups() {
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.NATURAL).register(entries -> {
-            entries.addAfter(Blocks.HONEYCOMB_BLOCK, CaffeinatedBlocks.COFFEE_BEAN_BLOCK, CaffeinatedBlocks.GROUND_COFFEE_BLOCK);
-            entries.addAfter(Items.SWEET_BERRIES, COFFEE_BERRIES);
-        });
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(entries -> {
-            entries.addAfter(Items.GLOW_BERRIES, COFFEE_BERRIES);
-            entries.addAfter(Items.CAKE, CaffeinatedBlocks.TIRAMISU, TIRAMISU_SLICE);
-            entries.addAfter(Items.HONEY_BOTTLE, COFFEE_BOTTLE);
-        });
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
-            entries.addAfter(Items.WHEAT, COFFEE_BEANS, GROUND_COFFEE);
-            entries.addAfter(Items.PIGLIN_BANNER_PATTERN, JAVA_BANNER_PATTERN);
-        });
     }
 }
