@@ -7,6 +7,9 @@ import net.minecraft.block.*;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.particle.ParticleEffect;
+import net.minecraft.particle.ParticleType;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
@@ -22,7 +25,15 @@ public class CaffeinatedBlocks {
     public static final Block COFFEE_CAULDRON = register("coffee_cauldron", new CoffeeCauldronBlock(AbstractBlock.Settings.copy(Blocks.CAULDRON), CaffeinatedCauldronBehavior.COFFEE_CAULDRON_BEHAVIOR));
     public static final Block GROUND_COFFEE_CAULDRON = register("ground_coffee_cauldron", new GroundCoffeeCauldronBlock(AbstractBlock.Settings.copy(Blocks.CAULDRON).ticksRandomly()));
 
+    public static final Block CAULDRON_CAMPFIRE = register("cauldron_campfire", createCauldronCampfire(Blocks.CAMPFIRE, ParticleTypes.FLAME));
+    public static final Block SOUL_CAULDRON_CAMPFIRE = register("soul_cauldron_campfire", createCauldronCampfire(Blocks.SOUL_CAMPFIRE, ParticleTypes.SOUL_FIRE_FLAME));
+
     public static final Block TIRAMISU = registerBlockWithItem("tiramisu", new TiramisuBlock(AbstractBlock.Settings.create().solid().strength(0.5F).sounds(BlockSoundGroup.WOOL).pistonBehavior(PistonBehavior.DESTROY)), new Item.Settings().maxCount(1));
+
+    private static CauldronCampfireBlock createCauldronCampfire(Block campfireBlock, ParticleEffect particleEffect) {
+        Block cauldronBlock = Blocks.CAULDRON;
+        return new CauldronCampfireBlock(campfireBlock, particleEffect, AbstractBlock.Settings.copy(campfireBlock).sounds(cauldronBlock.getSoundGroup(cauldronBlock.getDefaultState())));
+    }
 
     public static Block registerBlockWithItem(String id, Block block, Item.Settings settings) {
         Block block2 = register(id, block);

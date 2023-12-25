@@ -4,10 +4,13 @@
   "package": "com.chikoritalover.caffeinated.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "CampfireBlockMixin",
+    "CauldronBlockMixin",
     "CookingRecipeJsonBuilderMixin",
     "GrowCropsGoalMixin",
     "ItemMixin",
-    "PlayerEntityMixin"
+    "PlayerEntityMixin",
+    "ShovelItemMixin"
   ],
   "client": [
     "ClientRecipeBookMixin",

@@ -1,5 +1,6 @@
 package com.chikoritalover.caffeinated;
 
+import com.chikoritalover.caffeinated.block.CauldronCampfireBlock;
 import com.chikoritalover.caffeinated.block.TiramisuBlock;
 import com.chikoritalover.caffeinated.registry.CaffeinatedBlocks;
 import com.chikoritalover.caffeinated.registry.CaffeinatedItems;
@@ -11,14 +12,12 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.LeveledCauldronBlock;
 import net.minecraft.data.client.*;
 import net.minecraft.data.server.recipe.CookingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
-import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
@@ -26,6 +25,7 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.state.property.Property;
 import net.minecraft.util.Identifier;
 
+import java.util.Optional;
 import java.util.function.Consumer;
 
 public class CaffeinatedDataGenerator implements DataGeneratorEntrypoint {
@@ -39,6 +39,12 @@ public class CaffeinatedDataGenerator implements DataGeneratorEntrypoint {
     private static class CaffeinatedModelGenerator extends FabricModelProvider {
         private CaffeinatedModelGenerator(FabricDataOutput output) {
             super(output);
+        }
+
+        public final void registerCauldronCampfire(BlockStateModelGenerator blockStateModelGenerator, Block cauldronCampfire, Block campfire) {
+            Identifier identifier = new Identifier(Caffeinated.MODID, "block/cauldron_campfire_off");
+            Identifier identifier2 = new Model(Optional.of(new Identifier(Caffeinated.MODID, "block/template_cauldron_campfire")), Optional.empty(), TextureKey.FIRE, TextureKey.LIT_LOG).upload(cauldronCampfire, TextureMap.campfire(campfire), blockStateModelGenerator.modelCollector);
+            blockStateModelGenerator.blockStateCollector.accept(VariantsBlockStateSupplier.create(cauldronCampfire).coordinate(BlockStateModelGenerator.createBooleanModelMap(Properties.LIT, identifier2, identifier)).coordinate(BlockStateModelGenerator.createSouthDefaultHorizontalRotationStates()));
         }
 
         public final void registerCoffeeShrub(BlockStateModelGenerator blockStateModelGenerator, Block crop, Block pottedCrop, Property<Integer> ageProperty, int... ageTextureIndices) {
@@ -78,11 +84,15 @@ public class CaffeinatedDataGenerator implements DataGeneratorEntrypoint {
             registerCoffeeShrub(blockStateModelGenerator, CaffeinatedBlocks.COFFEE_SHRUB, CaffeinatedBlocks.POTTED_COFFEE_SHRUB, Properties.AGE_3, 0, 0, 1, 1);
 
             registerTiramisu(blockStateModelGenerator);
+
+            for (Block campfireBlock : CauldronCampfireBlock.CAMPFIRE_TO_CAULDRON_CAMPFIRE.keySet()) {
+                registerCauldronCampfire(blockStateModelGenerator, CauldronCampfireBlock.CAMPFIRE_TO_CAULDRON_CAMPFIRE.get(campfireBlock), campfireBlock);
+            }
         }
 
         @Override
         public void generateItemModels(ItemModelGenerator itemModelGenerator) {
-            itemModelGenerator.register(CaffeinatedItems.COFFEE_BERRIES, Models.GENERATED);
+            itemModelGenerator.register(CaffeinatedItems.COFFEE_BEANS, Models.GENERATED);
             itemModelGenerator.register(CaffeinatedItems.COFFEE_BOTTLE, Models.GENERATED);
             itemModelGenerator.register(CaffeinatedItems.GROUND_COFFEE, Models.GENERATED);
             itemModelGenerator.register(CaffeinatedItems.JAVA_BANNER_PATTERN, Models.GENERATED);

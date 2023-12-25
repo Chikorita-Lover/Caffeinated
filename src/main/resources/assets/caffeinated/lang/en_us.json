@@ -4,6 +4,7 @@
   "advancements.husbandry.eat_tiramisu.title": "I Tira-Miss-U",
   "advancements.husbandry.eat_tiramisu.description": "Bake and take a bite of a Tiramisu",
 
+  "block.caffeinated.cauldron_campfire": "Campfire with Cauldron",
   "block.caffeinated.coffee_bean_block": "Coffee Bean Block",
   "block.caffeinated.coffee_berry_crate": "Coffee Berry Crate",
   "block.caffeinated.coffee_cauldron": "Coffee Cauldron",
@@ -12,6 +13,7 @@
   "block.caffeinated.ground_coffee_block": "Ground Coffee Block",
   "block.caffeinated.ground_coffee_cauldron": "Ground Coffee Cauldron",
   "block.caffeinated.potted_coffee_shrub": "Potted Coffee Shrub",
+  "block.caffeinated.soul_cauldron_campfire": "Soul Campfire with Cauldron",
   "block.caffeinated.tiramisu": "Tiramisu",
 
   "block.minecraft.banner.caffeinated.java.black": "Black Java Emblem",

@@ -1,8 +1,16 @@
 package com.chikoritalover.caffeinated;
 
+import com.chikoritalover.caffeinated.block.entity.CauldronCampfireBlockEntity;
 import com.chikoritalover.caffeinated.registry.*;
+import com.mojang.datafixers.types.Type;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
+import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.block.entity.CampfireBlockEntity;
+import net.minecraft.datafixer.TypeReferences;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTables;
@@ -11,7 +19,9 @@ import net.minecraft.loot.condition.RandomChanceLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,6 +31,11 @@ public class Caffeinated implements ModInitializer {
     // That way, it's clear which mod wrote info, warnings, and errors.
     public static final String MODID = "caffeinated";
     public static final Logger LOGGER = LoggerFactory.getLogger("modid");
+    public static final BlockEntityType<CauldronCampfireBlockEntity> CAULDRON_CAMPFIRE = Registry.register(
+            Registries.BLOCK_ENTITY_TYPE,
+            new Identifier(MODID, "cauldron_campfire"),
+            FabricBlockEntityTypeBuilder.create(CauldronCampfireBlockEntity::new, CaffeinatedBlocks.CAULDRON_CAMPFIRE, CaffeinatedBlocks.SOUL_CAULDRON_CAMPFIRE).build(null)
+    );
 
     @Override
     public void onInitialize() {
