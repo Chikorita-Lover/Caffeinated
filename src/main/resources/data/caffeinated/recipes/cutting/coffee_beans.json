@@ -1,0 +1,17 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "caffeinated:coffee_beans"
+    }
+  ],
+  "result": [
+    {
+      "item": "caffeinated:ground_coffee",
+      "count": 2
+    }
+  ],
+  "tool": {
+    "tag": "c:tools/knives"
+  }
+}
