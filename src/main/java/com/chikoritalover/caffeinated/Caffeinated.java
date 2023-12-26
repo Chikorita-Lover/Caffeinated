@@ -2,28 +2,24 @@ package com.chikoritalover.caffeinated;
 
 import com.chikoritalover.caffeinated.block.entity.CauldronCampfireBlockEntity;
 import com.chikoritalover.caffeinated.registry.*;
-import com.mojang.datafixers.types.Type;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.loot.v2.FabricLootPoolBuilder;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.block.entity.CampfireBlockEntity;
-import net.minecraft.datafixer.TypeReferences;
-import net.minecraft.item.ItemConvertible;
 import net.minecraft.loot.LootPool;
+import net.minecraft.loot.LootTable;
 import net.minecraft.loot.LootTables;
-import net.minecraft.loot.condition.LootCondition;
-import net.minecraft.loot.condition.RandomChanceLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
+import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.function.Consumer;
 
 public class Caffeinated implements ModInitializer {
     // This logger is used to write text to the console and the log file.
@@ -36,6 +32,26 @@ public class Caffeinated implements ModInitializer {
             new Identifier(MODID, "cauldron_campfire"),
             FabricBlockEntityTypeBuilder.create(CauldronCampfireBlockEntity::new, CaffeinatedBlocks.CAULDRON_CAMPFIRE, CaffeinatedBlocks.SOUL_CAULDRON_CAMPFIRE).build(null)
     );
+
+    /**
+     * Modifies a single loot pool present in the provided builder.
+     *
+     * <p>This method can be used instead of simply adding a new pool
+     * when you want the loot table to only drop items from one of the loot pool entries
+     * instead of multiple.
+     *
+     * <p>Calling this method turns the loot pool at the specified index into a builder and rebuilds it back into a loot pool afterward.
+     *
+     * @param supplier the loot table builder
+     * @param index    the list index of the target loot pool
+     * @param modifier the modifying function
+     */
+    private static void modifyPool(LootTable.Builder supplier, int index, Consumer<? super LootPool.Builder> modifier) {
+        LootPool lootPool = supplier.pools.get(index);
+        LootPool.Builder poolBuilder = FabricLootPoolBuilder.copyOf(lootPool);
+        modifier.accept(poolBuilder);
+        supplier.pools.set(index, poolBuilder.build());
+    }
 
     @Override
     public void onInitialize() {
@@ -57,21 +73,15 @@ public class Caffeinated implements ModInitializer {
         CaffeinatedBannerPatternTags.register();
         CaffeinatedBannerPatterns.register();
 
-        registerLootTableEvents();
-    }
-
-    public void registerLootTableEvents() {
-        addLootTablePool(1, 1, 0.5F, LootTables.JUNGLE_TEMPLE_CHEST, CaffeinatedItems.COFFEE_BERRIES, 1, 3);
-    }
-
-    private void addLootTablePool(int minRolls, int maxRolls, float chance, Identifier lootTable, ItemConvertible item, int minCount, int maxCount) {
-        UniformLootNumberProvider lootTableRange = UniformLootNumberProvider.create(minRolls, maxRolls);
-        LootCondition condition = RandomChanceLootCondition.builder(chance).build();
-        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, supplier, setter) -> {
-            if (lootTable.equals(id)) {
-                LootPool lootPool = LootPool.builder().rolls(lootTableRange).conditionally(condition).with(ItemEntry.builder(item).build()).build();
-
-                supplier.pool(lootPool);
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (id.equals(LootTables.JUNGLE_TEMPLE_CHEST)) {
+                modifyPool(tableBuilder, 0, builder -> builder.with(ItemEntry.builder(CaffeinatedItems.COFFEE_BERRIES).weight(10).apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 7.0F)))));
+            }
+            if (id.equals(LootTables.SHIPWRECK_SUPPLY_CHEST)) {
+                modifyPool(tableBuilder, 0, builder -> builder.with(ItemEntry.builder(CaffeinatedItems.COFFEE_BERRIES).weight(2).apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 5.0F)))));
+            }
+            if (id.equals(LootTables.VILLAGE_SAVANNA_HOUSE_CHEST)) {
+                modifyPool(tableBuilder, 0, builder -> builder.with(ItemEntry.builder(CaffeinatedItems.COFFEE_BERRIES).weight(5).apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 7.0F)))));
             }
         });
     }
