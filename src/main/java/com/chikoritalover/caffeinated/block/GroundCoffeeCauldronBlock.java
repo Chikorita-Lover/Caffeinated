@@ -45,7 +45,7 @@ public class GroundCoffeeCauldronBlock extends CoffeeCauldronBlock {
             world.setBlockState(pos, blockState);
             world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(blockState));
 
-            world.playSound(null, pos, CaffeinatedSoundEvents.BLOCK_CAULDRON_BREW, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            world.playSound(null, pos, CaffeinatedSoundEvents.BLOCK_CAULDRON_CAMPFIRE_BREW, SoundCategory.BLOCKS, 1.0F, 1.0F);
         }
     }
 }

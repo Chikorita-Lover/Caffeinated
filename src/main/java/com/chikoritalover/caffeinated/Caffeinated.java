@@ -1,11 +1,13 @@
 package com.chikoritalover.caffeinated;
 
+import com.chikoritalover.caffeinated.advancement.BrewCoffeeCriterion;
 import com.chikoritalover.caffeinated.block.entity.CauldronCampfireBlockEntity;
 import com.chikoritalover.caffeinated.registry.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.loot.v2.FabricLootPoolBuilder;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
@@ -27,6 +29,7 @@ public class Caffeinated implements ModInitializer {
     // That way, it's clear which mod wrote info, warnings, and errors.
     public static final String MODID = "caffeinated";
     public static final Logger LOGGER = LoggerFactory.getLogger("modid");
+    public static final BrewCoffeeCriterion BREW_COFFEE_CRITERION = Criteria.register(new BrewCoffeeCriterion());
     public static final BlockEntityType<CauldronCampfireBlockEntity> CAULDRON_CAMPFIRE = Registry.register(
             Registries.BLOCK_ENTITY_TYPE,
             new Identifier(MODID, "cauldron_campfire"),

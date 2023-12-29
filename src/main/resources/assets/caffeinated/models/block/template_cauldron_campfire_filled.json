@@ -4,7 +4,8 @@
         "particle": "block/campfire_log",
         "log": "block/campfire_log",
         "cauldron_side": "caffeinated:block/cauldron_campfire_side",
-        "cauldron_top": "caffeinated:block/cauldron_campfire_top"
+        "cauldron_top": "caffeinated:block/cauldron_campfire_top",
+        "liquid": "block/water_still"
     },
     "elements": [
         {
@@ -95,6 +96,13 @@
                 "west": {"uv": [0, 0, 12, 11], "texture": "#cauldron_side"},
                 "up": {"uv": [0, 0, 12, 12], "texture": "#cauldron_top"},
                 "down": {"uv": [0, 0, 12, 12], "texture": "#cauldron_side"}
+            }
+        },
+        {
+            "from": [4, 16, 4],
+            "to": [12, 16, 12],
+            "faces": {
+                "up": {"uv": [4, 4, 12, 12], "texture": "#liquid", "tintindex": 0}
             }
         }
     ]

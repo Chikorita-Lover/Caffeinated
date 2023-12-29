@@ -59,7 +59,7 @@ public class CoffeeCauldronBlock extends LeveledCauldronBlock {
             double e = pos.getY() + 0.375 + level * 0.1875;
             double f = pos.getZ() + random.nextDouble() * 0.5 + 0.25;
             if (random.nextDouble() < 0.15) {
-                world.playSound(d, e, f, CaffeinatedSoundEvents.BLOCK_CAULDRON_BUBBLE, SoundCategory.BLOCKS, 0.2F, 2.5F - level * 0.5F, true);
+                world.playSound(d, e, f, CaffeinatedSoundEvents.BLOCK_CAULDRON_CAMPFIRE_BUBBLE, SoundCategory.BLOCKS, 0.2F, 2.5F - level * 0.5F, true);
             }
 
             world.addParticle(getPopParticleEffect(), d, e, f, 0.0, 0.0, 0.0);

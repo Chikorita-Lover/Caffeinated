@@ -10,6 +10,7 @@ import net.minecraft.util.Identifier;
 public class CaffeinatedStats {
     public static final Identifier COFFEE_TAKEN = register("coffee_taken", StatFormatter.DEFAULT);
     public static final Identifier EAT_TIRAMISU_SLICE = register("eat_tiramisu_slice", StatFormatter.DEFAULT);
+    public static final Identifier INTERACT_WITH_CAULDRON_CAMPFIRE = register("interact_with_cauldron_campfire", StatFormatter.DEFAULT);
 
     private static Identifier register(String id, StatFormatter formatter) {
         Identifier identifier = new Identifier(Caffeinated.MODID, id);

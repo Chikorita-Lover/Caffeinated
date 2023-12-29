@@ -7,8 +7,8 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 
 public class CaffeinatedSoundEvents {
-    public static final SoundEvent BLOCK_CAULDRON_BREW = register("block.cauldron.brew");
-    public static final SoundEvent BLOCK_CAULDRON_BUBBLE = register("block.cauldron.bubble");
+    public static final SoundEvent BLOCK_CAULDRON_CAMPFIRE_BREW = register("block.cauldron_campfire.brew");
+    public static final SoundEvent BLOCK_CAULDRON_CAMPFIRE_BUBBLE = register("block.cauldron_campfire.bubble");
 
     public static final SoundEvent BLOCK_COFFEE_BEAN_BLOCK_BREAK = register("block.coffee_bean_block.break");
     public static final SoundEvent BLOCK_COFFEE_BEAN_BLOCK_FALL = register("block.coffee_bean_block.fall");

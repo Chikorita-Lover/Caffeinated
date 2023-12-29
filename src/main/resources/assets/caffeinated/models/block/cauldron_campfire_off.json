@@ -67,7 +67,7 @@
         },
         {
             "from": [2, 5, 2],
-            "to": [14, 16, 14],
+            "to": [14, 15.99, 14],
             "faces": {
                 "north": {"uv": [0, 0, 12, 11], "texture": "#cauldron_side"},
                 "east": {"uv": [0, 0, 12, 11], "texture": "#cauldron_side"},
