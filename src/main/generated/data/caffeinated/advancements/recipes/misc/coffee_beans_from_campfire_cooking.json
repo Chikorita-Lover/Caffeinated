@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:coffee_beans_from_campfire_cooking"
+        "recipe": "caffeinated:coffee_beans_from_campfire_cooking"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:coffee_beans_from_campfire_cooking"
+      "caffeinated:coffee_beans_from_campfire_cooking"
     ]
   },
   "sends_telemetry_event": false
