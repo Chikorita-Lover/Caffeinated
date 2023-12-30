@@ -104,8 +104,8 @@ public class CauldronCampfireBlock extends BlockWithEntity implements Waterlogga
             ItemStack stack = player.getStackInHand(hand);
             Item item = stack.getItem();
             Item item2 = cauldronCampfire.getStack(0).getItem();
-            boolean bl = !state.get(FILLED) && CauldronCampfireBlockEntity.isBaseIngredient(stack);
-            boolean bl2 = !cauldronCampfire.hasReagent() && CauldronCampfireBlockEntity.canBrewTogether(cauldronCampfire.getStack(0), stack);
+            boolean bl = !state.get(FILLED) && cauldronCampfire.isBaseIngredient(stack);
+            boolean bl2 = !cauldronCampfire.hasReagent() && cauldronCampfire.canBrewTogether(cauldronCampfire.getStack(0), stack);
             boolean bl3 = state.get(FILLED) && (!item2.hasRecipeRemainder() || stack.isOf(item2.getRecipeRemainder()));
             if (!bl && !bl2 && !bl3) {
                 return ActionResult.PASS;
@@ -123,17 +123,17 @@ public class CauldronCampfireBlock extends BlockWithEntity implements Waterlogga
                     world.emitGameEvent(null, GameEvent.BLOCK_CHANGE, pos);
                 } else {
                     ItemStack itemStack = item2.getDefaultStack();
+                    ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
                     if (stack.isOf(item2.getRecipeRemainder())) {
                         player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, item2.getDefaultStack()));
                     } else {
                         player.giveItemStack(item2.getDefaultStack());
                     }
                     cauldronCampfire.clear();
+                    cauldronCampfire.dropExperienceForRecipesUsed((ServerPlayerEntity) player);
                     world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
                     world.emitGameEvent(null, GameEvent.FLUID_PICKUP, pos);
-                    if (player instanceof ServerPlayerEntity serverPlayer) {
-                        Caffeinated.BREW_COFFEE_CRITERION.trigger(serverPlayer, itemStack);
-                    }
+                    Caffeinated.BREW_COFFEE_CRITERION.trigger(serverPlayer, itemStack);
                 }
                 player.incrementStat(Stats.USED.getOrCreateStat(item));
                 player.incrementStat(CaffeinatedStats.INTERACT_WITH_CAULDRON_CAMPFIRE);

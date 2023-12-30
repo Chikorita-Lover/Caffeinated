@@ -2,6 +2,7 @@ package com.chikoritalover.caffeinated;
 
 import com.chikoritalover.caffeinated.advancement.BrewCoffeeCriterion;
 import com.chikoritalover.caffeinated.block.entity.CauldronCampfireBlockEntity;
+import com.chikoritalover.caffeinated.recipe.CoffeeBrewingRecipe;
 import com.chikoritalover.caffeinated.registry.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.loot.v2.FabricLootPoolBuilder;
@@ -15,6 +16,8 @@ import net.minecraft.loot.LootTables;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
+import net.minecraft.recipe.RecipeSerializer;
+import net.minecraft.recipe.RecipeType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -35,6 +38,14 @@ public class Caffeinated implements ModInitializer {
             new Identifier(MODID, "cauldron_campfire"),
             FabricBlockEntityTypeBuilder.create(CauldronCampfireBlockEntity::new, CaffeinatedBlocks.CAULDRON_CAMPFIRE, CaffeinatedBlocks.SOUL_CAULDRON_CAMPFIRE).build(null)
     );
+    public static final RecipeSerializer<CoffeeBrewingRecipe> COFFEE_BREWING_SERIALIZER = Registry.register(Registries.RECIPE_SERIALIZER, new Identifier(MODID, "coffee_brewing"), new CoffeeBrewingRecipe.Serializer<CoffeeBrewingRecipe>(CoffeeBrewingRecipe::new, 600) {
+    });
+    public static final RecipeType<CoffeeBrewingRecipe> COFFEE_BREWING = Registry.register(Registries.RECIPE_TYPE, new Identifier(MODID, "coffee_brewing"), new RecipeType<CoffeeBrewingRecipe>(){
+
+        public String toString() {
+            return "coffee_brewing";
+        }
+    });
 
     /**
      * Modifies a single loot pool present in the provided builder.

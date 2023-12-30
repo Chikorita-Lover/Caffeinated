@@ -15,5 +15,6 @@ public class CaffeinatedEarlyRiser implements Runnable {
         String recipeBookGroup = mappingResolver.mapClassName("intermediary", "net.minecraft.class_314");
         String itemStack = "[L" + mappingResolver.mapClassName("intermediary", "net.minecraft.class_1799") + ';';
         ClassTinkerers.enumBuilder(recipeBookGroup, itemStack).addEnum("CAFFEINATED_SMOKER_MISC", () -> new Object[]{new ItemStack[]{new ItemStack(Items.LAVA_BUCKET), new ItemStack(CaffeinatedItems.COFFEE_BERRIES)}}).build();
+        ClassTinkerers.enumBuilder(recipeBookGroup, itemStack).addEnum("CAFFEINATED_COFFEE_BREWING", () -> new Object[]{new ItemStack[]{new ItemStack(CaffeinatedItems.COFFEE_BOTTLE)}}).build();
     }
 }

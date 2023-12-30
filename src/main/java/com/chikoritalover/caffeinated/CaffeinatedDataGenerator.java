@@ -2,6 +2,7 @@ package com.chikoritalover.caffeinated;
 
 import com.chikoritalover.caffeinated.block.CauldronCampfireBlock;
 import com.chikoritalover.caffeinated.block.TiramisuBlock;
+import com.chikoritalover.caffeinated.recipe.CoffeeBrewingRecipeJsonBuilder;
 import com.chikoritalover.caffeinated.registry.CaffeinatedBlocks;
 import com.chikoritalover.caffeinated.registry.CaffeinatedItems;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
@@ -123,6 +124,8 @@ public class CaffeinatedDataGenerator implements DataGeneratorEntrypoint {
             ShapelessRecipeJsonBuilder.create(RecipeCategory.FOOD, CaffeinatedItems.COFFEE_BERRIES, 9).input(CaffeinatedBlocks.COFFEE_BERRY_CRATE).criterion("has_coffee_berry_crate", conditionsFromItem(CaffeinatedBlocks.COFFEE_BERRY_CRATE)).offerTo(exporter);
             ShapelessRecipeJsonBuilder.create(RecipeCategory.FOOD, CaffeinatedBlocks.TIRAMISU).input(CaffeinatedItems.COFFEE_BOTTLE).input(Items.WHEAT).input(Items.SUGAR).input(Items.MILK_BUCKET).input(Items.EGG).group("tiramisu").criterion("has_coffee_bottle", conditionsFromItem(CaffeinatedItems.COFFEE_BOTTLE)).offerTo(exporter);
             ShapedRecipeJsonBuilder.create(RecipeCategory.FOOD, CaffeinatedBlocks.TIRAMISU).input('#', CaffeinatedItems.TIRAMISU_SLICE).pattern("##").pattern("##").group("tiramisu").criterion("has_tiramisu_slice", conditionsFromItem(CaffeinatedItems.TIRAMISU_SLICE)).offerTo(exporter, new Identifier(Caffeinated.MODID, "tiramisu_from_slices"));
+
+            CoffeeBrewingRecipeJsonBuilder.create(Ingredient.ofItems(Items.POTION), Ingredient.ofItems(CaffeinatedItems.GROUND_COFFEE), RecipeCategory.FOOD, CaffeinatedItems.COFFEE_BOTTLE, 1.0F, 600).criterion(hasItem(CaffeinatedItems.GROUND_COFFEE), conditionsFromItem(CaffeinatedItems.GROUND_COFFEE)).offerTo(exporter);
         }
     }
 }
