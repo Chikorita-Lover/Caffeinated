@@ -1,15 +1,18 @@
 package com.chikoritalover.caffeinated.item;
 
 import com.chikoritalover.caffeinated.registry.CaffeinatedSoundEvents;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
 import net.minecraft.item.Items;
+import net.minecraft.potion.PotionUtil;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.stat.Stats;
@@ -19,6 +22,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
+import org.apache.commons.compress.utils.Lists;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -38,7 +42,6 @@ public class CoffeeBottleItem extends Item {
             serverPlayerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
         }
         if (!world.isClient) {
-            user.removeStatusEffect(StatusEffects.MINING_FATIGUE);
             user.removeStatusEffect(StatusEffects.SLOWNESS);
         }
         if (stack.isEmpty()) {
@@ -82,6 +85,13 @@ public class CoffeeBottleItem extends Item {
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         super.appendTooltip(stack, world, tooltip, context);
         tooltip.add(Text.translatable(this.getTranslationKey() + ".desc").formatted(Formatting.GRAY));
+        List<StatusEffectInstance> list = Lists.newArrayList();
+        for (Pair<StatusEffectInstance, Float> statusEffect : this.getFoodComponent().getStatusEffects()) {
+            list.add(statusEffect.getFirst());
+        }
+        if (!list.isEmpty()) {
+            PotionUtil.buildTooltip(list, tooltip, 1.0F);
+        }
     }
 }
 
