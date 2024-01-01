@@ -1,5 +1,6 @@
 package com.chikoritalover.caffeinated.item;
 
+import com.chikoritalover.caffeinated.Caffeinated;
 import com.chikoritalover.caffeinated.registry.CaffeinatedSoundEvents;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.advancement.criterion.Criteria;
@@ -13,14 +14,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
 import net.minecraft.item.Items;
 import net.minecraft.potion.PotionUtil;
+import net.minecraft.registry.Registries;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
-import net.minecraft.util.UseAction;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import org.apache.commons.compress.utils.Lists;
 import org.jetbrains.annotations.Nullable;
@@ -29,6 +28,7 @@ import java.util.List;
 
 public class CoffeeBottleItem extends Item {
     private static final int MAX_USE_TIME = 40;
+    private static final String TRANSLATION_KEY = Util.createTranslationKey("item", new Identifier(Caffeinated.MODID, "coffee_bottle"));
 
     public CoffeeBottleItem(Item.Settings settings) {
         super(settings);
@@ -84,7 +84,7 @@ public class CoffeeBottleItem extends Item {
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         super.appendTooltip(stack, world, tooltip, context);
-        tooltip.add(Text.translatable(this.getTranslationKey() + ".desc").formatted(Formatting.GRAY));
+        tooltip.add(Text.translatable(Util.createTranslationKey("item", Registries.ITEM.getId(this)).concat(".desc")).formatted(Formatting.GRAY));
         List<StatusEffectInstance> list = Lists.newArrayList();
         for (Pair<StatusEffectInstance, Float> statusEffect : this.getFoodComponent().getStatusEffects()) {
             list.add(statusEffect.getFirst());
@@ -92,6 +92,11 @@ public class CoffeeBottleItem extends Item {
         if (!list.isEmpty()) {
             PotionUtil.buildTooltip(list, tooltip, 1.0F);
         }
+    }
+
+    @Override
+    public String getTranslationKey() {
+        return TRANSLATION_KEY;
     }
 }
 

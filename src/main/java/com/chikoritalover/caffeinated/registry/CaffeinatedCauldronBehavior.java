@@ -28,8 +28,8 @@ public class CaffeinatedCauldronBehavior {
     public static final Map<Item, CauldronBehavior> GROUND_COFFEE_CAULDRON_BEHAVIOR = CauldronBehavior.createMap();
 
     public static void register() {
-        CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.put(CaffeinatedItems.COFFEE_BOTTLE, (state, world, pos, player, hand, stack) -> {
-            if (stack.getItem() != CaffeinatedItems.COFFEE_BOTTLE) {
+        CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.put(CaffeinatedItems.BLACK_COFFEE_BOTTLE, (state, world, pos, player, hand, stack) -> {
+            if (stack.getItem() != CaffeinatedItems.BLACK_COFFEE_BOTTLE) {
                 return ActionResult.PASS;
             } else {
                 if (!world.isClient) {
@@ -69,7 +69,7 @@ public class CaffeinatedCauldronBehavior {
         COFFEE_CAULDRON_BEHAVIOR.put(Items.GLASS_BOTTLE, (state, world, pos, player, hand, stack) -> {
             if (!world.isClient) {
                 Item item = stack.getItem();
-                player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, new ItemStack(CaffeinatedItems.COFFEE_BOTTLE)));
+                player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, new ItemStack(CaffeinatedItems.BLACK_COFFEE_BOTTLE)));
                 player.incrementStat(CaffeinatedStats.COFFEE_TAKEN);
                 player.incrementStat(Stats.USED.getOrCreateStat(item));
                 LeveledCauldronBlock.decrementFluidLevel(state, world, pos);
@@ -84,8 +84,8 @@ public class CaffeinatedCauldronBehavior {
 
             return ActionResult.success(world.isClient);
         });
-        COFFEE_CAULDRON_BEHAVIOR.put(CaffeinatedItems.COFFEE_BOTTLE, (state, world, pos, player, hand, stack) -> {
-            if (state.get(LeveledCauldronBlock.LEVEL) != 3 && stack.getItem() == CaffeinatedItems.COFFEE_BOTTLE) {
+        COFFEE_CAULDRON_BEHAVIOR.put(CaffeinatedItems.BLACK_COFFEE_BOTTLE, (state, world, pos, player, hand, stack) -> {
+            if (state.get(LeveledCauldronBlock.LEVEL) != 3 && stack.getItem() == CaffeinatedItems.BLACK_COFFEE_BOTTLE) {
                 if (!world.isClient) {
                     player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, new ItemStack(Items.GLASS_BOTTLE)));
                     player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));

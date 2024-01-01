@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "caffeinated:coffee_bottle"
-            ]
+            "tag": "caffeinated:coffee_bottles"
           }
         ]
       },

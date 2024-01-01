@@ -2,10 +2,9 @@ package com.chikoritalover.caffeinated.registry;
 
 import com.chikoritalover.caffeinated.Caffeinated;
 import com.chikoritalover.caffeinated.item.CoffeeBottleItem;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import com.chikoritalover.caffeinated.item.LatteCoffeeBottleItem;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -15,9 +14,16 @@ public class CaffeinatedItems {
     public static final Item COFFEE_BERRIES = register("coffee_berries", new AliasedBlockItem(CaffeinatedBlocks.COFFEE_SHRUB, new Item.Settings().food(CaffeinatedFoodComponents.COFFEE_BERRIES)));
     public static final Item COFFEE_BEANS = register("coffee_beans", new Item(new Item.Settings()));
     public static final Item GROUND_COFFEE = register("ground_coffee", new Item(new Item.Settings()));
-    public static final Item COFFEE_BOTTLE = register("coffee_bottle", new CoffeeBottleItem(new Item.Settings().food(CaffeinatedFoodComponents.COFFEE_BOTTLE).maxCount(16).recipeRemainder(Items.GLASS_BOTTLE)));
+
+    public static final Item BLACK_COFFEE_BOTTLE = register("coffee_bottle", createCoffeeBottle(CaffeinatedFoodComponents.BLACK_COFFEE_BOTTLE));
+    public static final Item LATTE_COFFEE_BOTTLE = register("latte_coffee_bottle", new LatteCoffeeBottleItem(new Item.Settings().food(CaffeinatedFoodComponents.LATTE_COFFEE_BOTTLE).maxCount(16).recipeRemainder(Items.GLASS_BOTTLE)));
+
     public static final Item JAVA_BANNER_PATTERN = register("java_banner_pattern", new BannerPatternItem(CaffeinatedBannerPatternTags.JAVA_PATTERN_ITEM, (new Item.Settings()).maxCount(1)));
     public static final Item TIRAMISU_SLICE = register("tiramisu_slice", new Item(new Item.Settings().food(CaffeinatedFoodComponents.TIRAMISU_SLICE)));
+
+    private static Item createCoffeeBottle(FoodComponent foodComponent) {
+        return new CoffeeBottleItem(new Item.Settings().food(foodComponent).maxCount(16).recipeRemainder(Items.GLASS_BOTTLE));
+    }
 
     public static Item register(Block block) {
         return register(new BlockItem(block, new Item.Settings()));

@@ -1,9 +1,10 @@
-// 1.20.1	2023-12-30T12:13:30.3443018	Caffeinated/Model Definitions
+// 1.20.1	2024-01-01T00:51:21.9037056	Caffeinated/Model Definitions
 da4528a3cfafc1ab21e5814b64029c10ec357178 assets\caffeinated\blockstates\ground_coffee_block.json
 26f35f3a03b0d53578efd2c555721b08353d75f0 assets\caffeinated\blockstates\coffee_cauldron.json
 b1a481861132973fe035c9b9ce7613e15938034c assets\caffeinated\models\block\coffee_berry_crate.json
 e8f1792493d7219e1da4ac39e45bf903a349e3f5 assets\caffeinated\models\block\ground_coffee_cauldron_full.json
 cd360bb185f465f81672c32ac31312f77270e5f4 assets\caffeinated\models\block\coffee_cauldron_level2.json
+5f0ad0fc380a095ead21e3a00bdbbdcd648548e3 assets\caffeinated\models\item\latte_coffee_bottle.json
 57311e73aae426dff5d3b58c69ec071360f952d3 assets\caffeinated\models\block\ground_coffee_cauldron_level1.json
 13297d4a51cb3b1369630338ba5f7b439b4af3fc assets\caffeinated\models\block\cauldron_campfire_filled.json
 cd254ba40cfd07d6c01d66a963e5ec83ed478aef assets\caffeinated\blockstates\coffee_berry_crate.json

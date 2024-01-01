@@ -7,7 +7,6 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CampfireBlock;
-import net.minecraft.block.SuspiciousStewIngredient;
 import net.minecraft.item.*;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
@@ -15,8 +14,6 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
@@ -28,7 +25,7 @@ public class CaffeinatedItemGroups {
     public static void register() {
         Registry.register(Registries.ITEM_GROUP, CAFFEINATED, FabricItemGroup.builder()
                 .displayName(Text.translatable("itemGroup.caffeinated.caffeinated"))
-                .icon(CaffeinatedItems.COFFEE_BOTTLE::getDefaultStack)
+                .icon(CaffeinatedItems.BLACK_COFFEE_BOTTLE::getDefaultStack)
                 .build()
         );
 
@@ -38,7 +35,7 @@ public class CaffeinatedItemGroups {
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(entries -> {
             entries.addBefore(Items.CHORUS_FRUIT, CaffeinatedItems.COFFEE_BERRIES);
-            entries.addBefore(Items.ROTTEN_FLESH, CaffeinatedItems.COFFEE_BOTTLE, CaffeinatedBlocks.TIRAMISU, CaffeinatedItems.TIRAMISU_SLICE);
+            entries.addBefore(Items.ROTTEN_FLESH, CaffeinatedItems.BLACK_COFFEE_BOTTLE, CaffeinatedItems.LATTE_COFFEE_BOTTLE, CaffeinatedBlocks.TIRAMISU, CaffeinatedItems.TIRAMISU_SLICE);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
             entries.addAfter(Items.WHEAT, CaffeinatedItems.COFFEE_BEANS);
@@ -55,7 +52,8 @@ public class CaffeinatedItemGroups {
             registerCampfiresCauldron(entries, visibility);
             entries.add(Items.GLASS_BOTTLE, visibility);
             entries.add(PotionUtil.setPotion(Items.POTION.getDefaultStack(), Potions.WATER), visibility);
-            entries.add(CaffeinatedItems.COFFEE_BOTTLE, visibility);
+            entries.add(CaffeinatedItems.BLACK_COFFEE_BOTTLE, visibility);
+            entries.add(CaffeinatedItems.LATTE_COFFEE_BOTTLE, visibility);
             entries.add(CaffeinatedBlocks.TIRAMISU, visibility);
             entries.add(CaffeinatedItems.TIRAMISU_SLICE, visibility);
             entries.add(CaffeinatedItems.JAVA_BANNER_PATTERN, visibility);

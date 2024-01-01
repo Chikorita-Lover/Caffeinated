@@ -7,6 +7,8 @@ import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 
 public class CaffeinatedItemTags {
+    public static final TagKey<Item> BLACK_COFFEE_BOTTLES = of("black_coffee_bottles");
+    public static final TagKey<Item> COFFEE_BOTTLES = of("coffee_bottles");
     public static final TagKey<Item> COFFEE_FOOD = of("coffee_food");
 
     private static TagKey<Item> of(String id) {

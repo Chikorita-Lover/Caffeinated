@@ -4,7 +4,7 @@
   "group": "tiramisu",
   "ingredients": [
     {
-      "item": "caffeinated:coffee_bottle"
+      "tag": "caffeinated:black_coffee_bottles"
     },
     {
       "item": "minecraft:wheat"
@@ -13,7 +13,7 @@
       "item": "minecraft:sugar"
     },
     {
-      "item": "minecraft:milk_bucket"
+      "tag": "c:milk_buckets"
     },
     {
       "item": "minecraft:egg"

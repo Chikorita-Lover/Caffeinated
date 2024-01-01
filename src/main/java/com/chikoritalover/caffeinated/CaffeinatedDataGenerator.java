@@ -4,6 +4,7 @@ import com.chikoritalover.caffeinated.block.CauldronCampfireBlock;
 import com.chikoritalover.caffeinated.block.TiramisuBlock;
 import com.chikoritalover.caffeinated.recipe.CoffeeBrewingRecipeJsonBuilder;
 import com.chikoritalover.caffeinated.registry.CaffeinatedBlocks;
+import com.chikoritalover.caffeinated.registry.CaffeinatedItemTags;
 import com.chikoritalover.caffeinated.registry.CaffeinatedItems;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
@@ -12,6 +13,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.fabricmc.fabric.api.tag.convention.v1.ConventionalItemTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.LeveledCauldronBlock;
 import net.minecraft.data.client.*;
@@ -96,7 +98,8 @@ public class CaffeinatedDataGenerator implements DataGeneratorEntrypoint {
         @Override
         public void generateItemModels(ItemModelGenerator itemModelGenerator) {
             itemModelGenerator.register(CaffeinatedItems.COFFEE_BEANS, Models.GENERATED);
-            itemModelGenerator.register(CaffeinatedItems.COFFEE_BOTTLE, Models.GENERATED);
+            itemModelGenerator.register(CaffeinatedItems.BLACK_COFFEE_BOTTLE, Models.GENERATED);
+            itemModelGenerator.register(CaffeinatedItems.LATTE_COFFEE_BOTTLE, Models.GENERATED);
             itemModelGenerator.register(CaffeinatedItems.GROUND_COFFEE, Models.GENERATED);
             itemModelGenerator.register(CaffeinatedItems.JAVA_BANNER_PATTERN, Models.GENERATED);
             itemModelGenerator.register(CaffeinatedItems.TIRAMISU_SLICE, Models.GENERATED);
@@ -118,14 +121,15 @@ public class CaffeinatedDataGenerator implements DataGeneratorEntrypoint {
             CookingRecipeJsonBuilder.createCampfireCooking(Ingredient.ofItems(CaffeinatedItems.COFFEE_BERRIES), RecipeCategory.MISC, CaffeinatedItems.COFFEE_BEANS, 0.3F, 600).criterion(hasItem(CaffeinatedItems.COFFEE_BERRIES), conditionsFromItem(CaffeinatedItems.COFFEE_BERRIES)).offerTo(exporter, new Identifier(Caffeinated.MODID, getItemPath(CaffeinatedItems.COFFEE_BEANS) + "_from_campfire_cooking"));
 
             ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, CaffeinatedItems.GROUND_COFFEE, 3).input('#', CaffeinatedItems.COFFEE_BEANS).pattern("###").criterion(hasItem(CaffeinatedItems.COFFEE_BEANS), conditionsFromItem(CaffeinatedItems.COFFEE_BEANS)).offerTo(exporter);
-            ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, CaffeinatedItems.JAVA_BANNER_PATTERN).input(Items.PAPER).input(CaffeinatedItems.COFFEE_BOTTLE).criterion("has_coffee_bottle", conditionsFromItem(CaffeinatedItems.COFFEE_BOTTLE)).offerTo(exporter);
+            ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, CaffeinatedItems.JAVA_BANNER_PATTERN).input(Items.PAPER).input(CaffeinatedItemTags.COFFEE_BOTTLES).criterion("has_coffee_bottle", conditionsFromTag(CaffeinatedItemTags.COFFEE_BOTTLES)).offerTo(exporter);
             ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, Items.BROWN_DYE).input(CaffeinatedItems.GROUND_COFFEE).group("brown_dye").criterion("has_ground_coffee", conditionsFromItem(CaffeinatedItems.GROUND_COFFEE)).offerTo(exporter, new Identifier(Caffeinated.MODID, "brown_dye_from_ground_coffee"));
 
             ShapelessRecipeJsonBuilder.create(RecipeCategory.FOOD, CaffeinatedItems.COFFEE_BERRIES, 9).input(CaffeinatedBlocks.COFFEE_BERRY_CRATE).criterion("has_coffee_berry_crate", conditionsFromItem(CaffeinatedBlocks.COFFEE_BERRY_CRATE)).offerTo(exporter);
-            ShapelessRecipeJsonBuilder.create(RecipeCategory.FOOD, CaffeinatedBlocks.TIRAMISU).input(CaffeinatedItems.COFFEE_BOTTLE).input(Items.WHEAT).input(Items.SUGAR).input(Items.MILK_BUCKET).input(Items.EGG).group("tiramisu").criterion("has_coffee_bottle", conditionsFromItem(CaffeinatedItems.COFFEE_BOTTLE)).offerTo(exporter);
+            ShapelessRecipeJsonBuilder.create(RecipeCategory.FOOD, CaffeinatedBlocks.TIRAMISU).input(CaffeinatedItemTags.BLACK_COFFEE_BOTTLES).input(Items.WHEAT).input(Items.SUGAR).input(ConventionalItemTags.MILK_BUCKETS).input(Items.EGG).group("tiramisu").criterion("has_black_coffee_bottle", conditionsFromTag(CaffeinatedItemTags.BLACK_COFFEE_BOTTLES)).offerTo(exporter);
             ShapedRecipeJsonBuilder.create(RecipeCategory.FOOD, CaffeinatedBlocks.TIRAMISU).input('#', CaffeinatedItems.TIRAMISU_SLICE).pattern("##").pattern("##").group("tiramisu").criterion("has_tiramisu_slice", conditionsFromItem(CaffeinatedItems.TIRAMISU_SLICE)).offerTo(exporter, new Identifier(Caffeinated.MODID, "tiramisu_from_slices"));
 
-            CoffeeBrewingRecipeJsonBuilder.create(Ingredient.ofItems(Items.POTION), Ingredient.ofItems(CaffeinatedItems.GROUND_COFFEE), RecipeCategory.FOOD, CaffeinatedItems.COFFEE_BOTTLE, 1.0F, 600).criterion(hasItem(CaffeinatedItems.GROUND_COFFEE), conditionsFromItem(CaffeinatedItems.GROUND_COFFEE)).offerTo(exporter);
+            CoffeeBrewingRecipeJsonBuilder.create(Ingredient.ofItems(Items.POTION), Ingredient.ofItems(CaffeinatedItems.GROUND_COFFEE), RecipeCategory.FOOD, CaffeinatedItems.BLACK_COFFEE_BOTTLE, 1.0F, 600).criterion(hasItem(CaffeinatedItems.GROUND_COFFEE), conditionsFromItem(CaffeinatedItems.GROUND_COFFEE)).offerTo(exporter);
+            CoffeeBrewingRecipeJsonBuilder.create(Ingredient.fromTag(CaffeinatedItemTags.BLACK_COFFEE_BOTTLES), Ingredient.fromTag(ConventionalItemTags.MILK_BUCKETS), RecipeCategory.FOOD, CaffeinatedItems.LATTE_COFFEE_BOTTLE, 1.0F, 600).criterion(hasItem(Items.MILK_BUCKET), conditionsFromTag(ConventionalItemTags.MILK_BUCKETS)).offerTo(exporter);
         }
     }
 }

@@ -6,7 +6,7 @@
       "item": "minecraft:paper"
     },
     {
-      "item": "caffeinated:coffee_bottle"
+      "tag": "caffeinated:coffee_bottles"
     }
   ],
   "result": {

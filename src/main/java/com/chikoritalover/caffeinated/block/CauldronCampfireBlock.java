@@ -6,6 +6,7 @@ import com.chikoritalover.caffeinated.registry.CaffeinatedBlockTags;
 import com.chikoritalover.caffeinated.registry.CaffeinatedSoundEvents;
 import com.chikoritalover.caffeinated.registry.CaffeinatedStats;
 import com.google.common.collect.Maps;
+import net.fabricmc.fabric.api.tag.convention.v1.ConventionalItemTags;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -27,6 +28,7 @@ import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.state.StateManager;
@@ -74,6 +76,16 @@ public class CauldronCampfireBlock extends BlockWithEntity implements Waterlogga
         this.setDefaultState(this.getStateManager().getDefaultState().with(FILLED, false).with(LIT, true).with(WATERLOGGED, false).with(FACING, Direction.NORTH));
     }
 
+    private static SoundEvent getEmptySoundEvent(ItemStack stack) {
+        if (stack.getRecipeRemainder().isOf(Items.GLASS_BOTTLE)) {
+            return SoundEvents.ITEM_BOTTLE_EMPTY;
+        }
+        if (stack.getRecipeRemainder().isIn(ConventionalItemTags.EMPTY_BUCKETS)) {
+            return SoundEvents.ITEM_BUCKET_EMPTY;
+        }
+        return CaffeinatedSoundEvents.ITEM_GROUND_COFFEE_SPLASH;
+    }
+
     public static void extinguish(@Nullable Entity entity, WorldAccess world, BlockPos pos, BlockState state) {
         if (world.isClient()) {
             for (int i = 0; i < 20; i++) {
@@ -113,27 +125,25 @@ public class CauldronCampfireBlock extends BlockWithEntity implements Waterlogga
             if (!world.isClient()) {
                 if (bl) {
                     cauldronCampfire.addBaseIngredient(player, stack);
+                    world.playSound(null, pos, getEmptySoundEvent(stack), SoundCategory.BLOCKS, 1.0F, 1.0F);
                     player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, item.getRecipeRemainder(stack)));
-                    world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
                     world.emitGameEvent(null, GameEvent.FLUID_PLACE, pos);
                 } else if (bl2) {
                     cauldronCampfire.addReagent(player, stack);
+                    world.playSound(null, pos, getEmptySoundEvent(stack), SoundCategory.BLOCKS, 1.0F, 1.0F);
                     player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, item.getRecipeRemainder(stack)));
-                    world.playSound(null, pos, CaffeinatedSoundEvents.ITEM_GROUND_COFFEE_SPLASH, SoundCategory.BLOCKS, 1.0F, 1.0F);
                     world.emitGameEvent(null, GameEvent.BLOCK_CHANGE, pos);
                 } else {
                     ItemStack itemStack = item2.getDefaultStack();
-                    ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
                     if (stack.isOf(item2.getRecipeRemainder())) {
-                        player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, item2.getDefaultStack()));
+                        player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, itemStack));
                     } else {
-                        player.giveItemStack(item2.getDefaultStack());
+                        player.giveItemStack(itemStack);
                     }
                     cauldronCampfire.clear();
                     cauldronCampfire.dropExperienceForRecipesUsed((ServerPlayerEntity) player);
                     world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
                     world.emitGameEvent(null, GameEvent.FLUID_PICKUP, pos);
-                    Caffeinated.BREW_COFFEE_CRITERION.trigger(serverPlayer, itemStack);
                 }
                 player.incrementStat(Stats.USED.getOrCreateStat(item));
                 player.incrementStat(CaffeinatedStats.INTERACT_WITH_CAULDRON_CAMPFIRE);

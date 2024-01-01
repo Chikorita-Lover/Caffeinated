@@ -5,12 +5,8 @@ import com.chikoritalover.caffeinated.block.CauldronCampfireBlock;
 import com.chikoritalover.caffeinated.recipe.CoffeeBrewingRecipe;
 import com.chikoritalover.caffeinated.registry.CaffeinatedItems;
 import com.chikoritalover.caffeinated.registry.CaffeinatedSoundEvents;
-import com.google.common.collect.Lists;
-import it.unimi.dsi.fastutil.objects.Object2IntMap;
-import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.entity.Entity;
@@ -29,7 +25,6 @@ import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
-import net.minecraft.recipe.AbstractCookingRecipe;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeManager;
 import net.minecraft.recipe.RecipeUnlocker;
@@ -47,7 +42,6 @@ import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 public class CauldronCampfireBlockEntity extends BlockEntity implements RecipeUnlocker {
@@ -197,7 +191,7 @@ public class CauldronCampfireBlockEntity extends BlockEntity implements RecipeUn
         if (this.getStack(0).isOf(Items.POTION)) {
             return BiomeColors.getWaterColor(this.getWorld(), this.getPos());
         }
-        if (this.getStack(0).isOf(CaffeinatedItems.COFFEE_BOTTLE)) {
+        if (this.getStack(0).isOf(CaffeinatedItems.BLACK_COFFEE_BOTTLE)) {
             return 0x4A2E20;
         }
         return -1;
@@ -225,6 +219,7 @@ public class CauldronCampfireBlockEntity extends BlockEntity implements RecipeUn
         for (Recipe<?> recipe : arrayList) {
             if (recipe == null) continue;
             player.onRecipeCrafted(recipe, this.inventory);
+            Caffeinated.BREW_COFFEE_CRITERION.trigger(player, recipe.getOutput(this.getWorld().getRegistryManager()));
             dropExperience(player.getServerWorld(), player.getPos(), ((CoffeeBrewingRecipe) recipe).getExperience());
         }
         this.recipesUsed.clear();

@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_black_coffee_bottle": {
+    "has_milk_bucket": {
       "conditions": {
         "items": [
           {
-            "tag": "caffeinated:black_coffee_bottles"
+            "tag": "c:milk_buckets"
           }
         ]
       },
@@ -13,20 +13,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "caffeinated:tiramisu"
+        "recipe": "caffeinated:latte_coffee_bottle"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_black_coffee_bottle",
+      "has_milk_bucket",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "caffeinated:tiramisu"
+      "caffeinated:latte_coffee_bottle"
     ]
   },
   "sends_telemetry_event": false
