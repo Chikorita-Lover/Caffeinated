@@ -1,8 +1,10 @@
 {
-  "advancements.husbandry.brew_coffee.title": "Wake Up and Smell the Coffee",
-  "advancements.husbandry.brew_coffee.description": "Add Ground Coffee to Water in a Campfire with Cauldron to brew Coffee",
-  "advancements.husbandry.eat_tiramisu.title": "I Tira-Miss-U",
-  "advancements.husbandry.eat_tiramisu.description": "Bake and take a bite of a Tiramisu",
+  "advancements.husbandry.brew_all_coffee.description": "Brew every type of Coffee Bottle",
+  "advancements.husbandry.brew_all_coffee.title": "Caffeinated",
+  "advancements.husbandry.brew_coffee.description": "Add Ground Coffee to Water in a Campfire with Cauldron to brew Black Coffee",
+  "advancements.husbandry.brew_coffee.title": "Stop and Smell the Coffee",
+  "advancements.husbandry.eat_tiramisu.description": "Prepare a dish of Tiramisu",
+  "advancements.husbandry.eat_tiramisu.title": "Pick Me Up Buttercup",
 
   "block.caffeinated.cauldron_campfire": "Campfire with Cauldron",
   "block.caffeinated.coffee_bean_block": "Coffee Bean Block",

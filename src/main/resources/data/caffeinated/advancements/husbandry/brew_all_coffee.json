@@ -1,0 +1,52 @@
+{
+  "parent": "caffeinated:husbandry/brew_coffee",
+  "criteria": {
+    "coffee_bottle": {
+      "trigger": "caffeinated:brew_coffee",
+      "conditions": {
+        "item": {
+          "items": [
+            "caffeinated:coffee_bottle"
+          ]
+        }
+      }
+    },
+    "latte_coffee_bottle": {
+      "trigger": "caffeinated:brew_coffee",
+      "conditions": {
+        "item": {
+          "items": [
+            "caffeinated:latte_coffee_bottle"
+          ]
+        }
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "item": "caffeinated:latte_coffee_bottle"
+    },
+    "title": {
+      "translate": "advancements.husbandry.brew_all_coffee.title"
+    },
+    "description": {
+      "translate": "advancements.husbandry.brew_all_coffee.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "requirements": [
+    [
+      "coffee_bottle"
+    ],
+    [
+      "latte_coffee_bottle"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}
