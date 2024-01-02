@@ -47,6 +47,8 @@
   "item.caffeinated.latte_coffee_bottle.desc": "Latte",
   "item.caffeinated.tiramisu_slice": "Tiramisu Slice",
 
+  "item.modifiers.exhaustion": "Exhaustion",
+
   "itemGroup.caffeinated.caffeinated": "Caffeinated",
 
   "subtitles.block.cauldron_campfire.brew": "Cauldron brews",

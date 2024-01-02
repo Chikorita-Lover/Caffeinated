@@ -9,10 +9,10 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 public class CaffeinatedStatusEffects {
-    public static final StatusEffect CAFFEINE = register("caffeine", StatusEffectCategory.BENEFICIAL, 4927777);
+    public static final StatusEffect CAFFEINE = register("caffeine", new CaffeineStatusEffect(StatusEffectCategory.BENEFICIAL, 0x4B3121));
 
-    private static StatusEffect register(String id, StatusEffectCategory category, int i){
-        return Registry.register(Registries.STATUS_EFFECT, new Identifier(Caffeinated.MODID, id), new CaffeineStatusEffect(category, i));
+    private static StatusEffect register(String id, StatusEffect effect) {
+        return Registry.register(Registries.STATUS_EFFECT, new Identifier(Caffeinated.MODID, id), effect);
     }
 
     public static void register() {

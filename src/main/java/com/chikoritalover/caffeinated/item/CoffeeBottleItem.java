@@ -2,29 +2,37 @@ package com.chikoritalover.caffeinated.item;
 
 import com.chikoritalover.caffeinated.Caffeinated;
 import com.chikoritalover.caffeinated.registry.CaffeinatedSoundEvents;
+import com.chikoritalover.caffeinated.registry.CaffeinatedStatusEffects;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffectUtil;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
 import net.minecraft.item.Items;
-import net.minecraft.potion.PotionUtil;
 import net.minecraft.registry.Registries;
+import net.minecraft.screen.ScreenTexts;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.stat.Stats;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
 import org.apache.commons.compress.utils.Lists;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class CoffeeBottleItem extends Item {
     private static final int MAX_USE_TIME = 40;
@@ -90,8 +98,57 @@ public class CoffeeBottleItem extends Item {
             list.add(statusEffect.getFirst());
         }
         if (!list.isEmpty()) {
-            PotionUtil.buildTooltip(list, tooltip, 1.0F);
+            buildTooltip(list, tooltip, 1.0F);
         }
+    }
+
+    private static void buildTooltip(List<StatusEffectInstance> statusEffects, List<Text> list, float durationMultiplier) {
+        ArrayList<Pair<EntityAttribute, EntityAttributeModifier>> list2 = Lists.newArrayList();
+        int i = 0;
+        for (StatusEffectInstance statusEffectInstance : statusEffects) {
+            MutableText mutableText = Text.translatable(statusEffectInstance.getTranslationKey());
+            StatusEffect statusEffect = statusEffectInstance.getEffectType();
+            Map<EntityAttribute, EntityAttributeModifier> map = statusEffect.getAttributeModifiers();
+            if (!map.isEmpty()) {
+                for (Map.Entry<EntityAttribute, EntityAttributeModifier> entry : map.entrySet()) {
+                    EntityAttributeModifier entityAttributeModifier = entry.getValue();
+                    EntityAttributeModifier entityAttributeModifier2 = new EntityAttributeModifier(entityAttributeModifier.getName(), statusEffect.adjustModifierAmount(statusEffectInstance.getAmplifier(), entityAttributeModifier), entityAttributeModifier.getOperation());
+                    list2.add(new Pair<>(entry.getKey(), entityAttributeModifier2));
+                }
+            }
+            if (statusEffectInstance.getAmplifier() > 0) {
+                mutableText = Text.translatable("potion.withAmplifier", mutableText, Text.translatable("potion.potency." + statusEffectInstance.getAmplifier()));
+                if (statusEffectInstance.getEffectType() == CaffeinatedStatusEffects.CAFFEINE) {
+                    i = statusEffectInstance.getAmplifier();
+                }
+            }
+            if (!statusEffectInstance.isDurationBelow(20)) {
+                mutableText = Text.translatable("potion.withDuration", mutableText, StatusEffectUtil.getDurationText(statusEffectInstance, durationMultiplier));
+            }
+            list.add(mutableText.formatted(statusEffect.getCategory().getFormatting()));
+        }
+        list.add(ScreenTexts.EMPTY);
+        list.add(Text.translatable("potion.whenDrank").formatted(Formatting.DARK_PURPLE));
+        list.add(Text.translatable("attribute.modifier.take.2", ItemStack.MODIFIER_FORMAT.format(getEffectChance(i) * 100.0F), Text.translatable("item.modifiers.exhaustion")).formatted(Formatting.BLUE));
+        for (Pair<EntityAttribute, EntityAttributeModifier> pair : list2) {
+            EntityAttributeModifier entityAttributeModifier3 = pair.getSecond();
+            double d = entityAttributeModifier3.getValue();
+            double e = entityAttributeModifier3.getOperation() == EntityAttributeModifier.Operation.MULTIPLY_BASE || entityAttributeModifier3.getOperation() == EntityAttributeModifier.Operation.MULTIPLY_TOTAL ? entityAttributeModifier3.getValue() * 100.0 : entityAttributeModifier3.getValue();
+            if (d > 0.0) {
+                list.add(Text.translatable("attribute.modifier.plus." + entityAttributeModifier3.getOperation().getId(), ItemStack.MODIFIER_FORMAT.format(e), Text.translatable(pair.getFirst().getTranslationKey())).formatted(Formatting.BLUE));
+                continue;
+            }
+            if (!(d < 0.0)) continue;
+            list.add(Text.translatable("attribute.modifier.take." + entityAttributeModifier3.getOperation().getId(), ItemStack.MODIFIER_FORMAT.format(-e), Text.translatable(pair.getFirst().getTranslationKey())).formatted(Formatting.RED));
+        }
+    }
+
+    public static float getEffectChance(StatusEffectInstance statusEffectInstance) {
+        return getEffectChance(statusEffectInstance.getAmplifier());
+    }
+
+    public static float getEffectChance(int i) {
+        return (i + 1) * 0.2F;
     }
 
     @Override
