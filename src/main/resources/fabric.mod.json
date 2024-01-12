@@ -35,7 +35,7 @@
     "caffeinated.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.14.21",
+    "fabricloader": ">=0.15.3",
     "fabric-api": "*",
     "minecraft": "~1.20.0",
     "java": ">=17"

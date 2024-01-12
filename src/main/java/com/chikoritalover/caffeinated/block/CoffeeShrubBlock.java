@@ -28,63 +28,70 @@ public class CoffeeShrubBlock extends PlantBlock implements Fertilizable {
 
     public CoffeeShrubBlock(AbstractBlock.Settings settings) {
         super(settings);
-        this.setDefaultState(this.stateManager.getDefaultState().with(AGE, 0));
+        this.setDefaultState(this.getStateManager().getDefaultState().with(AGE, 0));
     }
 
+    @Override
     public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
         return new ItemStack(CaffeinatedItems.COFFEE_BEANS);
     }
 
+    @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return state.get(AGE) < 2 ? SMALL_SHAPE : LARGE_SHAPE;
     }
 
+    @Override
     public boolean hasRandomTicks(BlockState state) {
         return true;
     }
 
+    @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        int i = state.get(AGE);
-        BlockState aboveState = world.getBlockState(pos.up());
-        if ((i < 3 || aboveState.isReplaceable()) && random.nextInt(5) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
-            grow(world, random, pos, state);
-            BlockState state2 = world.getBlockState(pos);
-            world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(state2));
+        if (!this.canGrow(world, random, pos, state)) {
+            return;
         }
-
+        if (random.nextInt(5) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
+            this.grow(world, random, pos, state);
+            BlockState blockState = world.getBlockState(pos);
+            world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(blockState));
+        }
     }
 
+    @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        int i = state.get(AGE);
-        BlockState aboveState = world.getBlockState(pos.up());
-        boolean bl = i == 3 && !aboveState.isReplaceable();
-        if (!bl && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
+        boolean bl = this.isFertilizable(world, pos, state, world.isClient());
+        if (bl && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
             return ActionResult.PASS;
         } else {
             return super.onUse(state, world, pos, player, hand, hit);
         }
     }
 
+    @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(AGE);
     }
 
     @Override
-    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state) {
-        int i = state.get(AGE);
-        BlockState aboveState = world.getBlockState(pos.up());
-        return i < 3 || aboveState.isReplaceable();
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
+        return state.get(AGE) < 3 || world.isAir(pos.up());
     }
 
+    @Override
     public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
-        return true;
+        return state.get(AGE) < 3 || world.isAir(pos.up());
     }
 
+    @Override
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-        BlockState state2 = state.get(AGE) < 3 ? state.cycle(AGE) : CaffeinatedBlocks.FLOWERING_COFFEE_SHRUB.getDefaultState();
-        world.setBlockState(pos, state2, 2);
-        if (state.get(AGE) == 3) {
-            world.setBlockState(pos.up(), state2.cycle(Properties.DOUBLE_BLOCK_HALF), 2);
+        if (state.get(AGE) < 3) {
+            world.setBlockState(pos, state.with(AGE, state.get(AGE) + 1), Block.NOTIFY_LISTENERS);
+            return;
+        }
+        BlockState blockState = CaffeinatedBlocks.FLOWERING_COFFEE_SHRUB.getDefaultState();
+        if (blockState.canPlaceAt(world, pos) && world.isAir(pos.up())) {
+            FloweringCoffeeShrubBlock.placeAt(world, blockState, pos, Block.NOTIFY_LISTENERS);
         }
     }
 }

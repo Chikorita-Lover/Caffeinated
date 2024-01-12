@@ -7,7 +7,7 @@ import net.minecraft.village.VillagerProfession;
 public class CaffeinatedTradeOffers {
     public static void register() {
         TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 3, factories -> {
-            factories.add(new TradeOffers.BuyItemFactory(CaffeinatedItems.COFFEE_BERRIES, 8, 12, 20));
+            factories.add(new TradeOffers.BuyForOneEmeraldFactory(CaffeinatedItems.COFFEE_BERRIES, 8, 12, 20));
         });
         TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 5, factories -> {
             factories.add(new TradeOffers.SellItemFactory(CaffeinatedItems.TIRAMISU, 3, 1, 12, 30));
