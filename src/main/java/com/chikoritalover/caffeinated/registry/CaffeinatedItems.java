@@ -3,6 +3,7 @@ package com.chikoritalover.caffeinated.registry;
 import com.chikoritalover.caffeinated.Caffeinated;
 import com.chikoritalover.caffeinated.item.CoffeeBottleItem;
 import com.chikoritalover.caffeinated.item.LatteCoffeeBottleItem;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.*;
@@ -20,6 +21,8 @@ public class CaffeinatedItems {
 
     public static final Item JAVA_BANNER_PATTERN = register("java_banner_pattern", new BannerPatternItem(CaffeinatedBannerPatternTags.JAVA_PATTERN_ITEM, (new Item.Settings()).maxCount(1)));
     public static final Item TIRAMISU_SLICE = register("tiramisu_slice", new Item(new Item.Settings().food(CaffeinatedFoodComponents.TIRAMISU_SLICE)));
+
+    public static final Item CIVET_SPAWN_EGG = register("civet_spawn_egg", new SpawnEggItem(CaffeinatedEntities.CIVET, 0xDCCE95, 0x6F6A5F, new FabricItemSettings()));
 
     private static Item createCoffeeBottle(FoodComponent foodComponent) {
         return new CoffeeBottleItem(new Item.Settings().food(foodComponent).maxCount(16).recipeRemainder(Items.GLASS_BOTTLE));

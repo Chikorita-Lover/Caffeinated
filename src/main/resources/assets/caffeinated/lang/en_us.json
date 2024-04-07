@@ -37,6 +37,9 @@
 
   "effect.caffeinated.caffeine": "Caffeine",
 
+  "entity.caffeinated.civet": "Civet",
+
+  "item.caffeinated.civet_spawn_egg": "Civet Spawn Egg",
   "item.caffeinated.coffee_beans": "Coffee Beans",
   "item.caffeinated.coffee_berries": "Coffee Berries",
   "item.caffeinated.coffee_bottle": "Coffee Bottle",
@@ -53,6 +56,10 @@
 
   "subtitles.block.cauldron_campfire.brew": "Cauldron brews",
   "subtitles.block.cauldron_campfire.bubble": "Cauldron bubbles",
+  "subtitles.entity.civet.death": "Civet dies",
+  "subtitles.entity.civet.eat": "Civet eats",
+  "subtitles.entity.civet.hurt": "Civet hurts",
+  "subtitles.entity.civet.idle": "Civet growls",
   "subtitles.item.coffee_bottle.drink": "Slurping",
   "subtitles.item.ground_coffee.splash": "Ground Coffee splashes",
 

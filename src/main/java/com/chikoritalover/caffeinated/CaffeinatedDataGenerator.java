@@ -103,6 +103,7 @@ public class CaffeinatedDataGenerator implements DataGeneratorEntrypoint {
             itemModelGenerator.register(CaffeinatedItems.GROUND_COFFEE, Models.GENERATED);
             itemModelGenerator.register(CaffeinatedItems.JAVA_BANNER_PATTERN, Models.GENERATED);
             itemModelGenerator.register(CaffeinatedItems.TIRAMISU_SLICE, Models.GENERATED);
+            itemModelGenerator.register(CaffeinatedItems.CIVET_SPAWN_EGG, Models.item("template_spawn_egg"));
         }
     }
 

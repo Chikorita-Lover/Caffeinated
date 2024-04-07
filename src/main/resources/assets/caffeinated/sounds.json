@@ -82,6 +82,38 @@
       "caffeinated:block/ground_coffee_block/break4"
     ]
   },
+  "entity.civet.death": {
+    "subtitle": "subtitles.entity.civet.death",
+    "sounds": [
+      "caffeinated:entity/civet/death1",
+      "caffeinated:entity/civet/death2",
+      "caffeinated:entity/civet/death3"
+    ]
+  },
+  "entity.civet.eat": {
+    "subtitle": "subtitles.entity.civet.eat",
+    "sounds": [
+      "caffeinated:entity/civet/eat1",
+      "caffeinated:entity/civet/eat2"
+    ]
+  },
+  "entity.civet.hurt": {
+    "subtitle": "subtitles.entity.civet.hurt",
+    "sounds": [
+      "caffeinated:entity/civet/death1",
+      "caffeinated:entity/civet/death2",
+      "caffeinated:entity/civet/death3"
+    ]
+  },
+  "entity.civet.idle": {
+    "subtitle": "subtitles.entity.civet.idle",
+    "sounds": [
+      "caffeinated:entity/civet/idle1",
+      "caffeinated:entity/civet/idle2",
+      "caffeinated:entity/civet/idle3",
+      "caffeinated:entity/civet/idle4"
+    ]
+  },
   "item.coffee_bottle.drink": {
     "subtitle": "subtitles.item.coffee_bottle.drink",
     "sounds": [

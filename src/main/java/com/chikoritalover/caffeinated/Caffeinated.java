@@ -2,14 +2,19 @@ package com.chikoritalover.caffeinated;
 
 import com.chikoritalover.caffeinated.advancement.BrewCoffeeCriterion;
 import com.chikoritalover.caffeinated.block.entity.CauldronCampfireBlockEntity;
+import com.chikoritalover.caffeinated.entity.CivetEntity;
 import com.chikoritalover.caffeinated.recipe.CoffeeBrewingRecipe;
 import com.chikoritalover.caffeinated.registry.*;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
+import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.loot.v2.FabricLootPoolBuilder;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.SpawnGroup;
+import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.LootTables;
@@ -20,18 +25,18 @@ import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.tag.BiomeTags;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.Heightmap;
+import net.minecraft.world.biome.BiomeKeys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.function.Consumer;
 
 public class Caffeinated implements ModInitializer {
-    // This logger is used to write text to the console and the log file.
-    // It is considered best practice to use your mod id as the logger's name.
-    // That way, it's clear which mod wrote info, warnings, and errors.
     public static final String MODID = "caffeinated";
-    public static final Logger LOGGER = LoggerFactory.getLogger("modid");
+    public static final Logger LOGGER = LoggerFactory.getLogger(MODID);
     public static final BrewCoffeeCriterion BREW_COFFEE_CRITERION = Criteria.register(new BrewCoffeeCriterion());
     public static final BlockEntityType<CauldronCampfireBlockEntity> CAULDRON_CAMPFIRE = Registry.register(
             Registries.BLOCK_ENTITY_TYPE,
@@ -72,6 +77,7 @@ public class Caffeinated implements ModInitializer {
         CaffeinatedBannerPatterns.initAndGetDefault(Registries.BANNER_PATTERN);
         CaffeinatedBlocks.register();
         CaffeinatedCauldronBehavior.register();
+        CaffeinatedEntities.register();
         CaffeinatedItemGroups.register();
         CaffeinatedItems.register();
         CaffeinatedParticleTypes.register();
@@ -86,6 +92,10 @@ public class Caffeinated implements ModInitializer {
         CaffeinatedItemTags.register();
         CaffeinatedBannerPatternTags.register();
         CaffeinatedBannerPatterns.register();
+
+        SpawnRestriction.register(CaffeinatedEntities.CIVET, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, CivetEntity::canSpawn);
+
+        BiomeModifications.addSpawn(BiomeSelectors.tag(CaffeinatedBiomeTags.SPAWNS_CIVETS), SpawnGroup.CREATURE, CaffeinatedEntities.CIVET, 4, 1, 2);
 
         LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
             if (id.equals(LootTables.JUNGLE_TEMPLE_CHEST)) {

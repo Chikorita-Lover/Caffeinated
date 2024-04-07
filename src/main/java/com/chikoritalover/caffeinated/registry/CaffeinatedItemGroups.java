@@ -42,6 +42,9 @@ public class CaffeinatedItemGroups {
             entries.addBefore(Items.NETHER_WART, CaffeinatedItems.GROUND_COFFEE);
             entries.addAfter(Items.PIGLIN_BANNER_PATTERN, CaffeinatedItems.JAVA_BANNER_PATTERN);
         });
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS).register(entries -> {
+            entries.addAfter(Items.CHICKEN_SPAWN_EGG, CaffeinatedItems.CIVET_SPAWN_EGG);
+        });
         ItemGroupEvents.modifyEntriesEvent(CAFFEINATED).register(entries -> {
             ItemGroup.StackVisibility visibility = ItemGroup.StackVisibility.PARENT_TAB_ONLY;
             entries.add(CaffeinatedItems.COFFEE_BERRIES, visibility);
@@ -57,6 +60,7 @@ public class CaffeinatedItemGroups {
             entries.add(CaffeinatedBlocks.TIRAMISU, visibility);
             entries.add(CaffeinatedItems.TIRAMISU_SLICE, visibility);
             entries.add(CaffeinatedItems.JAVA_BANNER_PATTERN, visibility);
+            entries.add(CaffeinatedItems.CIVET_SPAWN_EGG, visibility);
         });
     }
 
