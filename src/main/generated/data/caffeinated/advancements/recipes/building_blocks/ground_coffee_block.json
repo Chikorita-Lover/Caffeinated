@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "caffeinated:ground_coffee"
-            ]
+            "items": "caffeinated:ground_coffee"
           }
         ]
       },
@@ -22,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_ground_coffee",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_ground_coffee"
     ]
   ],
   "rewards": {
     "recipes": [
       "caffeinated:ground_coffee_block"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -1,16 +1,14 @@
 {
-  "required": true,
-  "minVersion": "0.8",
-  "package": "com.chikoritalover.caffeinated.mixin",
-  "compatibilityLevel": "JAVA_17",
-  "mixins": [
-    "GrowCropsGoalMixin",
-    "ItemMixin",
-    "PlayerEntityMixin"
-  ],
-  "client": [],
-  "server": [],
-  "injectors": {
-    "defaultRequire": 1
-  }
+	"required": true,
+	"minVersion": "0.8",
+	"package": "net.chikorita_lover.caffeinated.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"GrowCropsGoalMixin",
+		"ItemMixin",
+		"PlayerEntityMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
 }

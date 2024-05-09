@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "caffeinated:coffee_berries"
-            ]
+            "items": "caffeinated:coffee_berries"
           }
         ]
       },
@@ -22,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_coffee_berries",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_coffee_berries"
     ]
   ],
   "rewards": {
     "recipes": [
       "caffeinated:coffee_beans_from_coffee_berries"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

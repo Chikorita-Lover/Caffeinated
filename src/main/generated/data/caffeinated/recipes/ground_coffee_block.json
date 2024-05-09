@@ -12,7 +12,7 @@
     "###"
   ],
   "result": {
-    "item": "caffeinated:ground_coffee_block"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "caffeinated:ground_coffee_block"
+  }
 }

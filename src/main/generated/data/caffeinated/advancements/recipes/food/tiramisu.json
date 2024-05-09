@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "caffeinated:coffee_bottle"
-            ]
+            "items": "caffeinated:coffee_bottle"
           }
         ]
       },
@@ -22,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_coffee_bottle",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_coffee_bottle"
     ]
   ],
   "rewards": {
     "recipes": [
       "caffeinated:tiramisu"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

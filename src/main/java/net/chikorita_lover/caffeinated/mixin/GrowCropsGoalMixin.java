@@ -1,0 +1,47 @@
+package net.chikorita_lover.caffeinated.mixin;
+
+import net.chikorita_lover.caffeinated.block.CoffeeShrubBlock;
+import net.chikorita_lover.caffeinated.block.FloweringCoffeeShrubBlock;
+import net.chikorita_lover.caffeinated.registry.CaffeinatedBlocks;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.enums.DoubleBlockHalf;
+import net.minecraft.entity.passive.BeeEntity;
+import net.minecraft.util.math.BlockPos;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
+
+@Mixin(targets = "net.minecraft.entity.passive.BeeEntity$GrowCropsGoal")
+public class GrowCropsGoalMixin {
+    @Final
+    BeeEntity field_20373;
+
+    @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/BlockState;isIn(Lnet/minecraft/registry/tag/TagKey;)Z", shift = At.Shift.AFTER), locals = LocalCapture.CAPTURE_FAILHARD)
+    public void tryGrowCoffeeShrub(CallbackInfo info, int i, BlockPos blockPos, BlockState blockState, Block block) {
+        boolean bl = false;
+        if (block instanceof CoffeeShrubBlock) {
+            bl = true;
+            if (blockState.get(CoffeeShrubBlock.AGE) == 3) {
+                field_20373.getWorld().setBlockState(blockPos, CaffeinatedBlocks.FLOWERING_COFFEE_SHRUB.getDefaultState());
+                field_20373.getWorld().setBlockState(blockPos.up(), CaffeinatedBlocks.FLOWERING_COFFEE_SHRUB.getDefaultState().cycle(FloweringCoffeeShrubBlock.HALF));
+            } else {
+                field_20373.getWorld().setBlockState(blockPos, blockState.cycle(CoffeeShrubBlock.AGE));
+            }
+        } else if (block instanceof FloweringCoffeeShrubBlock) {
+            if (blockState.get(FloweringCoffeeShrubBlock.AGE) < 3) {
+                bl = true;
+                BlockState blockState2 = blockState.cycle(FloweringCoffeeShrubBlock.AGE);
+                field_20373.getWorld().setBlockState(blockPos, blockState2);
+                field_20373.getWorld().setBlockState(blockState2.get(FloweringCoffeeShrubBlock.HALF) == DoubleBlockHalf.LOWER ? blockPos.up() : blockPos.down(), blockState2.cycle(FloweringCoffeeShrubBlock.HALF));
+            }
+        }
+        if (bl) {
+            field_20373.getWorld().syncWorldEvent(2005, blockPos, 0);
+            field_20373.addCropCounter();
+        }
+    }
+}

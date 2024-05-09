@@ -1,4 +1,12 @@
 {
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "farmersdelight"
+      ]
+    }
+  ],
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
@@ -8,6 +16,6 @@
   ],
   "result": {
     "count": 9,
-    "item": "caffeinated:coffee_berries"
+    "id": "caffeinated:coffee_berries"
   }
 }

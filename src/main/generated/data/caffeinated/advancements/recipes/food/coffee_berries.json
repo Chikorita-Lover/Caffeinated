@@ -1,13 +1,19 @@
 {
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "farmersdelight"
+      ]
+    }
+  ],
   "parent": "minecraft:recipes/root",
   "criteria": {
     "has_coffee_berry_crate": {
       "conditions": {
         "items": [
           {
-            "items": [
-              "caffeinated:coffee_berry_crate"
-            ]
+            "items": "caffeinated:coffee_berry_crate"
           }
         ]
       },
@@ -15,21 +21,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "caffeinated:coffee_berries"
+        "recipe": "minecraft:coffee_berries"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_coffee_berry_crate",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_coffee_berry_crate"
     ]
   ],
   "rewards": {
     "recipes": [
-      "caffeinated:coffee_berries"
+      "minecraft:coffee_berries"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

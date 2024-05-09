@@ -11,7 +11,7 @@
     "###"
   ],
   "result": {
-    "item": "caffeinated:ground_coffee"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "caffeinated:ground_coffee"
+  }
 }

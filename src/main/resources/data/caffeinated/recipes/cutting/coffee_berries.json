@@ -2,13 +2,14 @@
   "type": "farmersdelight:cutting",
   "ingredients": [
     {
-      "item": "caffeinated:coffee_berries"
+      "count": 1,
+      "id": "caffeinated:coffee_berries"
     }
   ],
   "result": [
     {
-      "item": "caffeinated:coffee_beans",
-      "count": 2
+      "count": 2,
+      "id": "caffeinated:coffee_beans"
     }
   ],
   "tool": {

@@ -1,56 +1,44 @@
 {
-  "display": {
-    "icon": {
-      "item": "caffeinated:coffee_bottle"
-    },
-    "title": {
-      "translate": "advancements.husbandry.brew_coffee.title"
-    },
-    "description": {
-      "translate": "advancements.husbandry.brew_coffee.description"
-    },
-    "frame": "task",
-    "show_toast": true,
-    "announce_to_chat": true,
-    "hidden": false
-  },
-  "parent": "minecraft:husbandry/root",
-  "criteria": {
-    "brew_coffee": {
-      "trigger": "minecraft:item_used_on_block",
-      "conditions": {
-        "item": {
-          "items": [
-            "minecraft:glass_bottle"
-          ]
-        },
-        "location": [
-          {
-            "condition": "minecraft:location_check",
-            "predicate": {
-              "block": {
-                "blocks": [
-                  "caffeinated:coffee_cauldron"
-                ]
-              }
-            }
-          },
-          {
-            "condition": "minecraft:match_tool",
-            "predicate": {
-              "items": [
-                "minecraft:glass_bottle"
-              ]
-            }
-          }
-        ]
-      }
-    }
-  },
-  "requirements": [
-    [
-      "brew_coffee"
-    ]
-  ],
-  "sends_telemetry_event": true
+	"parent": "minecraft:husbandry/root",
+	"criteria": {
+		"brew_coffee": {
+			"conditions": {
+				"location": [
+					{
+						"condition": "minecraft:location_check",
+						"predicate": {
+							"block": {
+								"blocks": "caffeinated:coffee_cauldron"
+							}
+						}
+					},
+					{
+						"condition": "minecraft:match_tool",
+						"predicate": {
+							"items": "minecraft:glass_bottle"
+						}
+					}
+				]
+			},
+			"trigger": "minecraft:item_used_on_block"
+		}
+	},
+	"display": {
+		"description": {
+			"translate": "advancements.husbandry.brew_coffee.description"
+		},
+		"icon": {
+			"count": 1,
+			"id": "caffeinated:coffee_bottle"
+		},
+		"title": {
+			"translate": "advancements.husbandry.brew_coffee.title"
+		}
+	},
+	"requirements": [
+		[
+			"brew_coffee"
+		]
+	],
+	"sends_telemetry_event": true
 }
