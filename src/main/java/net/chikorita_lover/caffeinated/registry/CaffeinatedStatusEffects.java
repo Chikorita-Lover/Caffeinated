@@ -7,15 +7,14 @@ import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.util.Identifier;
 
 public class CaffeinatedStatusEffects {
-    public static final RegistryEntry<StatusEffect> CAFFEINE = register("caffeine", StatusEffectCategory.BENEFICIAL, 0x4B3121);
-
-    private static RegistryEntry<StatusEffect> register(String id, StatusEffectCategory category, int i) {
-        return Registry.registerReference(Registries.STATUS_EFFECT, new Identifier(Caffeinated.MODID, id), new CaffeineStatusEffect(category, i));
-    }
+    public static final RegistryEntry<StatusEffect> CAFFEINE = register("caffeine", new CaffeineStatusEffect(StatusEffectCategory.BENEFICIAL, 0x4B3121));
 
     public static void register() {
+    }
+
+    private static RegistryEntry<StatusEffect> register(String id, StatusEffect effect) {
+        return Registry.registerReference(Registries.STATUS_EFFECT, Caffeinated.of(id), effect);
     }
 }

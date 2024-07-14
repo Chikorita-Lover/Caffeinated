@@ -1,7 +1,7 @@
 package net.chikorita_lover.caffeinated.mixin;
 
-import net.chikorita_lover.caffeinated.registry.CaffeinatedEntityTypeTags;
-import net.chikorita_lover.caffeinated.registry.CaffeinatedItemTags;
+import net.chikorita_lover.caffeinated.registry.tag.CaffeinatedEntityTypeTags;
+import net.chikorita_lover.caffeinated.registry.tag.CaffeinatedItemTags;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;

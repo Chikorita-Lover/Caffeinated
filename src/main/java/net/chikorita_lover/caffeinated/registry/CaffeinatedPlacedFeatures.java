@@ -11,9 +11,13 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.PlacedFeature;
 
 public class CaffeinatedPlacedFeatures {
-    public static final RegistryKey<PlacedFeature> PATCH_COFFEE_SHRUB = RegistryKey.of(RegistryKeys.PLACED_FEATURE, new Identifier(Caffeinated.MODID, "patch_coffee_shrub"));
+    public static final RegistryKey<PlacedFeature> PATCH_COFFEE_SHRUB = of("patch_coffee_shrub");
 
     public static void register() {
         BiomeModifications.addFeature(BiomeSelectors.tag(BiomeTags.IS_JUNGLE), GenerationStep.Feature.VEGETAL_DECORATION, PATCH_COFFEE_SHRUB);
+    }
+
+    private static RegistryKey<PlacedFeature> of(String id) {
+        return RegistryKey.of(RegistryKeys.PLACED_FEATURE, Caffeinated.of(id));
     }
 }

@@ -1,6 +1,6 @@
 package net.chikorita_lover.caffeinated.block;
 
-import net.chikorita_lover.caffeinated.registry.CaffeinatedBlockTags;
+import net.chikorita_lover.caffeinated.registry.tag.CaffeinatedBlockTags;
 import net.chikorita_lover.caffeinated.registry.CaffeinatedParticleTypes;
 import net.chikorita_lover.caffeinated.registry.CaffeinatedSoundEvents;
 import net.minecraft.block.Block;

@@ -10,11 +10,10 @@ import net.minecraft.util.Identifier;
 public class CaffeinatedStats {
     public static final Identifier COFFEE_TAKEN = register("coffee_taken", StatFormatter.DEFAULT);
 
-    private static Identifier register(String id, StatFormatter formatter) {
-        Identifier identifier = new Identifier(Caffeinated.MODID, id);
-        Registry.register(Registries.CUSTOM_STAT, id, identifier);
-        Stats.CUSTOM.getOrCreateStat(identifier, formatter);
-        return identifier;
+    private static Identifier register(String path, StatFormatter formatter) {
+        Identifier id = Caffeinated.of(path);
+        Stats.CUSTOM.getOrCreateStat(Registry.register(Registries.CUSTOM_STAT, id, id), formatter);
+        return id;
     }
 
     public static void register() {

@@ -1,47 +1,47 @@
 package net.chikorita_lover.caffeinated.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.sugar.Local;
+import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import net.chikorita_lover.caffeinated.block.CoffeeShrubBlock;
 import net.chikorita_lover.caffeinated.block.FloweringCoffeeShrubBlock;
 import net.chikorita_lover.caffeinated.registry.CaffeinatedBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.entity.passive.BeeEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(targets = "net.minecraft.entity.passive.BeeEntity$GrowCropsGoal")
 public class GrowCropsGoalMixin {
     @Final
     BeeEntity field_20373;
 
-    @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/BlockState;isIn(Lnet/minecraft/registry/tag/TagKey;)Z", shift = At.Shift.AFTER), locals = LocalCapture.CAPTURE_FAILHARD)
-    public void tryGrowCoffeeShrub(CallbackInfo info, int i, BlockPos blockPos, BlockState blockState, Block block) {
-        boolean bl = false;
+    @ModifyExpressionValue(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/BlockState;isIn(Lnet/minecraft/registry/tag/TagKey;)Z"))
+    public boolean tryGrowCoffeeShrub(boolean isBeeGrowable, @Local int i, @Local BlockPos blockPos, @Local(ordinal = 0) BlockState blockState, @Local Block block, @Local(ordinal = 1) LocalRef<BlockState> blockState2) {
+        if (!isBeeGrowable) {
+            return false;
+        }
+        World world = field_20373.getWorld();
         if (block instanceof CoffeeShrubBlock) {
-            bl = true;
             if (blockState.get(CoffeeShrubBlock.AGE) == 3) {
-                field_20373.getWorld().setBlockState(blockPos, CaffeinatedBlocks.FLOWERING_COFFEE_SHRUB.getDefaultState());
-                field_20373.getWorld().setBlockState(blockPos.up(), CaffeinatedBlocks.FLOWERING_COFFEE_SHRUB.getDefaultState().cycle(FloweringCoffeeShrubBlock.HALF));
+                blockState2.set(CaffeinatedBlocks.FLOWERING_COFFEE_SHRUB.getDefaultState());
+                world.setBlockState(blockPos, blockState2.get());
+                world.setBlockState(blockPos.up(), blockState2.get().cycle(FloweringCoffeeShrubBlock.HALF));
             } else {
-                field_20373.getWorld().setBlockState(blockPos, blockState.cycle(CoffeeShrubBlock.AGE));
+                blockState2.set(blockState.cycle(CoffeeShrubBlock.AGE));
+                world.setBlockState(blockPos, blockState2.get());
             }
         } else if (block instanceof FloweringCoffeeShrubBlock) {
             if (blockState.get(FloweringCoffeeShrubBlock.AGE) < 3) {
-                bl = true;
-                BlockState blockState2 = blockState.cycle(FloweringCoffeeShrubBlock.AGE);
-                field_20373.getWorld().setBlockState(blockPos, blockState2);
-                field_20373.getWorld().setBlockState(blockState2.get(FloweringCoffeeShrubBlock.HALF) == DoubleBlockHalf.LOWER ? blockPos.up() : blockPos.down(), blockState2.cycle(FloweringCoffeeShrubBlock.HALF));
+                blockState2.set(blockState.cycle(FloweringCoffeeShrubBlock.AGE));
+                field_20373.getWorld().setBlockState(blockPos, blockState2.get());
+                field_20373.getWorld().setBlockState(blockPos.add(blockState2.get().get(FloweringCoffeeShrubBlock.HALF).getOppositeDirection().getVector()), blockState2.get().cycle(FloweringCoffeeShrubBlock.HALF));
             }
         }
-        if (bl) {
-            field_20373.getWorld().syncWorldEvent(2005, blockPos, 0);
-            field_20373.addCropCounter();
-        }
+        return true;
     }
 }

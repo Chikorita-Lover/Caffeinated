@@ -30,7 +30,7 @@ public class CaffeinatedBlocks {
     }
 
     public static Block register(String id, Block block) {
-        return Registry.register(Registries.BLOCK, new Identifier(Caffeinated.MODID, id), block);
+        return Registry.register(Registries.BLOCK, Caffeinated.of(id), block);
     }
 
     public static void register() {

@@ -11,6 +11,6 @@ public class CaffeinatedParticleTypes {
     public static final SimpleParticleType COFFEE_POP = FabricParticleTypes.simple();
 
     public static void register() {
-        Registry.register(Registries.PARTICLE_TYPE, new Identifier(Caffeinated.MODID, "coffee_pop"), COFFEE_POP);
+        Registry.register(Registries.PARTICLE_TYPE, Caffeinated.of("coffee_pop"), COFFEE_POP);
     }
 }

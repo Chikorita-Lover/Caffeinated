@@ -4,7 +4,6 @@ import net.chikorita_lover.caffeinated.Caffeinated;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.Identifier;
 
 public class CaffeinatedSoundEvents {
     public static final SoundEvent BLOCK_CAULDRON_BREW = register("block.cauldron.brew");
@@ -25,7 +24,7 @@ public class CaffeinatedSoundEvents {
     public static final SoundEvent ITEM_GROUND_COFFEE_SPLASH = register("item.ground_coffee.splash");
 
     private static SoundEvent register(String id) {
-        return Registry.register(Registries.SOUND_EVENT, new Identifier(Caffeinated.MODID, id), SoundEvent.of(new Identifier(Caffeinated.MODID, id)));
+        return Registry.register(Registries.SOUND_EVENT, Caffeinated.of(id), SoundEvent.of(Caffeinated.of(id)));
     }
 
     public static void register() {

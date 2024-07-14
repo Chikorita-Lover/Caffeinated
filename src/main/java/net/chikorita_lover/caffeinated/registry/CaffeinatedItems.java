@@ -2,6 +2,7 @@ package net.chikorita_lover.caffeinated.registry;
 
 import net.chikorita_lover.caffeinated.Caffeinated;
 import net.chikorita_lover.caffeinated.item.CoffeeBottleItem;
+import net.chikorita_lover.caffeinated.registry.tag.CaffeinatedBannerPatternTags;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.block.Block;
@@ -22,11 +23,7 @@ public class CaffeinatedItems {
     public static final Item JAVA_BANNER_PATTERN = register("java_banner_pattern", new BannerPatternItem(CaffeinatedBannerPatternTags.JAVA_PATTERN_ITEM, (new Item.Settings()).maxCount(1)));
 
     public static Item register(Block block) {
-        return register(new BlockItem(block, new Item.Settings()));
-    }
-
-    private static Item register(BlockItem item) {
-        return register(item.getBlock(), item);
+        return register(block, new BlockItem(block, new Item.Settings()));
     }
 
     private static Item register(Block block, Item item) {
@@ -34,7 +31,7 @@ public class CaffeinatedItems {
     }
 
     private static Item register(String id, Item item) {
-        return register(new Identifier(Caffeinated.MODID, id), item);
+        return register(Caffeinated.of(id), item);
     }
 
     private static Item register(Identifier id, Item item) {
