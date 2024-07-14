@@ -22,13 +22,13 @@
   "environment": "*",
   "entrypoints": {
     "client": [
-      "com.chikoritalover.caffeinated.CaffeinatedClient"
+      "net.chikorita_lover.caffeinated.CaffeinatedClient"
     ],
     "fabric-datagen": [
-      "com.chikoritalover.caffeinated.CaffeinatedDataGenerator"
+      "net.chikorita_lover.caffeinated.CaffeinatedDataGenerator"
     ],
     "main": [
-      "com.chikoritalover.caffeinated.Caffeinated"
+      "net.chikorita_lover.caffeinated.Caffeinated"
     ],
     "mm:early_risers": [
       "com.chikoritalover.caffeinated.CaffeinatedEarlyRiser"
@@ -38,14 +38,11 @@
     "caffeinated.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.15.7",
+    "fabricloader": ">=0.15.11",
     "fabric-api": "*",
-    "minecraft": "~1.20.0",
-    "java": ">=17",
+    "minecraft": "~1.21.0",
+    "java": ">=21",
     "mm": ">=2.3"
-  },
-  "suggests": {
-    "another-mod": "*"
   },
   "accessWidener" : "caffeinated.accesswidener"
 }

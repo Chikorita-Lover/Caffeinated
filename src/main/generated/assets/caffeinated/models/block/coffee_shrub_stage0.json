@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cross",
-  "textures": {
-    "cross": "caffeinated:block/coffee_shrub_stage0"
-  }
-}
