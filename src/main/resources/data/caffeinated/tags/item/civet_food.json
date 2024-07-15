@@ -1,6 +1,5 @@
 {
 	"values": [
-		"minecraft:glow_berries",
-		"minecraft:sweet_berries"
+		"#c:foods/berry"
 	]
 }

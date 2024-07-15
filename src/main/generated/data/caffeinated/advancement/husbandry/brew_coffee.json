@@ -1,0 +1,31 @@
+{
+  "parent": "minecraft:husbandry/root",
+  "criteria": {
+    "brew_coffee": {
+      "conditions": {
+        "result": {
+          "items": "#caffeinated:black_coffee_bottles"
+        }
+      },
+      "trigger": "caffeinated:brew_coffee"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.husbandry.brew_coffee.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "caffeinated:coffee_bottle"
+    },
+    "title": {
+      "translate": "advancements.husbandry.brew_coffee.title"
+    }
+  },
+  "requirements": [
+    [
+      "brew_coffee"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

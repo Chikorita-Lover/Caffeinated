@@ -1,26 +1,27 @@
-package com.chikoritalover.caffeinated.recipe;
+package net.chikorita_lover.caffeinated.recipe;
 
-import com.chikoritalover.caffeinated.Caffeinated;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import net.minecraft.inventory.Inventory;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.chikorita_lover.caffeinated.Caffeinated;
+import net.chikorita_lover.caffeinated.registry.CaffeinatedRecipeTypes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.network.PacketByteBuf;
+import net.minecraft.network.RegistryByteBuf;
+import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
-import net.minecraft.registry.DynamicRegistryManager;
-import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.JsonHelper;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
 
-public class CoffeeBrewingRecipe implements Recipe<Inventory> {
+import java.util.Objects;
+
+public class CoffeeBrewingRecipe implements Recipe<CoffeeBrewingRecipeInput> {
     protected final RecipeType<?> type;
-    protected final Identifier id;
     protected final String group;
     protected final Ingredient input;
     protected final Ingredient reagent;
@@ -28,9 +29,8 @@ public class CoffeeBrewingRecipe implements Recipe<Inventory> {
     protected final float experience;
     protected final int brewTime;
 
-    public CoffeeBrewingRecipe(Identifier id, String group, Ingredient input, Ingredient reagent, ItemStack output, float experience, int brewTime) {
-        this.type = Caffeinated.COFFEE_BREWING;
-        this.id = id;
+    public CoffeeBrewingRecipe(String group, Ingredient input, Ingredient reagent, ItemStack output, float experience, int brewTime) {
+        this.type = CaffeinatedRecipeTypes.COFFEE_BREWING;
         this.group = group;
         this.input = input;
         this.reagent = reagent;
@@ -40,18 +40,23 @@ public class CoffeeBrewingRecipe implements Recipe<Inventory> {
     }
 
     @Override
-    public boolean matches(Inventory inventory, World world) {
-        return this.input.test(inventory.getStack(0)) && this.reagent.test(inventory.getStack(1));
+    public boolean matches(CoffeeBrewingRecipeInput input, World world) {
+        return this.input.test(input.input()) && this.reagent.test(input.reagent());
     }
 
     @Override
-    public ItemStack craft(Inventory inventory, DynamicRegistryManager registryManager) {
+    public ItemStack craft(CoffeeBrewingRecipeInput input, RegistryWrapper.WrapperLookup lookup) {
         return this.output.copy();
     }
 
     @Override
     public boolean fits(int width, int height) {
         return true;
+    }
+
+    @Override
+    public ItemStack getResult(RegistryWrapper.WrapperLookup registriesLookup) {
+        return this.output;
     }
 
     @Override
@@ -67,22 +72,12 @@ public class CoffeeBrewingRecipe implements Recipe<Inventory> {
     }
 
     @Override
-    public ItemStack getOutput(DynamicRegistryManager registryManager) {
-        return this.output;
-    }
-
-    @Override
     public String getGroup() {
         return this.group;
     }
 
     public int getBrewTime() {
         return this.brewTime;
-    }
-
-    @Override
-    public Identifier getId() {
-        return this.id;
     }
 
     @Override
@@ -101,52 +96,49 @@ public class CoffeeBrewingRecipe implements Recipe<Inventory> {
     }
 
     public static class Serializer<T extends CoffeeBrewingRecipe> implements RecipeSerializer<T> {
-        private final int brewingTime;
-        final CoffeeBrewingRecipe.Serializer.RecipeFactory<T> recipeFactory;
+        private final CoffeeBrewingRecipe.Serializer.RecipeFactory<T> recipeFactory;
+        private final MapCodec<T> codec;
+        private final PacketCodec<RegistryByteBuf, T> packetCodec;
 
-        protected Serializer(CoffeeBrewingRecipe.Serializer.RecipeFactory<T> recipeFactory, int brewingTime) {
-            this.brewingTime = brewingTime;
+        public Serializer(CoffeeBrewingRecipe.Serializer.RecipeFactory<T> recipeFactory, int brewingTime) {
             this.recipeFactory = recipeFactory;
+            this.codec = RecordCodecBuilder.mapCodec((instance) -> {
+                var var10000 = instance.group(Codec.STRING.optionalFieldOf("group", "").forGetter((recipe) -> recipe.group), Ingredient.DISALLOW_EMPTY_CODEC.fieldOf("ingredient").forGetter((recipe) -> recipe.input), Ingredient.DISALLOW_EMPTY_CODEC.fieldOf("reagent").forGetter((recipe) -> recipe.reagent), ItemStack.VALIDATED_UNCOUNTED_CODEC.fieldOf("result").forGetter((recipe) -> recipe.output), Codec.FLOAT.fieldOf("experience").orElse(0.0F).forGetter((recipe) -> recipe.experience), Codec.INT.fieldOf("brewingtime").orElse(brewingTime).forGetter((recipe) -> recipe.brewTime));
+                Objects.requireNonNull(recipeFactory);
+                return var10000.apply(instance, recipeFactory::create);
+            });
+            this.packetCodec = PacketCodec.ofStatic(this::write, this::read);
         }
 
-        @Override
-        public T read(Identifier identifier, JsonObject jsonObject) {
-            String string = JsonHelper.getString(jsonObject, "group", "");
-            JsonElement jsonElement = JsonHelper.hasArray(jsonObject, "ingredient") ? JsonHelper.getArray(jsonObject, "ingredient") : JsonHelper.getObject(jsonObject, "ingredient");
-            JsonElement jsonElement2 = JsonHelper.hasArray(jsonObject, "reagent") ? JsonHelper.getArray(jsonObject, "reagent") : JsonHelper.getObject(jsonObject, "reagent");
-            Ingredient ingredient = Ingredient.fromJson(jsonElement, false);
-            Ingredient ingredient2 = Ingredient.fromJson(jsonElement2, false);
-            String string2 = JsonHelper.getString(jsonObject, "result");
-            Identifier identifier2 = new Identifier(string2);
-            ItemStack itemStack = new ItemStack(Registries.ITEM.getOrEmpty(identifier2).orElseThrow(() -> new IllegalStateException("Item: " + string2 + " does not exist")));
-            float f = JsonHelper.getFloat(jsonObject, "experience", 0.0F);
-            int i = JsonHelper.getInt(jsonObject, "brewingtime", this.brewingTime);
-            return this.recipeFactory.create(identifier, string, ingredient, ingredient2, itemStack, f, i);
+        public MapCodec<T> codec() {
+            return this.codec;
         }
 
-        @Override
-        public T read(Identifier identifier, PacketByteBuf packetByteBuf) {
-            String string = packetByteBuf.readString();
-            Ingredient ingredient = Ingredient.fromPacket(packetByteBuf);
-            Ingredient ingredient2 = Ingredient.fromPacket(packetByteBuf);
-            ItemStack itemStack = packetByteBuf.readItemStack();
-            float f = packetByteBuf.readFloat();
-            int i = packetByteBuf.readVarInt();
-            return this.recipeFactory.create(identifier, string, ingredient, ingredient2, itemStack, f, i);
+        public PacketCodec<RegistryByteBuf, T> packetCodec() {
+            return this.packetCodec;
         }
 
-        @Override
-        public void write(PacketByteBuf packetByteBuf, T coffeeBrewingRecipe) {
-            packetByteBuf.writeString(coffeeBrewingRecipe.group);
-            coffeeBrewingRecipe.input.write(packetByteBuf);
-            coffeeBrewingRecipe.reagent.write(packetByteBuf);
-            packetByteBuf.writeItemStack(coffeeBrewingRecipe.output);
-            packetByteBuf.writeFloat(coffeeBrewingRecipe.experience);
-            packetByteBuf.writeVarInt(coffeeBrewingRecipe.brewTime);
+        public T read(RegistryByteBuf buf) {
+            String group = buf.readString();
+            Ingredient input = Ingredient.PACKET_CODEC.decode(buf);
+            Ingredient reagent = Ingredient.PACKET_CODEC.decode(buf);
+            ItemStack output = ItemStack.PACKET_CODEC.decode(buf);
+            float experience = buf.readFloat();
+            int brewingTime = buf.readVarInt();
+            return this.recipeFactory.create(group, input, reagent, output, experience, brewingTime);
+        }
+
+        public void write(RegistryByteBuf buf, T coffeeBrewingRecipe) {
+            buf.writeString(coffeeBrewingRecipe.group);
+            Ingredient.PACKET_CODEC.encode(buf, coffeeBrewingRecipe.input);
+            Ingredient.PACKET_CODEC.encode(buf, coffeeBrewingRecipe.reagent);
+            ItemStack.PACKET_CODEC.encode(buf, coffeeBrewingRecipe.output);
+            buf.writeFloat(coffeeBrewingRecipe.experience);
+            buf.writeVarInt(coffeeBrewingRecipe.brewTime);
         }
 
         public interface RecipeFactory<T extends CoffeeBrewingRecipe> {
-            T create(Identifier identifier, String group, Ingredient input, Ingredient reagent, ItemStack output, float experience, int brewingTime);
+            T create(String group, Ingredient input, Ingredient reagent, ItemStack output, float experience, int brewingTime);
         }
     }
 }

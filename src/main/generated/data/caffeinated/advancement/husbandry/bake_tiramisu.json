@@ -1,0 +1,33 @@
+{
+  "parent": "caffeinated:husbandry/brew_coffee",
+  "criteria": {
+    "bake_tiramisu": {
+      "conditions": {
+        "items": [
+          {
+            "items": "caffeinated:tiramisu"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.husbandry.bake_tiramisu.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "caffeinated:tiramisu"
+    },
+    "title": {
+      "translate": "advancements.husbandry.bake_tiramisu.title"
+    }
+  },
+  "requirements": [
+    [
+      "bake_tiramisu"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

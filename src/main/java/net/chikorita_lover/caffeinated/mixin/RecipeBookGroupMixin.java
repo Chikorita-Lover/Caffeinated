@@ -1,4 +1,4 @@
-package com.chikoritalover.caffeinated.mixin;
+package net.chikorita_lover.caffeinated.mixin;
 
 import com.chocohead.mm.api.ClassTinkerers;
 import net.minecraft.client.recipebook.RecipeBookGroup;
@@ -33,17 +33,17 @@ public class RecipeBookGroupMixin {
 
     @Inject(method = "<clinit>", at = @At("TAIL"))
     private static void setSearchMap(CallbackInfo ci) {
-        ArrayList<RecipeBookGroup> recipeBookGroups = new ArrayList<>(SMOKER);
-        recipeBookGroups.add(SMOKER_MISC);
-        SMOKER = recipeBookGroups;
+        ArrayList<RecipeBookGroup> smokerGroups = new ArrayList<>(SMOKER);
+        smokerGroups.add(SMOKER_MISC);
+        SMOKER = smokerGroups;
 
         Map<RecipeBookGroup, List<RecipeBookGroup>> newMap = new HashMap<>();
-        SEARCH_MAP.forEach((group, groups) -> {
+        SEARCH_MAP.forEach((searchGroup, groups) -> {
             ArrayList<RecipeBookGroup> arrayList = new ArrayList<>(groups);
-            if (group == SMOKER_SEARCH) {
+            if (searchGroup == SMOKER_SEARCH) {
                 arrayList.add(SMOKER_MISC);
             }
-            newMap.put(group, arrayList);
+            newMap.put(searchGroup, arrayList);
         });
         SEARCH_MAP = newMap;
     }

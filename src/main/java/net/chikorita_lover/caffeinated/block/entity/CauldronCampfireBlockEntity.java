@@ -1,33 +1,33 @@
-package com.chikoritalover.caffeinated.block.entity;
+package net.chikorita_lover.caffeinated.block.entity;
 
-import com.chikoritalover.caffeinated.Caffeinated;
-import com.chikoritalover.caffeinated.block.CauldronCampfireBlock;
-import com.chikoritalover.caffeinated.recipe.CoffeeBrewingRecipe;
-import com.chikoritalover.caffeinated.registry.CaffeinatedItems;
-import com.chikoritalover.caffeinated.registry.CaffeinatedSoundEvents;
+import net.chikorita_lover.caffeinated.Caffeinated;
+import net.chikorita_lover.caffeinated.block.CauldronCampfireBlock;
+import net.chikorita_lover.caffeinated.recipe.CoffeeBrewingRecipe;
+import net.chikorita_lover.caffeinated.recipe.CoffeeBrewingRecipeInput;
+import net.chikorita_lover.caffeinated.registry.CaffeinatedBlockEntityTypes;
+import net.chikorita_lover.caffeinated.registry.CaffeinatedRecipeTypes;
+import net.chikorita_lover.caffeinated.registry.CaffeinatedSoundEvents;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.client.color.world.BiomeColors;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.PotionContentsComponent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ExperienceOrbEntity;
 import net.minecraft.inventory.Inventories;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.nbt.NbtString;
-import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
-import net.minecraft.recipe.Recipe;
+import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.recipe.RecipeManager;
 import net.minecraft.recipe.RecipeUnlocker;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -45,30 +45,30 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 public class CauldronCampfireBlockEntity extends BlockEntity implements RecipeUnlocker {
-    private DefaultedList<ItemStack> inventory = DefaultedList.ofSize(2, ItemStack.EMPTY);
-    int brewingTime;
-    int brewingTimeTotal;
+    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(2, ItemStack.EMPTY);
     private final ArrayList<Identifier> recipesUsed = new ArrayList<>();
-    private final RecipeManager.MatchGetter<Inventory, CoffeeBrewingRecipe> matchGetter = RecipeManager.createCachedMatchGetter(Caffeinated.COFFEE_BREWING);
+    private final RecipeManager.MatchGetter<CoffeeBrewingRecipeInput, CoffeeBrewingRecipe> matchGetter = RecipeManager.createCachedMatchGetter(CaffeinatedRecipeTypes.COFFEE_BREWING);
+    private int brewingTime;
+    private int brewingTimeTotal;
 
     public CauldronCampfireBlockEntity(BlockPos pos, BlockState state) {
-        super(Caffeinated.CAULDRON_CAMPFIRE, pos, state);
+        super(CaffeinatedBlockEntityTypes.CAULDRON_CAMPFIRE, pos, state);
         this.brewingTime = 0;
         this.brewingTimeTotal = 600;
     }
 
     public static void litServerTick(World world, BlockPos pos, BlockState state, CauldronCampfireBlockEntity cauldronCampfire) {
-        ItemStack stack = cauldronCampfire.getStack(0);
-        if (state.get(CauldronCampfireBlock.FILLED) && cauldronCampfire.canBrewTogether(stack, cauldronCampfire.getStack(1))) {
+        ItemStack inputStack = cauldronCampfire.getStack(0);
+        if (state.get(CauldronCampfireBlock.FILLED) && cauldronCampfire.canBrewTogether(inputStack, cauldronCampfire.getStack(1))) {
             cauldronCampfire.brewingTime++;
             if (cauldronCampfire.brewingTime >= cauldronCampfire.brewingTimeTotal) {
-                Optional<CoffeeBrewingRecipe> optional;
-                SimpleInventory inventory;
+                Optional<RecipeEntry<CoffeeBrewingRecipe>> optional;
+                CoffeeBrewingRecipeInput recipeInput;
                 cauldronCampfire.brewingTime = 0;
-                ItemStack itemStack = (optional = cauldronCampfire.matchGetter.getFirstMatch(inventory = new SimpleInventory(stack, cauldronCampfire.getStack(1)), world)).map(recipe -> recipe.craft(inventory, world.getRegistryManager())).orElse(stack);
+                ItemStack outputStack = (optional = cauldronCampfire.matchGetter.getFirstMatch(recipeInput = new CoffeeBrewingRecipeInput(inputStack, cauldronCampfire.getStack(1)), world)).map(recipe -> recipe.value().craft(recipeInput, world.getRegistryManager())).orElse(inputStack);
                 cauldronCampfire.clear();
-                cauldronCampfire.setStack(0, itemStack);
-                optional.ifPresent(recipe -> cauldronCampfire.recipesUsed.add(recipe.getId()));
+                cauldronCampfire.setStack(0, outputStack);
+                optional.ifPresent(recipe -> cauldronCampfire.recipesUsed.add(recipe.id()));
                 world.playSound(null, pos, CaffeinatedSoundEvents.BLOCK_CAULDRON_CAMPFIRE_BREW, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 world.updateListeners(pos, state, state, Block.NOTIFY_ALL);
                 world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(state));
@@ -84,37 +84,52 @@ public class CauldronCampfireBlockEntity extends BlockEntity implements RecipeUn
                 CauldronCampfireBlock.spawnSmokeParticle(world, pos, false);
             }
         }
-
         if (state.get(CauldronCampfireBlock.FILLED)) {
-            boolean bl = cauldronCampfire.hasReagent();
-            if (bl) {
+            boolean hasReagent = cauldronCampfire.hasReagent();
+            if (hasReagent) {
                 float f = random.nextFloat() * MathHelper.PI * 2.0F;
                 world.addParticle(ParticleTypes.SMOKE, pos.getX() + 0.5 + MathHelper.sin(f) * 0.45, pos.getY() + random.nextBetween(6, 8) / 16.0, pos.getZ() + 0.5 + MathHelper.cos(f) * 0.45, 0.0, 5.0E-4, 0.0);
             }
-
             if (random.nextInt(50) == 0) {
-                world.playSoundAtBlockCenter(pos, CaffeinatedSoundEvents.BLOCK_CAULDRON_CAMPFIRE_BUBBLE, SoundCategory.BLOCKS, bl ? 0.2F : 0.1F, bl ? 1.0F : 2.0F, false);
+                world.playSoundAtBlockCenter(pos, CaffeinatedSoundEvents.BLOCK_CAULDRON_CAMPFIRE_BUBBLE, SoundCategory.BLOCKS, hasReagent ? 0.2F : 0.1F, hasReagent ? 1.0F : 2.0F, false);
             }
         }
     }
 
+    private static void dropExperience(ServerWorld world, Vec3d pos, float experience) {
+        int i = MathHelper.floor(experience);
+        float f = MathHelper.fractionalPart(experience);
+        if (Math.random() < f) {
+            i++;
+        }
+        ExperienceOrbEntity.spawn(world, pos, i);
+    }
+
+    private static boolean isOfWaterBottle(ItemStack stack) {
+        if (stack.isOf(Items.POTION)) {
+            PotionContentsComponent component = stack.get(DataComponentTypes.POTION_CONTENTS);
+            return component != null && component.potion().isPresent() && component.potion().get() == Potions.WATER;
+        }
+        return false;
+    }
+
     @Override
-    public void readNbt(NbtCompound nbt) {
-        super.readNbt(nbt);
+    public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+        super.readNbt(nbt, registryLookup);
         this.inventory.clear();
-        Inventories.readNbt(nbt, this.inventory);
+        Inventories.readNbt(nbt, this.inventory, registryLookup);
         this.brewingTime = nbt.getInt("BrewingTime");
         this.brewingTimeTotal = nbt.getInt("BrewingTimeTotal");
         NbtList nbtList = nbt.getList("RecipesUsed", NbtElement.STRING_TYPE);
         for (NbtElement nbtElement : nbtList) {
-            this.recipesUsed.add(new Identifier(nbtElement.asString()));
+            this.recipesUsed.add(Identifier.of(nbtElement.asString()));
         }
     }
 
     @Override
-    protected void writeNbt(NbtCompound nbt) {
-        super.writeNbt(nbt);
-        Inventories.writeNbt(nbt, this.inventory, true);
+    protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+        super.writeNbt(nbt, registryLookup);
+        Inventories.writeNbt(nbt, this.inventory, registryLookup);
         nbt.putInt("BrewingTime", this.brewingTime);
         nbt.putInt("BrewingTimeTotal", this.brewingTimeTotal);
         NbtList nbtList = new NbtList();
@@ -123,19 +138,19 @@ public class CauldronCampfireBlockEntity extends BlockEntity implements RecipeUn
     }
 
     @Override
-    public Packet toUpdatePacket() {
+    public BlockEntityUpdateS2CPacket toUpdatePacket() {
         return BlockEntityUpdateS2CPacket.create(this);
     }
 
     @Override
-    public NbtCompound toInitialChunkDataNbt() {
+    public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registryLookup) {
         NbtCompound nbtCompound = new NbtCompound();
-        Inventories.writeNbt(nbtCompound, this.inventory, true);
+        Inventories.writeNbt(nbtCompound, this.inventory, registryLookup);
         return nbtCompound;
     }
 
-    public Optional<CoffeeBrewingRecipe> getRecipeFor(ItemStack... stacks) {
-        return this.matchGetter.getFirstMatch(new SimpleInventory(stacks), this.world);
+    public Optional<RecipeEntry<CoffeeBrewingRecipe>> getRecipeFor(ItemStack input, ItemStack reagent) {
+        return this.matchGetter.getFirstMatch(new CoffeeBrewingRecipeInput(input, reagent), this.world);
     }
 
     public ItemStack getStack(int slot) {
@@ -164,9 +179,9 @@ public class CauldronCampfireBlockEntity extends BlockEntity implements RecipeUn
 
     public void addReagent(@Nullable Entity user, ItemStack stack) {
         this.setStack(1, stack.copyWithCount(1));
-        Optional<CoffeeBrewingRecipe> optional;
+        Optional<RecipeEntry<CoffeeBrewingRecipe>> optional;
         if ((optional = getRecipeFor(this.getStack(0), stack)).isPresent()) {
-            this.brewingTimeTotal = optional.get().getBrewTime();
+            this.brewingTimeTotal = optional.get().value().getBrewTime();
         }
         this.getWorld().emitGameEvent(GameEvent.BLOCK_CHANGE, this.getPos(), GameEvent.Emitter.of(user, this.getCachedState()));
         this.updateListeners();
@@ -174,27 +189,17 @@ public class CauldronCampfireBlockEntity extends BlockEntity implements RecipeUn
 
     public boolean isBaseIngredient(ItemStack stack) {
         if (stack.isOf(Items.POTION)) {
-            return PotionUtil.getPotion(stack) == Potions.WATER;
+            return isOfWaterBottle(stack);
         }
-        return this.getWorld().getRecipeManager().listAllOfType(Caffeinated.COFFEE_BREWING).stream().anyMatch(coffeeBrewingRecipe -> coffeeBrewingRecipe.getIngredients().get(0).test(stack));
+        return this.getWorld().getRecipeManager().listAllOfType(CaffeinatedRecipeTypes.COFFEE_BREWING).stream().anyMatch(coffeeBrewingRecipe -> coffeeBrewingRecipe.value().getIngredients().get(0).test(stack));
     }
 
-    public boolean canBrewTogether(ItemStack stack, ItemStack stack2) {
-        return getRecipeFor(stack, stack2).isPresent() && (!stack.isOf(Items.POTION) || PotionUtil.getPotion(stack) == Potions.WATER);
+    public boolean canBrewTogether(ItemStack input, ItemStack reagent) {
+        return this.getRecipeFor(input, reagent).isPresent() && (!input.isOf(Items.POTION) || isOfWaterBottle(input));
     }
 
     public boolean hasReagent() {
         return !this.getStack(1).isEmpty();
-    }
-
-    public int getColor() {
-        if (this.getStack(0).isOf(Items.POTION)) {
-            return BiomeColors.getWaterColor(this.getWorld(), this.getPos());
-        }
-        if (this.getStack(0).isOf(CaffeinatedItems.BLACK_COFFEE_BOTTLE)) {
-            return 0x4A2E20;
-        }
-        return -1;
     }
 
     private void updateListeners() {
@@ -211,39 +216,29 @@ public class CauldronCampfireBlockEntity extends BlockEntity implements RecipeUn
     }
 
     public void dropExperienceForRecipesUsed(ServerPlayerEntity player) {
-        ArrayList<Recipe<?>> arrayList = new ArrayList<>();
-        for (Identifier identifier : this.recipesUsed) {
-            this.getWorld().getRecipeManager().get(identifier).ifPresent(arrayList::add);
+        ArrayList<RecipeEntry<?>> recipeEntries = new ArrayList<>();
+        for (Identifier recipeId : this.recipesUsed) {
+            this.getWorld().getRecipeManager().get(recipeId).ifPresent(recipeEntries::add);
         }
-        player.unlockRecipes(arrayList);
-        for (Recipe<?> recipe : arrayList) {
-            if (recipe == null) continue;
+        player.unlockRecipes(recipeEntries);
+        for (RecipeEntry<?> recipe : recipeEntries) {
+            if (recipe == null || !(recipe.value() instanceof CoffeeBrewingRecipe coffeeBrewingRecipe)) continue;
             player.onRecipeCrafted(recipe, this.inventory);
-            Caffeinated.BREW_COFFEE_CRITERION.trigger(player, recipe.getOutput(this.getWorld().getRegistryManager()));
-            dropExperience(player.getServerWorld(), player.getPos(), ((CoffeeBrewingRecipe) recipe).getExperience());
+            Caffeinated.BREW_COFFEE_CRITERION.trigger(player, coffeeBrewingRecipe.getResult(this.getWorld().getRegistryManager()));
+            dropExperience(player.getServerWorld(), player.getPos(), coffeeBrewingRecipe.getExperience());
         }
         this.recipesUsed.clear();
     }
 
-    private static void dropExperience(ServerWorld world, Vec3d pos, float experience) {
-        int i = MathHelper.floor(experience);
-        float f = MathHelper.fractionalPart(experience);
-        if (f != 0.0f && Math.random() < f) {
-            i++;
-        }
-        ExperienceOrbEntity.spawn(world, pos, i);
-    }
-
     @Override
-    public void setLastRecipe(@Nullable Recipe<?> recipe) {
-        if (recipe != null) {
-            this.recipesUsed.add(recipe.getId());
-        }
-    }
-
-    @Nullable
-    @Override
-    public Recipe<?> getLastRecipe() {
+    public RecipeEntry<?> getLastRecipe() {
         return null;
+    }
+
+    @Override
+    public void setLastRecipe(@Nullable RecipeEntry<?> recipe) {
+        if (recipe != null) {
+            this.recipesUsed.add(recipe.id());
+        }
     }
 }

@@ -1,23 +1,17 @@
-package com.chikoritalover.caffeinated.world;
+package net.chikorita_lover.caffeinated.world;
 
-import com.chikoritalover.caffeinated.Caffeinated;
-import com.chikoritalover.caffeinated.entity.CivetEntity;
-import com.chikoritalover.caffeinated.registry.CaffeinatedBiomeTags;
-import com.chikoritalover.caffeinated.registry.CaffeinatedEntities;
-import net.minecraft.SharedConstants;
+import net.chikorita_lover.caffeinated.Caffeinated;
+import net.chikorita_lover.caffeinated.entity.CivetEntity;
+import net.chikorita_lover.caffeinated.registry.CaffeinatedBiomeTags;
+import net.chikorita_lover.caffeinated.registry.CaffeinatedEntities;
 import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.SpawnRestriction;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.PointOfInterestTypeTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
@@ -25,19 +19,18 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.Heightmap;
-import net.minecraft.world.SpawnHelper;
 import net.minecraft.world.gen.structure.Structure;
 import net.minecraft.world.poi.PointOfInterestStorage;
 import net.minecraft.world.poi.PointOfInterestType;
-import net.minecraft.world.spawner.Spawner;
+import net.minecraft.world.spawner.SpecialSpawner;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-public class CivetSpawner implements Spawner {
+public class CivetSpawner implements SpecialSpawner {
     private static final int SPAWN_INTERVAL = 1200;
-    private static final TagKey<Structure> CIVETS_SPAWN_IN = TagKey.of(RegistryKeys.STRUCTURE, new Identifier(Caffeinated.MODID, "civets_spawn_in"));
+    private static final TagKey<Structure> CIVETS_SPAWN_IN = TagKey.of(RegistryKeys.STRUCTURE, Caffeinated.of("civets_spawn_in"));
     private int cooldown;
 
     private static BlockPos getRandomSpawnPos(ServerWorld world, ServerPlayerEntity playerEntity) {
@@ -90,8 +83,8 @@ public class CivetSpawner implements Spawner {
                 return 0;
             }
         } while (world.getBlockState(mutablePos).isOpaque() || !world.getBlockState(mutablePos.down()).isOpaque());
-        List<CivetEntity> list = world.getNonSpectatingEntities(CivetEntity.class, new Box(mutablePos).expand(16.0, 8.0, 16.0));
-        return list.isEmpty() ? spawn(mutablePos, world) : 0;
+        List<CivetEntity> entities = world.getNonSpectatingEntities(CivetEntity.class, new Box(mutablePos).expand(16.0, 8.0, 16.0));
+        return entities.isEmpty() ? spawn(mutablePos, world) : 0;
     }
 
     /**
@@ -100,17 +93,12 @@ public class CivetSpawner implements Spawner {
      * @return the number of civets spawned
      */
     private static int spawn(BlockPos pos, ServerWorld world) {
-        if (!SpawnHelper.canSpawn(SpawnRestriction.Location.ON_GROUND, world, pos, CaffeinatedEntities.CIVET)) {
-            return 0;
-        }
         CivetEntity civetEntity = CaffeinatedEntities.CIVET.create(world);
         if (civetEntity == null) {
             return 0;
         }
-        civetEntity.initialize(world, world.getLocalDifficulty(pos), SpawnReason.NATURAL, null, null);
+        civetEntity.initialize(world, world.getLocalDifficulty(pos), SpawnReason.NATURAL, null);
         civetEntity.refreshPositionAndAngles(pos, 0.0F, 0.0F);
-        if (!SharedConstants.isDevelopment)
-            civetEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 72000));
         world.spawnEntityAndPassengers(civetEntity);
         return 1;
     }

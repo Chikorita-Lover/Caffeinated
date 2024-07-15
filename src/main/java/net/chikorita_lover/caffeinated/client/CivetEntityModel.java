@@ -1,4 +1,4 @@
-package com.chikoritalover.caffeinated.client;
+package net.chikorita_lover.caffeinated.client;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.client.model.*;
@@ -32,10 +32,7 @@ public class CivetEntityModel<T extends Entity> extends AnimalModel<T> {
     public static TexturedModelData getTexturedModelData() {
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
-        modelPartData.addChild(EntityModelPartNames.HEAD, ModelPartBuilder.create().uv(0, 0).cuboid(-2.5F, -2.0F, -4.0F, 5.0F, 4.0F, 5.0F, new Dilation(0.0F))
-                .uv(0, 21).cuboid(-1.0F, 0.0F, -6.0F, 2.0F, 2.0F, 2.0F, new Dilation(0.0F))
-                .uv(0, 9).cuboid(-3.5F, -3.0F, -1.0F, 2.0F, 2.0F, 1.0F, new Dilation(0.0F))
-                .uv(0, 9).mirrored().cuboid(1.5F, -3.0F, -1.0F, 2.0F, 2.0F, 1.0F, new Dilation(0.0F)).mirrored(false), ModelTransform.pivot(0.0F, 17.5F, -7.0F));
+        modelPartData.addChild(EntityModelPartNames.HEAD, ModelPartBuilder.create().uv(0, 0).cuboid(-2.5F, -2.0F, -4.0F, 5.0F, 4.0F, 5.0F, new Dilation(0.0F)).uv(0, 21).cuboid(-1.0F, 0.0F, -6.0F, 2.0F, 2.0F, 2.0F, new Dilation(0.0F)).uv(0, 9).cuboid(-3.5F, -3.0F, -1.0F, 2.0F, 2.0F, 1.0F, new Dilation(0.0F)).uv(0, 9).mirrored().cuboid(1.5F, -3.0F, -1.0F, 2.0F, 2.0F, 1.0F, new Dilation(0.0F)).mirrored(false), ModelTransform.pivot(0.0F, 17.5F, -7.0F));
 
         modelPartData.addChild(EntityModelPartNames.BODY, ModelPartBuilder.create().uv(20, 0).cuboid(-2.5F, -6.0F, -3.5F, 5.0F, 13.0F, 4.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 17.0F, 0.0F, 1.5708F, 0.0F, 0.0F));
 

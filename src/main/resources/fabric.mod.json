@@ -22,7 +22,7 @@
   "environment": "*",
   "entrypoints": {
     "client": [
-      "net.chikorita_lover.caffeinated.CaffeinatedClient"
+      "net.chikorita_lover.caffeinated.client.CaffeinatedClient"
     ],
     "fabric-datagen": [
       "net.chikorita_lover.caffeinated.CaffeinatedDataGenerator"
@@ -31,7 +31,7 @@
       "net.chikorita_lover.caffeinated.Caffeinated"
     ],
     "mm:early_risers": [
-      "com.chikoritalover.caffeinated.CaffeinatedEarlyRiser"
+      "net.chikorita_lover.caffeinated.CaffeinatedEarlyRiser"
     ]
   },
   "mixins": [

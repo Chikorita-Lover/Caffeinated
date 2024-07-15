@@ -1,0 +1,14 @@
+{
+  "type": "caffeinated:coffee_brewing",
+  "brewingtime": 600,
+  "experience": 1.0,
+  "ingredient": {
+    "item": "minecraft:potion"
+  },
+  "reagent": {
+    "item": "caffeinated:ground_coffee"
+  },
+  "result": {
+    "id": "caffeinated:coffee_bottle"
+  }
+}

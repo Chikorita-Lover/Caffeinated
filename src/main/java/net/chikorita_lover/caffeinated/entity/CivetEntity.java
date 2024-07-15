@@ -1,11 +1,10 @@
-package com.chikoritalover.caffeinated.entity;
+package net.chikorita_lover.caffeinated.entity;
 
-import com.chikoritalover.caffeinated.registry.CaffeinatedBlockTags;
-import com.chikoritalover.caffeinated.registry.CaffeinatedEntities;
-import com.chikoritalover.caffeinated.registry.CaffeinatedItemTags;
-import com.chikoritalover.caffeinated.registry.CaffeinatedSoundEvents;
+import net.chikorita_lover.caffeinated.registry.CaffeinatedEntities;
+import net.chikorita_lover.caffeinated.registry.CaffeinatedSoundEvents;
+import net.chikorita_lover.caffeinated.registry.tag.CaffeinatedBlockTags;
+import net.chikorita_lover.caffeinated.registry.tag.CaffeinatedItemTags;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.*;
@@ -18,11 +17,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
@@ -65,13 +62,13 @@ public class CivetEntity extends AnimalEntity {
         return CaffeinatedEntities.CIVET.create(serverWorld);
     }
 
+    public static boolean canSpawn(EntityType<CivetEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        return world.getBlockState(pos.down()).isIn(CaffeinatedBlockTags.CIVETS_SPAWNABLE_ON) && isLightLevelValidForNaturalSpawn(world, pos);
+    }
+
     @Override
     public boolean isBreedingItem(ItemStack stack) {
         return BREEDING_INGREDIENT.test(stack);
-    }
-
-    public static boolean canSpawn(EntityType<CivetEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-        return world.getBlockState(pos.down()).isIn(CaffeinatedBlockTags.CIVETS_SPAWNABLE_ON);
     }
 
     @Override

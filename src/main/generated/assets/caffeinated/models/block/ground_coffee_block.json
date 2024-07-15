@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "caffeinated:block/ground_coffee_block"
+  }
+}

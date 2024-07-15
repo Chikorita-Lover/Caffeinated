@@ -1,25 +1,23 @@
-package com.chikoritalover.caffeinated.recipe;
+package net.chikorita_lover.caffeinated.recipe;
 
-import com.chikoritalover.caffeinated.Caffeinated;
-import com.google.gson.JsonObject;
 import net.minecraft.advancement.Advancement;
+import net.minecraft.advancement.AdvancementCriterion;
+import net.minecraft.advancement.AdvancementRequirements;
 import net.minecraft.advancement.AdvancementRewards;
-import net.minecraft.advancement.CriterionMerger;
-import net.minecraft.advancement.criterion.CriterionConditions;
 import net.minecraft.advancement.criterion.RecipeUnlockedCriterion;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
-import net.minecraft.data.server.recipe.RecipeJsonProvider;
-import net.minecraft.data.server.recipe.RecipeProvider;
+import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
+import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.book.RecipeCategory;
-import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.function.Consumer;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class CoffeeBrewingRecipeJsonBuilder implements CraftingRecipeJsonBuilder {
     private final RecipeCategory category;
@@ -28,12 +26,14 @@ public class CoffeeBrewingRecipeJsonBuilder implements CraftingRecipeJsonBuilder
     private final Ingredient reagent;
     private final float experience;
     private final int brewingTime;
-    private final Advancement.Builder advancementBuilder = Advancement.Builder.createUntelemetered();
+    private final Map<String, AdvancementCriterion<?>> criteria = new LinkedHashMap<>();
+    private final CoffeeBrewingRecipe.Serializer.RecipeFactory<?> recipeFactory;
     @Nullable
     private String group;
 
-    private CoffeeBrewingRecipeJsonBuilder(RecipeCategory category, ItemConvertible output, Ingredient input, Ingredient reagent, float experience, int brewingTime) {
+    private CoffeeBrewingRecipeJsonBuilder(RecipeCategory category, CoffeeBrewingRecipe.Serializer.RecipeFactory<?> recipeFactory, ItemConvertible output, Ingredient input, Ingredient reagent, float experience, int brewingTime) {
         this.category = category;
+        this.recipeFactory = recipeFactory;
         this.output = output.asItem();
         this.input = input;
         this.reagent = reagent;
@@ -42,18 +42,18 @@ public class CoffeeBrewingRecipeJsonBuilder implements CraftingRecipeJsonBuilder
     }
 
     public static CoffeeBrewingRecipeJsonBuilder create(Ingredient input, Ingredient reagent, RecipeCategory category, ItemConvertible output, float experience, int cookingTime) {
-        return new CoffeeBrewingRecipeJsonBuilder(category, output, input, reagent, experience, cookingTime);
+        return new CoffeeBrewingRecipeJsonBuilder(category, CoffeeBrewingRecipe::new, output, input, reagent, experience, cookingTime);
     }
 
     @Override
-    public CoffeeBrewingRecipeJsonBuilder criterion(String string, CriterionConditions criterionConditions) {
-        this.advancementBuilder.criterion(string, criterionConditions);
+    public CraftingRecipeJsonBuilder criterion(String name, AdvancementCriterion<?> criterion) {
+        this.criteria.put(name, criterion);
         return this;
     }
 
     @Override
-    public CoffeeBrewingRecipeJsonBuilder group(@Nullable String string) {
-        this.group = string;
+    public CoffeeBrewingRecipeJsonBuilder group(@Nullable String group) {
+        this.group = group;
         return this;
     }
 
@@ -63,85 +63,17 @@ public class CoffeeBrewingRecipeJsonBuilder implements CraftingRecipeJsonBuilder
     }
 
     @Override
-    public void offerTo(Consumer<RecipeJsonProvider> exporter, Identifier recipeId) {
+    public void offerTo(RecipeExporter exporter, Identifier recipeId) {
         this.validate(recipeId);
-        this.advancementBuilder.parent(ROOT).criterion("has_the_recipe", RecipeUnlockedCriterion.create(recipeId)).rewards(AdvancementRewards.Builder.recipe(recipeId)).criteriaMerger(CriterionMerger.OR);
-        exporter.accept(new CoffeeBrewingRecipeJsonBuilder.CoffeeBrewingRecipeJsonProvider(recipeId, this.group == null ? "" : this.group, this.input, this.reagent, this.output, this.experience, this.brewingTime, this.advancementBuilder, recipeId.withPrefixedPath("recipes/" + this.category.getName() + "/")));
+        Advancement.Builder builder = exporter.getAdvancementBuilder().criterion("has_the_recipe", RecipeUnlockedCriterion.create(recipeId)).rewards(AdvancementRewards.Builder.recipe(recipeId)).criteriaMerger(AdvancementRequirements.CriterionMerger.OR);
+        this.criteria.forEach(builder::criterion);
+        CoffeeBrewingRecipe recipe = this.recipeFactory.create(Objects.requireNonNullElse(this.group, ""), this.input, this.reagent, new ItemStack(this.output), this.experience, this.brewingTime);
+        exporter.accept(recipeId, recipe, builder.build(recipeId.withPrefixedPath("recipes/" + this.category.getName() + "/")));
     }
 
     private void validate(Identifier recipeId) {
-        if (this.advancementBuilder.getCriteria().isEmpty()) {
+        if (this.criteria.isEmpty()) {
             throw new IllegalStateException("No way of obtaining recipe " + recipeId);
-        }
-    }
-
-    @Override
-    public void offerTo(Consumer<RecipeJsonProvider> exporter, String recipePath) {
-        Identifier identifier2 = new Identifier(Caffeinated.MODID, recipePath);
-        Identifier identifier = CraftingRecipeJsonBuilder.getItemId(this.getOutputItem());
-        if (identifier2.equals(identifier)) {
-            throw new IllegalStateException("Recipe " + recipePath + " should remove its 'save' argument as it is equal to default one");
-        }
-        this.offerTo(exporter, identifier2);
-    }
-
-    static class CoffeeBrewingRecipeJsonProvider implements RecipeJsonProvider {
-        private final Identifier recipeId;
-        private final String group;
-        private final Ingredient input;
-        private final Ingredient reagent;
-        private final Item result;
-        private final float experience;
-        private final int brewingtime;
-        private final Advancement.Builder advancementBuilder;
-        private final Identifier advancementId;
-        private final RecipeSerializer<CoffeeBrewingRecipe> serializer;
-
-        public CoffeeBrewingRecipeJsonProvider(Identifier recipeId, String group, Ingredient input, Ingredient reagent, Item result, float experience, int brewingTime, Advancement.Builder advancementBuilder, Identifier advancementId) {
-            this.recipeId = recipeId;
-            this.group = group;
-            this.input = input;
-            this.reagent = reagent;
-            this.result = result;
-            this.experience = experience;
-            this.brewingtime = brewingTime;
-            this.advancementBuilder = advancementBuilder;
-            this.advancementId = advancementId;
-            this.serializer = Caffeinated.COFFEE_BREWING_SERIALIZER;
-        }
-
-        @Override
-        public void serialize(JsonObject json) {
-            if (!this.group.isEmpty()) {
-                json.addProperty("group", this.group);
-            }
-            json.add("ingredient", this.input.toJson());
-            json.add("reagent", this.reagent.toJson());
-            json.addProperty("result", Registries.ITEM.getId(this.result).toString());
-            json.addProperty("experience", this.experience);
-            json.addProperty("brewingtime", this.brewingtime);
-        }
-
-        @Override
-        public RecipeSerializer<?> getSerializer() {
-            return this.serializer;
-        }
-
-        @Override
-        public Identifier getRecipeId() {
-            return this.recipeId;
-        }
-
-        @Override
-        @Nullable
-        public JsonObject toAdvancementJson() {
-            return this.advancementBuilder.toJson();
-        }
-
-        @Override
-        @Nullable
-        public Identifier getAdvancementId() {
-            return this.advancementId;
         }
     }
 }

@@ -1,7 +1,7 @@
-package com.chikoritalover.caffeinated;
+package net.chikorita_lover.caffeinated;
 
-import com.chikoritalover.caffeinated.registry.CaffeinatedItems;
 import com.chocohead.mm.api.ClassTinkerers;
+import net.chikorita_lover.caffeinated.registry.CaffeinatedItems;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.MappingResolver;
 import net.minecraft.item.ItemStack;

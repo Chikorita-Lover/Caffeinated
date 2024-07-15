@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_black_coffee_bottle": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#caffeinated:black_coffee_bottles"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "caffeinated:tiramisu"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_black_coffee_bottle"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "caffeinated:tiramisu"
+    ]
+  }
+}

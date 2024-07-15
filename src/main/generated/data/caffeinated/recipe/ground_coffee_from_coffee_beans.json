@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "ground_coffee",
+  "key": {
+    "#": {
+      "item": "caffeinated:coffee_beans"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "caffeinated:ground_coffee"
+  }
+}

@@ -1,6 +1,6 @@
-package com.chikoritalover.caffeinated.item;
+package net.chikorita_lover.caffeinated.item;
 
-import com.chikoritalover.caffeinated.registry.CaffeinatedStatusEffects;
+import net.chikorita_lover.caffeinated.registry.CaffeinatedStatusEffects;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.ItemStack;
@@ -17,9 +17,9 @@ public class LatteCoffeeBottleItem extends CoffeeBottleItem {
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
         stack = super.finishUsing(stack, world, user);
         if (!world.isClient()) {
-            ArrayList<StatusEffectInstance> arrayList = new ArrayList<>(user.getStatusEffects());
+            ArrayList<StatusEffectInstance> statusEffects = new ArrayList<>(user.getStatusEffects());
             user.clearStatusEffects();
-            for (StatusEffectInstance effect : arrayList) {
+            for (StatusEffectInstance effect : statusEffects) {
                 if (effect.getEffectType() == CaffeinatedStatusEffects.CAFFEINE) {
                     user.addStatusEffect(effect);
                 } else if (effect.getAmplifier() > 0) {

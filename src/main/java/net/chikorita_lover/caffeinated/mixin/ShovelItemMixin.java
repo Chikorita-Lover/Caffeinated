@@ -1,8 +1,9 @@
-package com.chikoritalover.caffeinated.mixin;
+package net.chikorita_lover.caffeinated.mixin;
 
-import com.chikoritalover.caffeinated.block.CauldronCampfireBlock;
+import net.chikorita_lover.caffeinated.block.CauldronCampfireBlock;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.CampfireBlock;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.ShovelItem;
@@ -10,6 +11,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldEvents;
 import net.minecraft.world.event.GameEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -21,33 +23,29 @@ public class ShovelItemMixin {
     @Inject(method = "useOnBlock", at = @At("HEAD"), cancellable = true)
     public void useOnBlock(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir) {
         World world = context.getWorld();
-        BlockPos blockPos = context.getBlockPos();
-        BlockState blockState = world.getBlockState(blockPos);
+        BlockPos pos = context.getBlockPos();
+        BlockState state = world.getBlockState(pos);
         if (context.getSide() == Direction.DOWN) {
             cir.setReturnValue(ActionResult.PASS);
         } else {
-            BlockState blockState2 = null;
-            if (blockState.getBlock() instanceof CauldronCampfireBlock && blockState.get(CauldronCampfireBlock.LIT)) {
+            BlockState state2 = null;
+            if (state.getBlock() instanceof CauldronCampfireBlock && state.get(CauldronCampfireBlock.LIT)) {
                 if (!world.isClient()) {
-                    world.syncWorldEvent(null, 1009, blockPos, 0);
+                    world.syncWorldEvent(null, WorldEvents.FIRE_EXTINGUISHED, pos, 0);
                 }
-
-                CauldronCampfireBlock.extinguish(context.getPlayer(), world, blockPos, blockState);
-                blockState2 = blockState.with(CauldronCampfireBlock.LIT, false);
+                CauldronCampfireBlock.extinguish(context.getPlayer(), world, pos, state);
+                state2 = state.with(CauldronCampfireBlock.LIT, false);
             }
 
-            if (blockState2 != null) {
-                if (!world.isClient) {
-                    PlayerEntity playerEntity = context.getPlayer();
-                    world.setBlockState(blockPos, blockState2, 11);
-                    world.emitGameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Emitter.of(playerEntity, blockState2));
-                    if (playerEntity != null) {
-                        context.getStack().damage(1, playerEntity, (p) -> {
-                            p.sendToolBreakStatus(context.getHand());
-                        });
+            if (state2 != null) {
+                if (!world.isClient()) {
+                    PlayerEntity player = context.getPlayer();
+                    world.setBlockState(pos, state2, Block.NOTIFY_ALL_AND_REDRAW);
+                    world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(player, state2));
+                    if (player != null) {
+                        context.getStack().damage(1, player, LivingEntity.getSlotForHand(context.getHand()));
                     }
                 }
-
                 cir.setReturnValue(ActionResult.success(world.isClient()));
             }
         }

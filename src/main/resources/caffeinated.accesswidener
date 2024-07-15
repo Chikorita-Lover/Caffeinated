@@ -2,5 +2,9 @@ accessWidener	v1	named
 
 accessible class net/minecraft/entity/passive/BeeEntity$GrowCropsGoal
 accessible field net/minecraft/block/CampfireBlock emitsParticles Z
-accessible field net/minecraft/loot/LootTable$Builder pools Ljava/util/List;
 accessible method net/minecraft/data/client/Models item (Ljava/lang/String;[Lnet/minecraft/data/client/TextureKey;)Lnet/minecraft/data/client/Model;
+accessible field net/minecraft/loot/LootTable$Builder pools Lcom/google/common/collect/ImmutableList$Builder;
+mutable field net/minecraft/loot/LootTable$Builder pools Lcom/google/common/collect/ImmutableList$Builder;
+accessible field net/minecraft/loot/entry/ItemEntry item Lnet/minecraft/registry/entry/RegistryEntry;
+accessible field net/minecraft/loot/LootPool$Builder entries Lcom/google/common/collect/ImmutableList$Builder;
+mutable field net/minecraft/loot/LootPool$Builder entries Lcom/google/common/collect/ImmutableList$Builder;

@@ -1,6 +1,9 @@
-package net.chikorita_lover.caffeinated;
+package net.chikorita_lover.caffeinated.client;
 
+import net.chikorita_lover.caffeinated.Caffeinated;
+import net.chikorita_lover.caffeinated.block.CauldronCampfireBlock;
 import net.chikorita_lover.caffeinated.registry.CaffeinatedBlocks;
+import net.chikorita_lover.caffeinated.registry.CaffeinatedEntities;
 import net.chikorita_lover.caffeinated.registry.CaffeinatedParticleTypes;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -13,10 +16,9 @@ import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.particle.BubblePopParticle;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
-import net.minecraft.util.Identifier;
 
 public class CaffeinatedClient implements ClientModInitializer {
-    public static EntityModelLayer MODEL_CIVET_LAYER = new EntityModelLayer(new Identifier(Caffeinated.MODID, "civet"), "main");
+    public static EntityModelLayer MODEL_CIVET_LAYER = new EntityModelLayer(Caffeinated.of("civet"), "main");
 
     @Override
     public void onInitializeClient() {
@@ -26,12 +28,7 @@ public class CaffeinatedClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(CaffeinatedBlocks.CAULDRON_CAMPFIRE, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(CaffeinatedBlocks.SOUL_CAULDRON_CAMPFIRE, RenderLayer.getCutout());
 
-        ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> {
-            if (world == null || pos == null || world.getBlockEntity(pos) == null) {
-                return BiomeColors.getWaterColor(world, pos);
-            }
-            return ((CauldronCampfireBlockEntity) world.getBlockEntity(pos)).getColor();
-        }, CauldronCampfireBlock.CAMPFIRE_TO_CAULDRON_CAMPFIRE.values().toArray(new Block[0]));
+        ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> BiomeColors.getWaterColor(world, pos), CauldronCampfireBlock.CAMPFIRE_TO_CAULDRON_CAMPFIRE.values().toArray(new Block[0]));
 
         EntityModelLayerRegistry.registerModelLayer(MODEL_CIVET_LAYER, CivetEntityModel::getTexturedModelData);
 

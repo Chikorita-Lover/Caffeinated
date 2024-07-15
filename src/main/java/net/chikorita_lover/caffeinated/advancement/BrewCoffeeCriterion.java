@@ -1,52 +1,37 @@
-package com.chikoritalover.caffeinated.advancement;
+package net.chikorita_lover.caffeinated.advancement;
 
-import com.chikoritalover.caffeinated.Caffeinated;
-import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.chikorita_lover.caffeinated.Caffeinated;
+import net.minecraft.advancement.AdvancementCriterion;
 import net.minecraft.advancement.criterion.AbstractCriterion;
-import net.minecraft.advancement.criterion.AbstractCriterionConditions;
 import net.minecraft.item.ItemStack;
-import net.minecraft.predicate.entity.AdvancementEntityPredicateDeserializer;
-import net.minecraft.predicate.entity.AdvancementEntityPredicateSerializer;
+import net.minecraft.predicate.entity.EntityPredicate;
 import net.minecraft.predicate.entity.LootContextPredicate;
 import net.minecraft.predicate.item.ItemPredicate;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.Identifier;
+
+import java.util.Optional;
 
 public class BrewCoffeeCriterion extends AbstractCriterion<BrewCoffeeCriterion.Conditions> {
-    static final Identifier ID = new Identifier(Caffeinated.MODID, "brew_coffee");
-
-    @Override
-    protected Conditions conditionsFromJson(JsonObject obj, LootContextPredicate playerPredicate, AdvancementEntityPredicateDeserializer predicateDeserializer) {
-        ItemPredicate itemPredicate = ItemPredicate.fromJson(obj.get("item"));
-        return new Conditions(playerPredicate, itemPredicate);
-    }
-
-    @Override
-    public Identifier getId() {
-        return ID;
+    public Codec<Conditions> getConditionsCodec() {
+        return BrewCoffeeCriterion.Conditions.CODEC;
     }
 
     public void trigger(ServerPlayerEntity player, ItemStack stack) {
-        this.trigger(player, conditions -> conditions.matches(stack));
+        this.trigger(player, (conditions) -> conditions.matches(stack));
     }
 
-    public static class Conditions extends AbstractCriterionConditions {
-        private final ItemPredicate itemPredicate;
+    public record Conditions(Optional<LootContextPredicate> player,
+                             ItemPredicate predicate) implements AbstractCriterion.Conditions {
+        public static final Codec<BrewCoffeeCriterion.Conditions> CODEC = RecordCodecBuilder.create((instance) -> instance.group(EntityPredicate.LOOT_CONTEXT_PREDICATE_CODEC.optionalFieldOf("player").forGetter(BrewCoffeeCriterion.Conditions::player), ItemPredicate.CODEC.fieldOf("result").forGetter(Conditions::predicate)).apply(instance, Conditions::new));
 
-        public Conditions(LootContextPredicate player, ItemPredicate item) {
-            super(ID, player);
-            this.itemPredicate = item;
+        public static AdvancementCriterion<BrewCoffeeCriterion.Conditions> create(ItemPredicate.Builder builder) {
+            return Caffeinated.BREW_COFFEE_CRITERION.create(new BrewCoffeeCriterion.Conditions(Optional.empty(), builder.build()));
         }
 
         public boolean matches(ItemStack stack) {
-            return this.itemPredicate.test(stack);
-        }
-
-        @Override
-        public JsonObject toJson(AdvancementEntityPredicateSerializer predicateSerializer) {
-            JsonObject jsonObject = super.toJson(predicateSerializer);
-            jsonObject.add("item", this.itemPredicate.toJson());
-            return jsonObject;
+            return this.predicate.test(stack);
         }
     }
 }

@@ -1,5 +1,6 @@
-package com.chikoritalover.caffeinated.mixin;
+package net.chikorita_lover.caffeinated.mixin;
 
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.data.server.recipe.CookingRecipeJsonBuilder;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.recipe.AbstractCookingRecipe;
@@ -15,7 +16,7 @@ public class CookingRecipeJsonBuilderMixin {
     @Inject(method = "getCookingRecipeCategory", at = @At("HEAD"), cancellable = true)
     private static void getCookingRecipeCategory(RecipeSerializer<? extends AbstractCookingRecipe> serializer, ItemConvertible output, CallbackInfoReturnable<CookingRecipeCategory> cir) {
         if (serializer == RecipeSerializer.SMOKING || serializer == RecipeSerializer.CAMPFIRE_COOKING) {
-            cir.setReturnValue(output.asItem().isFood() ? CookingRecipeCategory.FOOD : CookingRecipeCategory.MISC);
+            cir.setReturnValue(output.asItem().getComponents().contains(DataComponentTypes.FOOD) ? CookingRecipeCategory.FOOD : CookingRecipeCategory.MISC);
         }
     }
 }

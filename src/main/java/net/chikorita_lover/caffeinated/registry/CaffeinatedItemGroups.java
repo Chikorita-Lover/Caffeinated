@@ -1,33 +1,26 @@
-package com.chikoritalover.caffeinated.registry;
+package net.chikorita_lover.caffeinated.registry;
 
-import com.chikoritalover.caffeinated.Caffeinated;
+import net.chikorita_lover.caffeinated.Caffeinated;
+import net.chikorita_lover.caffeinated.block.CauldronCampfireBlock;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.CampfireBlock;
 import net.minecraft.item.*;
-import net.minecraft.potion.PotionUtil;
-import net.minecraft.potion.Potions;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
 
 import java.util.Set;
 
 public class CaffeinatedItemGroups {
-    private static final RegistryKey<ItemGroup> CAFFEINATED = RegistryKey.of(RegistryKeys.ITEM_GROUP, new Identifier(Caffeinated.MODID, "caffeinated"));
+    private static final RegistryKey<ItemGroup> CAFFEINATED = RegistryKey.of(RegistryKeys.ITEM_GROUP, Caffeinated.of("caffeinated"));
 
     public static void register() {
-        Registry.register(Registries.ITEM_GROUP, CAFFEINATED, FabricItemGroup.builder()
-                .displayName(Text.translatable("itemGroup.caffeinated.caffeinated"))
-                .icon(CaffeinatedItems.BLACK_COFFEE_BOTTLE::getDefaultStack)
-                .build()
-        );
+        Registry.register(Registries.ITEM_GROUP, CAFFEINATED, FabricItemGroup.builder().displayName(Text.translatable("itemGroup.caffeinated.caffeinated")).icon(CaffeinatedItems.BLACK_COFFEE_BOTTLE::getDefaultStack).build());
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.NATURAL).register(entries -> {
             entries.addBefore(Items.NETHER_WART, CaffeinatedItems.COFFEE_BERRIES);
@@ -54,7 +47,6 @@ public class CaffeinatedItemGroups {
             entries.add(CaffeinatedBlocks.GROUND_COFFEE_BLOCK, visibility);
             registerCampfiresCauldron(entries, visibility);
             entries.add(Items.GLASS_BOTTLE, visibility);
-            entries.add(PotionUtil.setPotion(Items.POTION.getDefaultStack(), Potions.WATER), visibility);
             entries.add(CaffeinatedItems.BLACK_COFFEE_BOTTLE, visibility);
             entries.add(CaffeinatedItems.LATTE_COFFEE_BOTTLE, visibility);
             entries.add(CaffeinatedBlocks.TIRAMISU, visibility);
@@ -66,9 +58,9 @@ public class CaffeinatedItemGroups {
 
     private static void registerCampfiresCauldron(FabricItemGroupEntries entries, ItemGroup.StackVisibility visibility) {
         Set<ItemStack> set = ItemStackSet.create();
-        for (Block block : Registries.BLOCK.stream().filter(block -> block instanceof CampfireBlock).toList()) {
-            ItemStack itemStack = block.asItem().getDefaultStack();
-            set.add(itemStack);
+        for (Block block : CauldronCampfireBlock.CAMPFIRE_TO_CAULDRON_CAMPFIRE.keySet()) {
+            ItemStack stack = block.asItem().getDefaultStack();
+            set.add(stack);
         }
         set.add(Items.CAULDRON.getDefaultStack());
         entries.addAll(set, visibility);
