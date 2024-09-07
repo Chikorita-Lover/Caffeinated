@@ -69,5 +69,16 @@ public class CaffeinatedItems {
             entries.addAfter(Items.WHEAT, COFFEE_BEANS, GROUND_COFFEE);
             entries.addAfter(Items.PIGLIN_BANNER_PATTERN, JAVA_BANNER_PATTERN);
         });
+        ItemGroupEvents.MODIFY_ENTRIES_ALL.register((group, entries) -> {
+            final String farmersDelight = "farmersdelight";
+            if (Registries.ITEM_GROUP.getId(group).equals(Identifier.of(farmersDelight, farmersDelight))) {
+                for (ItemStack stack : entries.getDisplayStacks()) {
+                    if (Registries.ITEM.getId(stack.getItem()).equals(Identifier.of(farmersDelight, "carrot_crate"))) {
+                        entries.addBefore(stack, CaffeinatedBlocks.COFFEE_BERRY_CRATE);
+                        break;
+                    }
+                }
+            }
+        });
     }
 }

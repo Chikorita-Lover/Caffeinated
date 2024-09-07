@@ -9,11 +9,11 @@
   ],
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_coffee_berries": {
+    "has_coffee_berry_crate": {
       "conditions": {
         "items": [
           {
-            "items": "caffeinated:coffee_berries"
+            "items": "caffeinated:coffee_berry_crate"
           }
         ]
       },
@@ -21,7 +21,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:coffee_berry_crate"
+        "recipe": "caffeinated:coffee_berries_from_crate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -29,12 +29,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_coffee_berries"
+      "has_coffee_berry_crate"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:coffee_berry_crate"
+      "caffeinated:coffee_berries_from_crate"
     ]
   }
 }

@@ -22,18 +22,18 @@ public class CaffeinatedRecipeProvider extends FabricRecipeProvider {
         super(output, registriesFuture);
     }
 
-    private static void offerReversibleCompactingRecipes(RecipeExporter exporter, ItemConvertible input, ItemConvertible compacted, String compactingRecipeName, @Nullable String compactingRecipeGroup, String reverseRecipeName, @Nullable String reverseRecipeGroup) {
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, input, 9).input(compacted).group(reverseRecipeGroup).criterion(hasItem(compacted), conditionsFromItem(compacted)).offerTo(exporter, Caffeinated.of(reverseRecipeName));
-        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, compacted).input('#', input).pattern("###").pattern("###").pattern("###").group(compactingRecipeGroup).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, Caffeinated.of(compactingRecipeName));
+    public static void offerReversibleCompactingRecipes(RecipeExporter exporter, RecipeCategory reverseCategory, ItemConvertible input, RecipeCategory compactCategory, ItemConvertible compacted, String compactingRecipeName, @Nullable String compactingRecipeGroup, String reverseRecipeName, @Nullable String reverseRecipeGroup) {
+        ShapelessRecipeJsonBuilder.create(reverseCategory, input, 9).input(compacted).group(reverseRecipeGroup).criterion(hasItem(compacted), conditionsFromItem(compacted)).offerTo(exporter, Caffeinated.of(reverseRecipeName));
+        ShapedRecipeJsonBuilder.create(compactCategory, compacted).input('#', input).pattern("###").pattern("###").pattern("###").group(compactingRecipeGroup).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, Caffeinated.of(compactingRecipeName));
     }
 
     @Override
     public void generate(RecipeExporter exporter) {
         final RecipeExporter farmersDelightExporter = this.withConditions(exporter, ResourceConditions.allModsLoaded("farmersdelight"));
 
-        offerReversibleCompactingRecipes(exporter, CaffeinatedItems.COFFEE_BEANS, CaffeinatedBlocks.COFFEE_BEAN_BLOCK, "coffee_bean_block", null, "coffee_beans_from_block", "coffee_beans");
-        offerReversibleCompactingRecipes(exporter, CaffeinatedItems.GROUND_COFFEE, CaffeinatedBlocks.GROUND_COFFEE_BLOCK, "ground_coffee_block", null, "ground_coffee_from_block", "ground_coffee");
-        offerReversibleCompactingRecipes(farmersDelightExporter, RecipeCategory.FOOD, CaffeinatedItems.COFFEE_BERRIES, RecipeCategory.DECORATIONS, CaffeinatedBlocks.COFFEE_BERRY_CRATE);
+        offerReversibleCompactingRecipes(exporter, RecipeCategory.MISC, CaffeinatedItems.COFFEE_BEANS, RecipeCategory.BUILDING_BLOCKS, CaffeinatedBlocks.COFFEE_BEAN_BLOCK, "coffee_bean_block", null, "coffee_beans_from_block", "coffee_beans");
+        offerReversibleCompactingRecipes(exporter, RecipeCategory.MISC, CaffeinatedItems.GROUND_COFFEE, RecipeCategory.BUILDING_BLOCKS, CaffeinatedBlocks.GROUND_COFFEE_BLOCK, "ground_coffee_block", null, "ground_coffee_from_block", "ground_coffee");
+        offerReversibleCompactingRecipes(farmersDelightExporter, RecipeCategory.FOOD, CaffeinatedItems.COFFEE_BERRIES, RecipeCategory.BUILDING_BLOCKS, CaffeinatedBlocks.COFFEE_BERRY_CRATE, "coffee_berry_crate", null, "coffee_berries_from_crate", null);
 
         ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, CaffeinatedItems.COFFEE_BEANS).input(CaffeinatedItems.COFFEE_BERRIES).group("coffee_beans").criterion(hasItem(CaffeinatedItems.COFFEE_BERRIES), conditionsFromItem(CaffeinatedItems.COFFEE_BERRIES)).offerTo(exporter, Caffeinated.of("coffee_beans_from_coffee_berries"));
 
