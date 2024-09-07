@@ -8,7 +8,7 @@
     }
   ],
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
+  "category": "building",
   "key": {
     "#": {
       "item": "caffeinated:coffee_berries"

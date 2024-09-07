@@ -4,21 +4,17 @@ import net.chikorita_lover.caffeinated.Caffeinated;
 import net.chikorita_lover.caffeinated.recipe.CoffeeBrewingRecipeJsonBuilder;
 import net.chikorita_lover.caffeinated.registry.CaffeinatedBlocks;
 import net.chikorita_lover.caffeinated.registry.CaffeinatedItems;
-import net.chikorita_lover.caffeinated.registry.tag.CaffeinatedItemTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditions;
-import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.data.server.recipe.CookingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
-import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
