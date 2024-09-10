@@ -1,4 +1,4 @@
-// 1.21	2024-09-07T13:34:20.4716276	Caffeinated/Recipes
+// 1.21	2024-09-09T19:53:17.0439243	Caffeinated/Recipes
 c773cd5c995b67602b5f054f551a8f5d6f33d139 data\caffeinated\advancement\recipes\misc\coffee_beans.json
 c9b5cb066d0fab702915da1774fdd48fcbc57229 data\caffeinated\advancement\recipes\misc\coffee_beans_from_smoking.json
 6061a7a2ef7b2febcca08d801ffce55d131fda2b data\caffeinated\recipe\tiramisu_from_slices.json
@@ -9,6 +9,7 @@ afc5ab486779e47ce326b86ef93037905639d03a data\caffeinated\recipe\coffee_beans_fr
 51cbbbc43481615db699ce0878398bb475466f96 data\caffeinated\advancement\recipes\building_blocks\ground_coffee_block.json
 31f69cf23ef6a168c6d98a8fef731d470bcbb187 data\caffeinated\recipe\coffee_berries.json
 081e951942029c81b7edec2c02074e4b47d00d3d data\caffeinated\recipe\ground_coffee_from_coffee_beans.json
+07496d1ed8ed6ef8fda02b6606436108c59fbf43 data\caffeinated\advancement\recipes\food\cafe_miel_coffee_bottle.json
 5dc445d11ac1091b47d0393e020f2644f701cd29 data\caffeinated\recipe\coffee_berry_crate.json
 ba81552d4ee1d9d568b84f786de61e415fdb157e data\caffeinated\recipe\latte_coffee_bottle.json
 b3d10b49b978d96c244fb776e1292f0b3f9c272b data\caffeinated\recipe\brown_dye_from_ground_coffee.json
@@ -22,6 +23,7 @@ a3089cb10cc080957830e10d1b276e6fb8e2845c data\caffeinated\advancement\recipes\fo
 1410b08380530f562102b9d54fde26a7163b2256 data\caffeinated\advancement\recipes\food\latte_coffee_bottle.json
 145d4111298037135c323e1347f67b3871daaa3e data\caffeinated\recipe\java_banner_pattern.json
 fd6bc1e87eab4e2bccc5d198e5bca2730df804db data\caffeinated\recipe\coffee_beans_from_campfire_cooking.json
+cf353bc3103b1834f861ecb7a2da0ae56550bb65 data\caffeinated\recipe\cafe_miel_coffee_bottle.json
 514280f7d04586c23693c1dae8cf30241a810a24 data\caffeinated\advancement\recipes\building_blocks\coffee_berry_crate.json
 e1d9fbf68af558ba9d59fc35535075266be4d5fe data\caffeinated\recipe\tiramisu.json
 d4cb036e5e2675e9ddf086c9a38c979f07b2648e data\caffeinated\advancement\recipes\food\tiramisu.json

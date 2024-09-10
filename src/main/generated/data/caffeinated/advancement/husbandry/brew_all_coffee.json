@@ -1,6 +1,14 @@
 {
   "parent": "caffeinated:husbandry/brew_coffee",
   "criteria": {
+    "brew_cafe_miel_coffee_bottle": {
+      "conditions": {
+        "result": {
+          "items": "caffeinated:cafe_miel_coffee_bottle"
+        }
+      },
+      "trigger": "caffeinated:brew_coffee"
+    },
     "brew_coffee_bottle": {
       "conditions": {
         "result": {
@@ -37,6 +45,9 @@
     ],
     [
       "brew_latte_coffee_bottle"
+    ],
+    [
+      "brew_cafe_miel_coffee_bottle"
     ]
   ],
   "rewards": {

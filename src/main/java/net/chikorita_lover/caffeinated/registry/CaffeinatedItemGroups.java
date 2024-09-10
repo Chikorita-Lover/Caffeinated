@@ -30,7 +30,7 @@ public class CaffeinatedItemGroups {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(entries -> {
             entries.addBefore(Items.SWEET_BERRIES, CaffeinatedItems.COFFEE_BERRIES);
             entries.addBefore(Items.ROTTEN_FLESH, CaffeinatedBlocks.TIRAMISU);
-            entries.addBefore(Items.OMINOUS_BOTTLE, CaffeinatedItems.BLACK_COFFEE_BOTTLE, CaffeinatedItems.LATTE_COFFEE_BOTTLE);
+            entries.addBefore(Items.OMINOUS_BOTTLE, CaffeinatedItems.BLACK_COFFEE_BOTTLE, CaffeinatedItems.LATTE_COFFEE_BOTTLE, CaffeinatedItems.CAFE_MIEL_COFFEE_BOTTLE);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
             entries.addAfter(Items.WHEAT, CaffeinatedItems.COFFEE_BEANS, CaffeinatedItems.GROUND_COFFEE);
@@ -50,6 +50,7 @@ public class CaffeinatedItemGroups {
             entries.add(Items.GLASS_BOTTLE, parentTabOnly);
             entries.add(CaffeinatedItems.BLACK_COFFEE_BOTTLE, parentTabOnly);
             entries.add(CaffeinatedItems.LATTE_COFFEE_BOTTLE, parentTabOnly);
+            entries.add(CaffeinatedItems.CAFE_MIEL_COFFEE_BOTTLE, parentTabOnly);
             entries.add(CaffeinatedBlocks.TIRAMISU, parentTabOnly);
             entries.add(CaffeinatedItems.JAVA_BANNER_PATTERN, parentTabOnly);
             entries.add(CaffeinatedItems.CIVET_SPAWN_EGG, parentTabOnly);

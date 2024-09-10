@@ -48,5 +48,6 @@ public class CaffeinatedRecipeProvider extends FabricRecipeProvider {
 
         CoffeeBrewingRecipeJsonBuilder.create(Ingredient.ofItems(Items.POTION), Ingredient.ofItems(CaffeinatedItems.GROUND_COFFEE), RecipeCategory.FOOD, CaffeinatedItems.BLACK_COFFEE_BOTTLE, 1.0F, 600).criterion(hasItem(CaffeinatedItems.GROUND_COFFEE), conditionsFromItem(CaffeinatedItems.GROUND_COFFEE)).offerTo(exporter);
         CoffeeBrewingRecipeJsonBuilder.create(Ingredient.fromTag(CaffeinatedItemTags.BLACK_COFFEE_BOTTLES), Ingredient.fromTag(ConventionalItemTags.MILK_BUCKETS), RecipeCategory.FOOD, CaffeinatedItems.LATTE_COFFEE_BOTTLE, 1.0F, 600).criterion(hasItem(Items.MILK_BUCKET), conditionsFromTag(ConventionalItemTags.MILK_BUCKETS)).offerTo(exporter);
+        CoffeeBrewingRecipeJsonBuilder.create(Ingredient.fromTag(CaffeinatedItemTags.BLACK_COFFEE_BOTTLES), Ingredient.ofItems(Items.HONEY_BOTTLE), RecipeCategory.FOOD, CaffeinatedItems.CAFE_MIEL_COFFEE_BOTTLE, 1.0F, 600).criterion(hasItem(Items.HONEY_BOTTLE), conditionsFromItem(Items.HONEY_BOTTLE)).offerTo(exporter);
     }
 }

@@ -75,13 +75,14 @@ public class CaffeinatedModelProvider extends FabricModelProvider {
     }
 
     @Override
-    public void generateItemModels(ItemModelGenerator itemModelGenerator) {
-        itemModelGenerator.register(CaffeinatedItems.BLACK_COFFEE_BOTTLE, Models.GENERATED);
-        itemModelGenerator.register(CaffeinatedItems.LATTE_COFFEE_BOTTLE, Models.GENERATED);
-        itemModelGenerator.register(CaffeinatedItems.TIRAMISU_SLICE, Models.GENERATED);
-        itemModelGenerator.register(CaffeinatedItems.COFFEE_BEANS, Models.GENERATED);
-        itemModelGenerator.register(CaffeinatedItems.GROUND_COFFEE, Models.GENERATED);
-        itemModelGenerator.register(CaffeinatedItems.JAVA_BANNER_PATTERN, Models.GENERATED);
-        itemModelGenerator.register(CaffeinatedItems.CIVET_SPAWN_EGG, Models.item("template_spawn_egg"));
+    public void generateItemModels(ItemModelGenerator generator) {
+        generator.register(CaffeinatedItems.BLACK_COFFEE_BOTTLE, Models.GENERATED);
+        generator.register(CaffeinatedItems.LATTE_COFFEE_BOTTLE, Models.GENERATED);
+        generator.register(CaffeinatedItems.CAFE_MIEL_COFFEE_BOTTLE, Models.GENERATED);
+        generator.register(CaffeinatedItems.TIRAMISU_SLICE, Models.GENERATED);
+        generator.register(CaffeinatedItems.COFFEE_BEANS, Models.GENERATED);
+        generator.register(CaffeinatedItems.GROUND_COFFEE, Models.GENERATED);
+        generator.register(CaffeinatedItems.JAVA_BANNER_PATTERN, Models.GENERATED);
+        generator.register(CaffeinatedItems.CIVET_SPAWN_EGG, Models.item("template_spawn_egg"));
     }
 }

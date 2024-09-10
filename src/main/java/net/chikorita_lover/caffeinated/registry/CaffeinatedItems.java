@@ -1,6 +1,7 @@
 package net.chikorita_lover.caffeinated.registry;
 
 import net.chikorita_lover.caffeinated.Caffeinated;
+import net.chikorita_lover.caffeinated.item.CafeMielCoffeeBottleItem;
 import net.chikorita_lover.caffeinated.item.CoffeeBottleItem;
 import net.chikorita_lover.caffeinated.item.LatteCoffeeBottleItem;
 import net.chikorita_lover.caffeinated.registry.tag.CaffeinatedBannerPatternTags;
@@ -19,6 +20,7 @@ public class CaffeinatedItems {
 
     public static final Item BLACK_COFFEE_BOTTLE = register("coffee_bottle", createCoffeeBottle(CaffeinatedFoodComponents.BLACK_COFFEE_BOTTLE));
     public static final Item LATTE_COFFEE_BOTTLE = register("latte_coffee_bottle", new LatteCoffeeBottleItem(new Item.Settings().food(CaffeinatedFoodComponents.LATTE_COFFEE_BOTTLE).maxCount(16).recipeRemainder(Items.GLASS_BOTTLE)));
+    public static final Item CAFE_MIEL_COFFEE_BOTTLE = register("cafe_miel_coffee_bottle", new CafeMielCoffeeBottleItem(new Item.Settings().food(CaffeinatedFoodComponents.CAFE_MIEL_COFFEE_BOTTLE).maxCount(16).recipeRemainder(Items.GLASS_BOTTLE)));
 
     public static final Item JAVA_BANNER_PATTERN = register("java_banner_pattern", new BannerPatternItem(CaffeinatedBannerPatternTags.JAVA_PATTERN_ITEM, new Item.Settings().maxCount(1)));
     public static final Item TIRAMISU_SLICE = register("tiramisu_slice", new Item(new Item.Settings().food(CaffeinatedFoodComponents.TIRAMISU_SLICE)));

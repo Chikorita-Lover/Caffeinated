@@ -1,0 +1,14 @@
+{
+  "type": "caffeinated:coffee_brewing",
+  "brewingtime": 600,
+  "experience": 1.0,
+  "ingredient": {
+    "tag": "caffeinated:black_coffee_bottles"
+  },
+  "reagent": {
+    "item": "minecraft:honey_bottle"
+  },
+  "result": {
+    "id": "caffeinated:cafe_miel_coffee_bottle"
+  }
+}
