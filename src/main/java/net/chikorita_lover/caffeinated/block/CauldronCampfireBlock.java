@@ -125,10 +125,10 @@ public class CauldronCampfireBlock extends BlockWithEntity implements Waterlogga
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof CauldronCampfireBlockEntity cauldronCampfire) {
             Item item = stack.getItem();
-            Item item2 = cauldronCampfire.getStack(0).getItem();
+            Item ingredient = cauldronCampfire.getStack(0).getItem();
             boolean bl = !state.get(FILLED) && cauldronCampfire.isBaseIngredient(stack);
             boolean bl2 = !cauldronCampfire.hasReagent() && cauldronCampfire.canBrewTogether(cauldronCampfire.getStack(0), stack);
-            boolean bl3 = state.get(FILLED) && (!item2.hasRecipeRemainder() || stack.isOf(item2.getRecipeRemainder()));
+            boolean bl3 = state.get(FILLED) && (!ingredient.hasRecipeRemainder() || stack.isOf(ingredient.getRecipeRemainder()));
             if (!bl && !bl2 && !bl3) {
                 return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
             }
@@ -144,11 +144,11 @@ public class CauldronCampfireBlock extends BlockWithEntity implements Waterlogga
                     player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, item.getRecipeRemainder(stack)));
                     world.emitGameEvent(null, GameEvent.BLOCK_CHANGE, pos);
                 } else {
-                    ItemStack stack2 = item2.getDefaultStack();
-                    if (stack2.isOf(item2.getRecipeRemainder())) {
-                        player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, stack2));
+                    ItemStack ingredientStack = ingredient.getDefaultStack();
+                    if (stack.isOf(ingredient.getRecipeRemainder())) {
+                        player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, ingredientStack));
                     } else {
-                        player.giveItemStack(stack2);
+                        player.giveItemStack(ingredientStack);
                     }
                     cauldronCampfire.clear();
                     cauldronCampfire.dropExperienceForRecipesUsed((ServerPlayerEntity) player);

@@ -13,6 +13,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 
 import java.util.Set;
 
@@ -23,36 +24,51 @@ public class CaffeinatedItemGroups {
         Registry.register(Registries.ITEM_GROUP, CAFFEINATED, FabricItemGroup.builder().displayName(Text.translatable("itemGroup.caffeinated.caffeinated")).icon(CaffeinatedItems.BLACK_COFFEE_BOTTLE::getDefaultStack).build());
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.NATURAL).register(entries -> {
-            entries.addBefore(Items.NETHER_WART, CaffeinatedItems.COFFEE_BERRIES);
+            entries.addBefore(Items.GLOW_BERRIES, CaffeinatedItems.COFFEE_BERRIES);
             entries.addBefore(Blocks.BEE_NEST, CaffeinatedBlocks.COFFEE_BEAN_BLOCK, CaffeinatedBlocks.GROUND_COFFEE_BLOCK);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(entries -> {
-            entries.addBefore(Items.CHORUS_FRUIT, CaffeinatedItems.COFFEE_BERRIES);
-            entries.addBefore(Items.ROTTEN_FLESH, CaffeinatedItems.BLACK_COFFEE_BOTTLE, CaffeinatedItems.LATTE_COFFEE_BOTTLE, CaffeinatedBlocks.TIRAMISU, CaffeinatedItems.TIRAMISU_SLICE);
+            entries.addBefore(Items.SWEET_BERRIES, CaffeinatedItems.COFFEE_BERRIES);
+            entries.addBefore(Items.ROTTEN_FLESH, CaffeinatedBlocks.TIRAMISU);
+            entries.addBefore(Items.OMINOUS_BOTTLE, CaffeinatedItems.BLACK_COFFEE_BOTTLE, CaffeinatedItems.LATTE_COFFEE_BOTTLE);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
-            entries.addAfter(Items.WHEAT, CaffeinatedItems.COFFEE_BEANS);
-            entries.addBefore(Items.NETHER_WART, CaffeinatedItems.GROUND_COFFEE);
-            entries.addAfter(Items.PIGLIN_BANNER_PATTERN, CaffeinatedItems.JAVA_BANNER_PATTERN);
+            entries.addAfter(Items.WHEAT, CaffeinatedItems.COFFEE_BEANS, CaffeinatedItems.GROUND_COFFEE);
+            entries.addBefore(Items.PIGLIN_BANNER_PATTERN, CaffeinatedItems.JAVA_BANNER_PATTERN);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS).register(entries -> {
             entries.addAfter(Items.CHICKEN_SPAWN_EGG, CaffeinatedItems.CIVET_SPAWN_EGG);
         });
         ItemGroupEvents.modifyEntriesEvent(CAFFEINATED).register(entries -> {
-            ItemGroup.StackVisibility visibility = ItemGroup.StackVisibility.PARENT_TAB_ONLY;
-            entries.add(CaffeinatedItems.COFFEE_BERRIES, visibility);
-            entries.add(CaffeinatedItems.COFFEE_BEANS, visibility);
-            entries.add(CaffeinatedItems.GROUND_COFFEE, visibility);
-            entries.add(CaffeinatedBlocks.COFFEE_BEAN_BLOCK, visibility);
-            entries.add(CaffeinatedBlocks.GROUND_COFFEE_BLOCK, visibility);
-            registerCampfiresCauldron(entries, visibility);
-            entries.add(Items.GLASS_BOTTLE, visibility);
-            entries.add(CaffeinatedItems.BLACK_COFFEE_BOTTLE, visibility);
-            entries.add(CaffeinatedItems.LATTE_COFFEE_BOTTLE, visibility);
-            entries.add(CaffeinatedBlocks.TIRAMISU, visibility);
-            entries.add(CaffeinatedItems.TIRAMISU_SLICE, visibility);
-            entries.add(CaffeinatedItems.JAVA_BANNER_PATTERN, visibility);
-            entries.add(CaffeinatedItems.CIVET_SPAWN_EGG, visibility);
+            ItemGroup.StackVisibility parentTabOnly = ItemGroup.StackVisibility.PARENT_TAB_ONLY;
+            entries.add(CaffeinatedItems.COFFEE_BERRIES, parentTabOnly);
+            entries.add(CaffeinatedItems.COFFEE_BEANS, parentTabOnly);
+            entries.add(CaffeinatedItems.GROUND_COFFEE, parentTabOnly);
+            entries.add(CaffeinatedBlocks.COFFEE_BEAN_BLOCK, parentTabOnly);
+            entries.add(CaffeinatedBlocks.GROUND_COFFEE_BLOCK, parentTabOnly);
+            registerCampfiresCauldron(entries, parentTabOnly);
+            entries.add(Items.GLASS_BOTTLE, parentTabOnly);
+            entries.add(CaffeinatedItems.BLACK_COFFEE_BOTTLE, parentTabOnly);
+            entries.add(CaffeinatedItems.LATTE_COFFEE_BOTTLE, parentTabOnly);
+            entries.add(CaffeinatedBlocks.TIRAMISU, parentTabOnly);
+            entries.add(CaffeinatedItems.JAVA_BANNER_PATTERN, parentTabOnly);
+            entries.add(CaffeinatedItems.CIVET_SPAWN_EGG, parentTabOnly);
+        });
+        ItemGroupEvents.MODIFY_ENTRIES_ALL.register((group, entries) -> {
+            final String farmersDelight = "farmersdelight";
+            if (Registries.ITEM_GROUP.getId(group).equals(Identifier.of(farmersDelight, farmersDelight))) {
+                for (int i = 0; i < entries.getDisplayStacks().size(); ++i) {
+                    ItemStack displayStack = entries.getDisplayStacks().get(i);
+                    Identifier id = Registries.ITEM.getId(displayStack.getItem());
+                    if (id.equals(Identifier.of(farmersDelight, "carrot_crate"))) {
+                        entries.addBefore(displayStack, CaffeinatedBlocks.COFFEE_BERRY_CRATE);
+                        ++i;
+                    } else if (id.equals(Identifier.of(farmersDelight, "cake_slice"))) {
+                        entries.addAfter(displayStack, CaffeinatedItems.TIRAMISU_SLICE);
+                        ++i;
+                    }
+                }
+            }
         });
     }
 

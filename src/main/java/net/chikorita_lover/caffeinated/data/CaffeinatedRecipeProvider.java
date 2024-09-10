@@ -4,9 +4,11 @@ import net.chikorita_lover.caffeinated.Caffeinated;
 import net.chikorita_lover.caffeinated.recipe.CoffeeBrewingRecipeJsonBuilder;
 import net.chikorita_lover.caffeinated.registry.CaffeinatedBlocks;
 import net.chikorita_lover.caffeinated.registry.CaffeinatedItems;
+import net.chikorita_lover.caffeinated.registry.tag.CaffeinatedItemTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditions;
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.data.server.recipe.CookingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
@@ -33,7 +35,8 @@ public class CaffeinatedRecipeProvider extends FabricRecipeProvider {
 
         offer2x2CompactingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, CaffeinatedBlocks.COFFEE_BEAN_BLOCK, CaffeinatedItems.COFFEE_BEANS);
         offer2x2CompactingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, CaffeinatedBlocks.GROUND_COFFEE_BLOCK, CaffeinatedItems.GROUND_COFFEE);
-        offerReversibleCompactingRecipes(farmersDelightExporter, RecipeCategory.FOOD, CaffeinatedItems.COFFEE_BERRIES, RecipeCategory.DECORATIONS, CaffeinatedBlocks.COFFEE_BERRY_CRATE);
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.FOOD, CaffeinatedItems.COFFEE_BERRIES, 9).input(CaffeinatedBlocks.COFFEE_BERRY_CRATE).criterion(hasItem(CaffeinatedBlocks.COFFEE_BERRY_CRATE), conditionsFromItem(CaffeinatedBlocks.COFFEE_BERRY_CRATE)).offerTo(farmersDelightExporter, Caffeinated.of(getItemPath(CaffeinatedItems.COFFEE_BERRIES)));
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, CaffeinatedBlocks.COFFEE_BERRY_CRATE).input('#', CaffeinatedItems.COFFEE_BERRIES).pattern("###").pattern("###").pattern("###").criterion(hasItem(CaffeinatedItems.COFFEE_BERRIES), conditionsFromItem(CaffeinatedItems.COFFEE_BERRIES)).offerTo(farmersDelightExporter, Caffeinated.of(getItemPath(CaffeinatedBlocks.COFFEE_BERRY_CRATE)));
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, CaffeinatedItems.GROUND_COFFEE).input('#', CaffeinatedItems.COFFEE_BEANS).pattern("###").group("ground_coffee").criterion(hasItem(CaffeinatedItems.COFFEE_BEANS), conditionsFromItem(CaffeinatedItems.COFFEE_BEANS)).offerTo(exporter, Caffeinated.of("ground_coffee_from_coffee_beans"));
         ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, Items.BROWN_DYE).input(CaffeinatedItems.GROUND_COFFEE).group("brown_dye").criterion("has_ground_coffee", conditionsFromItem(CaffeinatedItems.GROUND_COFFEE)).offerTo(exporter, Caffeinated.of("brown_dye_from_ground_coffee"));

@@ -21,7 +21,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "caffeinated:coffee_berries_from_crate"
+        "recipe": "caffeinated:coffee_berries"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -34,7 +34,7 @@
   ],
   "rewards": {
     "recipes": [
-      "caffeinated:coffee_berries_from_crate"
+      "caffeinated:coffee_berries"
     ]
   }
 }
