@@ -1,10 +1,10 @@
 {
-	"advancements.husbandry.bake_tiramisu.description": "Prepara un plato de tiramisú.",
+	"advancements.husbandry.bake_tiramisu.description": "Prepará un plato de tiramisú.",
 	"advancements.husbandry.bake_tiramisu.title": "Recógeme",
-	"advancements.husbandry.brew_all_coffee.description": "Prepara a todos los tipos de botella de café.",
+	"advancements.husbandry.brew_all_coffee.description": "Prepará todos los tipos de botella de café.",
 	"advancements.husbandry.brew_all_coffee.title": "Cafeinado",
-	"advancements.husbandry.brew_coffee.description": "Agregue café molido al agua en una fogata con caldero para preparar café negro.",
-	"advancements.husbandry.brew_coffee.title": "Despierta y huele el café",
+	"advancements.husbandry.brew_coffee.description": "Agregá café molido al agua en una fogata con caldero para preparar café negro.",
+	"advancements.husbandry.brew_coffee.title": "Despertá y olé el café",
 	"block.caffeinated.cauldron_campfire": "Fogata con caldero",
 	"block.caffeinated.coffee_bean_block": "Bloque de granos de café",
 	"block.caffeinated.coffee_berry_crate": "Cajón de cerezas de café",
@@ -53,7 +53,7 @@
 	"subtitles.block.cauldron_campfire.bubble": "Caldero burbujea",
 	"subtitles.entity.civet.death": "Civeta muere",
 	"subtitles.entity.civet.eat": "Civeta come",
-	"subtitles.entity.civet.hurt": "Civeta herido",
+	"subtitles.entity.civet.hurt": "Civeta herida",
 	"subtitles.entity.civet.idle": "Gruñido de civeta",
 	"subtitles.item.coffee_bottle.drink": "Sorbiendo",
 	"subtitles.item.ground_coffee.splash": "Café molido salpica"
