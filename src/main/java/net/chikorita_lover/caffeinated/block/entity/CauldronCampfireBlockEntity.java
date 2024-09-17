@@ -31,6 +31,7 @@ import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.stat.Stats;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
@@ -215,15 +216,18 @@ public class CauldronCampfireBlockEntity extends BlockEntity implements RecipeUn
         }
     }
 
-    public void dropExperienceForRecipesUsed(ServerPlayerEntity player) {
+    public void onRecipesCrafted(ServerPlayerEntity player) {
         ArrayList<RecipeEntry<?>> recipeEntries = new ArrayList<>();
         for (Identifier recipeId : this.recipesUsed) {
             this.getWorld().getRecipeManager().get(recipeId).ifPresent(recipeEntries::add);
         }
         player.unlockRecipes(recipeEntries);
         for (RecipeEntry<?> recipe : recipeEntries) {
-            if (recipe == null || !(recipe.value() instanceof CoffeeBrewingRecipe coffeeBrewingRecipe)) continue;
+            if (recipe == null || !(recipe.value() instanceof CoffeeBrewingRecipe coffeeBrewingRecipe)) {
+                continue;
+            }
             player.onRecipeCrafted(recipe, this.inventory);
+            player.incrementStat(Stats.CRAFTED.getOrCreateStat(coffeeBrewingRecipe.getResult(this.world.getRegistryManager()).getItem()));
             Caffeinated.BREW_COFFEE_CRITERION.trigger(player, coffeeBrewingRecipe.getResult(this.getWorld().getRegistryManager()));
             dropExperience(player.getServerWorld(), player.getPos(), coffeeBrewingRecipe.getExperience());
         }

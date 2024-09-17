@@ -151,7 +151,7 @@ public class CauldronCampfireBlock extends BlockWithEntity implements Waterlogga
                         player.giveItemStack(ingredientStack);
                     }
                     cauldronCampfire.clear();
-                    cauldronCampfire.dropExperienceForRecipesUsed((ServerPlayerEntity) player);
+                    cauldronCampfire.onRecipesCrafted((ServerPlayerEntity) player);
                     world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
                     world.emitGameEvent(null, GameEvent.FLUID_PICKUP, pos);
                 }
