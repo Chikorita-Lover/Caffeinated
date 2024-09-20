@@ -1,0 +1,27 @@
+{
+	"fabric:load_conditions": [
+		{
+			"condition": "fabric:all_mods_loaded",
+			"values": [
+				"farmersdelight"
+			]
+		}
+	],
+	"type": "farmersdelight:cutting",
+	"ingredients": [
+		{
+			"item": "caffeinated:tiramisu"
+		}
+	],
+	"result": [
+		{
+			"item": {
+				"count": 4,
+				"id": "caffeinated:tiramisu_slice"
+			}
+		}
+	],
+	"tool": {
+		"tag": "c:tools/knife"
+	}
+}
