@@ -8,9 +8,9 @@ import net.minecraft.world.World;
 
 import java.util.ArrayList;
 
-public class LatteCoffeeBottleItem extends CoffeeBottleItem {
-    public LatteCoffeeBottleItem(Settings settings) {
-        super(settings);
+public class CaffeLatteBottleItem extends CoffeeBottleItem {
+    public CaffeLatteBottleItem(Settings settings) {
+        super(settings, true);
     }
 
     @Override

@@ -1,13 +1,12 @@
 package net.chikorita_lover.caffeinated.registry;
 
 import net.chikorita_lover.caffeinated.Caffeinated;
-import net.chikorita_lover.caffeinated.item.CafeMielCoffeeBottleItem;
+import net.chikorita_lover.caffeinated.item.CafeMielBottleItem;
+import net.chikorita_lover.caffeinated.item.CaffeLatteBottleItem;
 import net.chikorita_lover.caffeinated.item.CoffeeBottleItem;
-import net.chikorita_lover.caffeinated.item.LatteCoffeeBottleItem;
 import net.chikorita_lover.caffeinated.registry.tag.CaffeinatedBannerPatternTags;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.component.type.FoodComponent;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -18,18 +17,14 @@ public class CaffeinatedItems {
     public static final Item COFFEE_BEANS = register("coffee_beans", new Item(new Item.Settings()));
     public static final Item GROUND_COFFEE = register("ground_coffee", new Item(new Item.Settings()));
 
-    public static final Item BLACK_COFFEE_BOTTLE = register("coffee_bottle", createCoffeeBottle(CaffeinatedFoodComponents.BLACK_COFFEE_BOTTLE));
-    public static final Item LATTE_COFFEE_BOTTLE = register("latte_coffee_bottle", new LatteCoffeeBottleItem(new Item.Settings().food(CaffeinatedFoodComponents.LATTE_COFFEE_BOTTLE).maxCount(16).recipeRemainder(Items.GLASS_BOTTLE)));
-    public static final Item CAFE_MIEL_COFFEE_BOTTLE = register("cafe_miel_coffee_bottle", new CafeMielCoffeeBottleItem(new Item.Settings().food(CaffeinatedFoodComponents.CAFE_MIEL_COFFEE_BOTTLE).maxCount(16).recipeRemainder(Items.GLASS_BOTTLE)));
+    public static final Item COFFEE_BOTTLE = register("coffee_bottle", new CoffeeBottleItem(new Item.Settings().food(CaffeinatedFoodComponents.COFFEE_BOTTLE).maxCount(16).recipeRemainder(Items.GLASS_BOTTLE), false));
+    public static final Item LATTE_COFFEE_BOTTLE = register("latte_coffee_bottle", new CaffeLatteBottleItem(new Item.Settings().food(CaffeinatedFoodComponents.LATTE_COFFEE_BOTTLE).maxCount(16).recipeRemainder(Items.GLASS_BOTTLE)));
+    public static final Item CAFE_MIEL_COFFEE_BOTTLE = register("cafe_miel_coffee_bottle", new CafeMielBottleItem(new Item.Settings().food(CaffeinatedFoodComponents.CAFE_MIEL_COFFEE_BOTTLE).maxCount(16).recipeRemainder(Items.GLASS_BOTTLE)));
 
     public static final Item JAVA_BANNER_PATTERN = register("java_banner_pattern", new BannerPatternItem(CaffeinatedBannerPatternTags.JAVA_PATTERN_ITEM, new Item.Settings().maxCount(1)));
     public static final Item TIRAMISU_SLICE = register("tiramisu_slice", new Item(new Item.Settings().food(CaffeinatedFoodComponents.TIRAMISU_SLICE)));
 
     public static final Item CIVET_SPAWN_EGG = register("civet_spawn_egg", new SpawnEggItem(CaffeinatedEntities.CIVET, 0xDCCE95, 0x6F6A5F, new Item.Settings()));
-
-    private static Item createCoffeeBottle(FoodComponent foodComponent) {
-        return new CoffeeBottleItem(new Item.Settings().food(foodComponent).maxCount(16).recipeRemainder(Items.GLASS_BOTTLE));
-    }
 
     public static Item register(Block block) {
         return register(block, new BlockItem(block, new Item.Settings()));

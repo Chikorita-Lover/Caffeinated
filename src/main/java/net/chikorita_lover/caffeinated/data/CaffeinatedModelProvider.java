@@ -76,7 +76,7 @@ public class CaffeinatedModelProvider extends FabricModelProvider {
 
     @Override
     public void generateItemModels(ItemModelGenerator generator) {
-        generator.register(CaffeinatedItems.BLACK_COFFEE_BOTTLE, Models.GENERATED);
+        generator.register(CaffeinatedItems.COFFEE_BOTTLE, Models.GENERATED);
         generator.register(CaffeinatedItems.LATTE_COFFEE_BOTTLE, Models.GENERATED);
         generator.register(CaffeinatedItems.CAFE_MIEL_COFFEE_BOTTLE, Models.GENERATED);
         generator.register(CaffeinatedItems.TIRAMISU_SLICE, Models.GENERATED);

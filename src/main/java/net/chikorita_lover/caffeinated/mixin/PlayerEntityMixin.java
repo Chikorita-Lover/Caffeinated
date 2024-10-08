@@ -9,8 +9,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity {
@@ -18,13 +17,12 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         super(entityType, world);
     }
 
-    @Inject(method = "addExhaustion", at = @At(value = "HEAD"), cancellable = true)
-    private void tryCancelExhaustion(float exhaustion, CallbackInfo ci) {
+    @ModifyVariable(method = "addExhaustion", at = @At(value = "HEAD"), ordinal = 0, argsOnly = true)
+    private float modifyExhaustion(float exhaustion) {
         if (this.hasStatusEffect(CaffeinatedStatusEffects.CAFFEINE)) {
             StatusEffectInstance effect = this.getStatusEffect(CaffeinatedStatusEffects.CAFFEINE);
-            if (this.getRandom().nextFloat() < CoffeeBottleItem.getEffectChance(effect)) {
-                ci.cancel();
-            }
+            exhaustion *= CoffeeBottleItem.getEffectMultiplier(effect);
         }
+        return exhaustion;
     }
 }

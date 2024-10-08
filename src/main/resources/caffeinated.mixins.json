@@ -8,6 +8,7 @@
 		"CauldronBlockMixin",
 		"CookingRecipeJsonBuilderMixin",
 		"GrowCropsGoalMixin",
+		"HungerManagerMixin",
 		"ItemMixin",
 		"MinecraftServerMixin",
 		"PlayerEntityMixin",
@@ -15,6 +16,7 @@
 	],
 	"client": [
 		"ClientRecipeBookMixin",
+		"InGameHudMixin",
 		"RecipeBookGroupMixin"
 	],
 	"server": [],

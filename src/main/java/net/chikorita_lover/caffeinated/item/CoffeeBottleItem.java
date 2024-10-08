@@ -1,10 +1,16 @@
 package net.chikorita_lover.caffeinated.item;
 
-import net.chikorita_lover.caffeinated.Caffeinated;
+import com.google.common.collect.Lists;
+import com.mojang.datafixers.util.Pair;
 import net.chikorita_lover.caffeinated.registry.CaffeinatedSoundEvents;
 import net.minecraft.advancement.criterion.Criteria;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.FoodComponent;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffectUtil;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -13,21 +19,30 @@ import net.minecraft.item.ItemUsage;
 import net.minecraft.item.Items;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.stat.Stats;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CoffeeBottleItem extends Item {
     private static final int MAX_USE_TIME = 40;
-    private static final String TRANSLATION_KEY = Util.createTranslationKey("item", Caffeinated.of("coffee_bottle"));
+    private final boolean tooltipDesc;
 
-    public CoffeeBottleItem(Item.Settings settings) {
+    public CoffeeBottleItem(Item.Settings settings, boolean tooltipDesc) {
         super(settings);
+        this.tooltipDesc = tooltipDesc;
+    }
+
+    public static float getEffectMultiplier(StatusEffectInstance effect) {
+        int level = effect.getAmplifier() + 1;
+        return 1.0F - level * 0.2F;
     }
 
     @Override
@@ -37,10 +52,9 @@ public class CoffeeBottleItem extends Item {
             Criteria.CONSUME_ITEM.trigger(serverPlayer, stack);
             serverPlayer.incrementStat(Stats.USED.getOrCreateStat(this));
         }
-        if (!world.isClient) {
+        if (!world.isClient()) {
             user.removeStatusEffect(StatusEffects.SLOWNESS);
         }
-
         if (stack.isEmpty()) {
             return new ItemStack(Items.GLASS_BOTTLE);
         }
@@ -81,20 +95,26 @@ public class CoffeeBottleItem extends Item {
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
         super.appendTooltip(stack, context, tooltip, type);
-        tooltip.add(Text.translatable(Util.createTranslationKey("item", Registries.ITEM.getId(this)).concat(".desc")).formatted(Formatting.GRAY));
-    }
-
-    public static float getEffectChance(StatusEffectInstance effect) {
-        return getEffectChance(effect.getAmplifier());
-    }
-
-    public static float getEffectChance(int i) {
-        return (i + 1) * 0.2F;
-    }
-
-    @Override
-    public String getTranslationKey() {
-        return TRANSLATION_KEY;
+        if (this.tooltipDesc) {
+            // tooltip.add(Text.translatable(Util.createTranslationKey("item", Registries.ITEM.getId(this)).concat(".description")).formatted(Formatting.GRAY));
+        }
+        if (!stack.contains(DataComponentTypes.FOOD)) {
+            return;
+        }
+        for (FoodComponent.StatusEffectEntry entry : stack.get(DataComponentTypes.FOOD).effects()) {
+            if (entry.probability() < 1.0F) {
+                continue;
+            }
+            StatusEffectInstance effect = entry.effect();
+            MutableText text = Text.translatable(effect.getTranslationKey());
+            if (effect.getAmplifier() > 0) {
+                text = Text.translatable("potion.withAmplifier", text, Text.translatable("potion.potency." + effect.getAmplifier()));
+            }
+            if (!effect.isDurationBelow(20)) {
+                text = Text.translatable("potion.withDuration", text, StatusEffectUtil.getDurationText(effect, 1.0F, context.getUpdateTickRate()));
+            }
+            tooltip.add(text.formatted(effect.getEffectType().value().getCategory().getFormatting()));
+        }
     }
 }
 

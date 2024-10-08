@@ -21,7 +21,7 @@ public class CaffeinatedItemGroups {
     private static final RegistryKey<ItemGroup> CAFFEINATED = RegistryKey.of(RegistryKeys.ITEM_GROUP, Caffeinated.of("caffeinated"));
 
     public static void register() {
-        Registry.register(Registries.ITEM_GROUP, CAFFEINATED, FabricItemGroup.builder().displayName(Text.translatable("itemGroup.caffeinated.caffeinated")).icon(CaffeinatedItems.BLACK_COFFEE_BOTTLE::getDefaultStack).build());
+        Registry.register(Registries.ITEM_GROUP, CAFFEINATED, FabricItemGroup.builder().displayName(Text.translatable("itemGroup.caffeinated.caffeinated")).icon(CaffeinatedItems.COFFEE_BOTTLE::getDefaultStack).build());
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.NATURAL).register(entries -> {
             entries.addBefore(Items.GLOW_BERRIES, CaffeinatedItems.COFFEE_BERRIES);
@@ -30,7 +30,7 @@ public class CaffeinatedItemGroups {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(entries -> {
             entries.addBefore(Items.SWEET_BERRIES, CaffeinatedItems.COFFEE_BERRIES);
             entries.addBefore(Items.ROTTEN_FLESH, CaffeinatedBlocks.TIRAMISU);
-            entries.addBefore(Items.OMINOUS_BOTTLE, CaffeinatedItems.BLACK_COFFEE_BOTTLE, CaffeinatedItems.LATTE_COFFEE_BOTTLE, CaffeinatedItems.CAFE_MIEL_COFFEE_BOTTLE);
+            entries.addBefore(Items.OMINOUS_BOTTLE, CaffeinatedItems.COFFEE_BOTTLE, CaffeinatedItems.LATTE_COFFEE_BOTTLE, CaffeinatedItems.CAFE_MIEL_COFFEE_BOTTLE);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
             entries.addAfter(Items.WHEAT, CaffeinatedItems.COFFEE_BEANS, CaffeinatedItems.GROUND_COFFEE);
@@ -48,7 +48,7 @@ public class CaffeinatedItemGroups {
             entries.add(CaffeinatedBlocks.GROUND_COFFEE_BLOCK, parentTabOnly);
             registerCampfiresCauldron(entries, parentTabOnly);
             entries.add(Items.GLASS_BOTTLE, parentTabOnly);
-            entries.add(CaffeinatedItems.BLACK_COFFEE_BOTTLE, parentTabOnly);
+            entries.add(CaffeinatedItems.COFFEE_BOTTLE, parentTabOnly);
             entries.add(CaffeinatedItems.LATTE_COFFEE_BOTTLE, parentTabOnly);
             entries.add(CaffeinatedItems.CAFE_MIEL_COFFEE_BOTTLE, parentTabOnly);
             entries.add(CaffeinatedBlocks.TIRAMISU, parentTabOnly);

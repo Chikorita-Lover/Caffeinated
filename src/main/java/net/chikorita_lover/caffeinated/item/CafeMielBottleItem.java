@@ -1,17 +1,13 @@
 package net.chikorita_lover.caffeinated.item;
 
-import net.chikorita_lover.caffeinated.registry.CaffeinatedStatusEffects;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import java.util.ArrayList;
-
-public class CafeMielCoffeeBottleItem extends CoffeeBottleItem {
-    public CafeMielCoffeeBottleItem(Settings settings) {
-        super(settings);
+public class CafeMielBottleItem extends CoffeeBottleItem {
+    public CafeMielBottleItem(Settings settings) {
+        super(settings, false);
     }
 
     @Override
