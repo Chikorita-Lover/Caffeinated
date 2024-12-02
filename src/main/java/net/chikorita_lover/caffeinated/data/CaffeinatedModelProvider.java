@@ -10,6 +10,7 @@ import net.chikorita_lover.caffeinated.registry.CaffeinatedItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.LeveledCauldronBlock;
 import net.minecraft.data.client.*;
 import net.minecraft.state.property.Properties;
@@ -43,7 +44,7 @@ public class CaffeinatedModelProvider extends FabricModelProvider {
     }
 
     private static void registerTiramisu(BlockStateModelGenerator generator) {
-        generator.registerItemModel(CaffeinatedBlocks.TIRAMISU.asItem());
+        generator.registerItemModel(CaffeinatedItems.TIRAMISU);
         generator.blockStateCollector.accept(VariantsBlockStateSupplier.create(CaffeinatedBlocks.TIRAMISU).coordinate(BlockStateVariantMap.create(TiramisuBlock.SLICES).register(1, BlockStateVariant.create().put(VariantSettings.MODEL, ModelIds.getBlockSubModelId(CaffeinatedBlocks.TIRAMISU, "_slice3"))).register(2, BlockStateVariant.create().put(VariantSettings.MODEL, ModelIds.getBlockSubModelId(CaffeinatedBlocks.TIRAMISU, "_slice2"))).register(3, BlockStateVariant.create().put(VariantSettings.MODEL, ModelIds.getBlockSubModelId(CaffeinatedBlocks.TIRAMISU, "_slice1"))).register(4, BlockStateVariant.create().put(VariantSettings.MODEL, ModelIds.getBlockModelId(CaffeinatedBlocks.TIRAMISU)))));
     }
 
@@ -59,6 +60,7 @@ public class CaffeinatedModelProvider extends FabricModelProvider {
     public void generateBlockStateModels(BlockStateModelGenerator generator) {
         generator.registerSimpleCubeAll(CaffeinatedBlocks.COFFEE_BEAN_BLOCK);
         generator.registerSimpleCubeAll(CaffeinatedBlocks.GROUND_COFFEE_BLOCK);
+        generator.registerWoolAndCarpet(CaffeinatedBlocks.COFFEE_STAINED_WOOL, CaffeinatedBlocks.COFFEE_STAINED_CARPET);
         generator.registerSingleton(CaffeinatedBlocks.COFFEE_BERRY_CRATE, new TextureMap().put(TextureKey.SIDE, Caffeinated.of("block/coffee_berry_crate_side")).put(TextureKey.TOP, Caffeinated.of("block/coffee_berry_crate_top")).put(TextureKey.BOTTOM, Identifier.of("farmersdelight", "block/crate_bottom")), Models.CUBE_BOTTOM_TOP);
 
         generator.blockStateCollector.accept(VariantsBlockStateSupplier.create(CaffeinatedBlocks.COFFEE_CAULDRON).coordinate(BlockStateVariantMap.create(LeveledCauldronBlock.LEVEL).register(1, BlockStateVariant.create().put(VariantSettings.MODEL, Models.TEMPLATE_CAULDRON_LEVEL1.upload(CaffeinatedBlocks.COFFEE_CAULDRON, "_level1", TextureMap.cauldron(Caffeinated.of("block/coffee")), generator.modelCollector))).register(2, BlockStateVariant.create().put(VariantSettings.MODEL, Models.TEMPLATE_CAULDRON_LEVEL2.upload(CaffeinatedBlocks.COFFEE_CAULDRON, "_level2", TextureMap.cauldron(Caffeinated.of("block/coffee")), generator.modelCollector))).register(3, BlockStateVariant.create().put(VariantSettings.MODEL, Models.TEMPLATE_CAULDRON_FULL.upload(CaffeinatedBlocks.COFFEE_CAULDRON, "_full", TextureMap.cauldron(Caffeinated.of("block/coffee")), generator.modelCollector)))));
