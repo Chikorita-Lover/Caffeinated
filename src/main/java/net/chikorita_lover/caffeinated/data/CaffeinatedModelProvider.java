@@ -10,7 +10,6 @@ import net.chikorita_lover.caffeinated.registry.CaffeinatedItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.LeveledCauldronBlock;
 import net.minecraft.data.client.*;
 import net.minecraft.state.property.Properties;
@@ -58,6 +57,7 @@ public class CaffeinatedModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator generator) {
+        generator.registerSimpleCubeAll(CaffeinatedBlocks.CIVET_SCAT);
         generator.registerSimpleCubeAll(CaffeinatedBlocks.COFFEE_BEAN_BLOCK);
         generator.registerSimpleCubeAll(CaffeinatedBlocks.GROUND_COFFEE_BLOCK);
         generator.registerWoolAndCarpet(CaffeinatedBlocks.COFFEE_STAINED_WOOL, CaffeinatedBlocks.COFFEE_STAINED_CARPET);

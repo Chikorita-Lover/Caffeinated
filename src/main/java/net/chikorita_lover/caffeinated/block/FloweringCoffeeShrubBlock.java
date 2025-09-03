@@ -8,6 +8,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Fertilizable;
 import net.minecraft.block.TallPlantBlock;
 import net.minecraft.block.enums.DoubleBlockHalf;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BoneMealItem;
 import net.minecraft.item.ItemStack;
@@ -26,6 +27,7 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.event.GameEvent;
+import org.jetbrains.annotations.Nullable;
 
 public class FloweringCoffeeShrubBlock extends TallPlantBlock implements Fertilizable {
     public static final int MAX_AGE = 3;
@@ -33,6 +35,25 @@ public class FloweringCoffeeShrubBlock extends TallPlantBlock implements Fertili
 
     public FloweringCoffeeShrubBlock(Settings settings) {
         super(settings);
+    }
+
+    public static ActionResult pickBerries(@Nullable Entity picker, BlockState state, World world, BlockPos pos, boolean eaten) {
+        if (!state.contains(AGE) || state.get(AGE) < MAX_AGE) {
+            return ActionResult.PASS;
+        }
+        if (!eaten) {
+            dropStack(world, pos, new ItemStack(CaffeinatedItems.COFFEE_BERRIES, 1 + world.getRandom().nextInt(3)));
+        }
+        float pitch = MathHelper.nextBetween(world.random, 0.8F, 1.2F);
+        world.playSound(null, pos, CaffeinatedSoundEvents.BLOCK_COFFEE_SHRUB_PICK_BERRIES, SoundCategory.BLOCKS, 1.0F, pitch);
+        BlockState pickedState = state.with(AGE, eaten ? world.getRandom().nextInt(3) : 0);
+        world.setBlockState(pos, pickedState, Block.NOTIFY_LISTENERS);
+        world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(picker, pickedState));
+        BlockState otherState = pickedState.cycle(HALF);
+        BlockPos otherPos = pos.offset(pickedState.get(HALF).getOppositeDirection());
+        world.setBlockState(otherPos, otherState, Block.NOTIFY_LISTENERS);
+        world.emitGameEvent(GameEvent.BLOCK_CHANGE, otherPos, GameEvent.Emitter.of(picker, otherState));
+        return ActionResult.success(world.isClient());
     }
 
     @Override
@@ -71,20 +92,7 @@ public class FloweringCoffeeShrubBlock extends TallPlantBlock implements Fertili
         if (state.get(AGE) < MAX_AGE) {
             return super.onUse(state, world, pos, player, hit);
         }
-        int count = world.getRandom().nextBetween(1, 3);
-        dropStack(world, pos, new ItemStack(CaffeinatedItems.COFFEE_BERRIES, count));
-        world.playSound(null, pos, CaffeinatedSoundEvents.BLOCK_COFFEE_SHRUB_PICK_BERRIES, SoundCategory.BLOCKS, 1.0F, MathHelper.nextBetween(world.getRandom(), 0.8F, 1.2F));
-
-        BlockState newState = state.with(AGE, 0);
-        world.setBlockState(pos, newState, Block.NOTIFY_LISTENERS);
-        world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(player, newState));
-
-        BlockState otherState = newState.cycle(HALF);
-        BlockPos otherPos = pos.offset(newState.get(HALF).getOppositeDirection());
-        world.setBlockState(otherPos, otherState, Block.NOTIFY_LISTENERS);
-        world.emitGameEvent(GameEvent.BLOCK_CHANGE, otherPos, GameEvent.Emitter.of(player, otherState));
-
-        return ActionResult.success(world.isClient());
+        return pickBerries(player, state, world, pos, false);
     }
 
     @Override

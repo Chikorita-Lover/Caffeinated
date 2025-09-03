@@ -6,6 +6,7 @@
 	"advancements.husbandry.brew_coffee.description": "Add Ground Coffee to Water in a Campfire with Cauldron to brew Black Coffee",
 	"advancements.husbandry.brew_coffee.title": "Stop and Smell the Coffee",
 	"block.caffeinated.cauldron_campfire": "Campfire with Cauldron",
+	"block.caffeinated.civet_scat": "Civet Scat",
 	"block.caffeinated.coffee_bean_block": "Coffee Bean Block",
 	"block.caffeinated.coffee_berry_crate": "Coffee Cherry Crate",
 	"block.caffeinated.coffee_cauldron": "Coffee Cauldron",
@@ -57,6 +58,8 @@
 	"subtitles.entity.civet.eat": "Civet eats",
 	"subtitles.entity.civet.hurt": "Civet hurts",
 	"subtitles.entity.civet.idle": "Civet growls",
+	"subtitles.entity.civet.scat_drop": "Civet leaves scat",
+	"subtitles.entity.civet.sniff": "Civet sniffs",
 	"subtitles.item.coffee_bottle.drink": "Slurping",
 	"subtitles.item.ground_coffee.splash": "Ground Coffee splashes"
 }

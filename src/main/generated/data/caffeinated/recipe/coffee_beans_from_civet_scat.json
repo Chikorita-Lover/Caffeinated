@@ -1,10 +1,10 @@
 {
-  "type": "minecraft:smoking",
+  "type": "minecraft:smelting",
   "category": "misc",
-  "cookingtime": 100,
+  "cookingtime": 200,
   "experience": 0.35,
   "ingredient": {
-    "item": "caffeinated:coffee_berries"
+    "item": "caffeinated:civet_scat"
   },
   "result": {
     "id": "caffeinated:coffee_beans"

@@ -114,6 +114,34 @@
       "caffeinated:entity/civet/idle4"
     ]
   },
+  "entity.civet.scat_drop": {
+    "subtitle": "subtitles.entity.civet.scat_drop",
+    "sounds": [
+      "caffeinated:entity/civet/scat_drop1",
+      "caffeinated:entity/civet/scat_drop2"
+    ]
+  },
+  "entity.civet.sniff": {
+    "subtitle": "subtitles.entity.civet.sniff",
+    "sounds": [
+      {
+        "name": "mob/fox/sniff1",
+        "volume": 0.6
+      },
+      {
+        "name": "mob/fox/sniff2",
+        "volume": 0.6
+      },
+      {
+        "name": "mob/fox/sniff3",
+        "volume": 0.6
+      },
+      {
+        "name": "mob/fox/sniff4",
+        "volume": 0.6
+      }
+    ]
+  },
   "item.coffee_bottle.drink": {
     "subtitle": "subtitles.item.coffee_bottle.drink",
     "sounds": [

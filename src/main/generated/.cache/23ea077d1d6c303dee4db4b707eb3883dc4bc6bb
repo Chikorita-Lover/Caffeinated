@@ -1,5 +1,6 @@
-// 1.21.1	2024-12-01T20:24:16.0014858	Caffeinated/Block Loot Tables
+// 1.21.1	2025-09-02T22:50:55.9370669	Caffeinated/Block Loot Tables
 548d115eeb79b74d3fbe03951bdc179110ed6f8a data\caffeinated\loot_table\blocks\ground_coffee_cauldron.json
+049fb79e0b69606ea9e244ab47ba18c95c60a8a0 data\caffeinated\loot_table\blocks\civet_scat.json
 8b8e67a4f2fbd3f51a69d1359cceb2704429f4c3 data\caffeinated\loot_table\blocks\coffee_berry_crate.json
 d481f7802dfc0e83cd271518b47e73b256a24d2f data\caffeinated\loot_table\blocks\flowering_coffee_shrub.json
 548d115eeb79b74d3fbe03951bdc179110ed6f8a data\caffeinated\loot_table\blocks\coffee_cauldron.json

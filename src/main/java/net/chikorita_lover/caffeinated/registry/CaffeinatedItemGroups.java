@@ -29,7 +29,7 @@ public class CaffeinatedItemGroups {
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.NATURAL).register(entries -> {
             entries.addBefore(Items.GLOW_BERRIES, CaffeinatedItems.COFFEE_BERRIES);
-            entries.addBefore(Blocks.BEE_NEST, CaffeinatedBlocks.COFFEE_BEAN_BLOCK, CaffeinatedBlocks.GROUND_COFFEE_BLOCK);
+            entries.addBefore(Blocks.BEE_NEST, CaffeinatedBlocks.CIVET_SCAT, CaffeinatedBlocks.COFFEE_BEAN_BLOCK, CaffeinatedBlocks.GROUND_COFFEE_BLOCK);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(entries -> {
             entries.addBefore(Items.SWEET_BERRIES, CaffeinatedItems.COFFEE_BERRIES);
@@ -48,6 +48,7 @@ public class CaffeinatedItemGroups {
             entries.add(CaffeinatedItems.COFFEE_BERRIES, parentTabOnly);
             entries.add(CaffeinatedItems.COFFEE_BEANS, parentTabOnly);
             entries.add(CaffeinatedItems.GROUND_COFFEE, parentTabOnly);
+            entries.add(CaffeinatedBlocks.CIVET_SCAT, parentTabOnly);
             entries.add(CaffeinatedBlocks.COFFEE_BEAN_BLOCK, parentTabOnly);
             entries.add(CaffeinatedBlocks.GROUND_COFFEE_BLOCK, parentTabOnly);
             entries.add(CaffeinatedBlocks.COFFEE_STAINED_WOOL, parentTabOnly);

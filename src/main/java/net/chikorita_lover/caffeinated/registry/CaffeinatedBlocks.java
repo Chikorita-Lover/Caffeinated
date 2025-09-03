@@ -18,6 +18,7 @@ public class CaffeinatedBlocks {
     public static final Block COFFEE_SHRUB = register("coffee_shrub", new CoffeeShrubBlock(AbstractBlock.Settings.create().ticksRandomly().noCollision().sounds(BlockSoundGroup.AZALEA)));
     public static final Block FLOWERING_COFFEE_SHRUB = register("flowering_coffee_shrub", new FloweringCoffeeShrubBlock(AbstractBlock.Settings.create().ticksRandomly().noCollision().sounds(BlockSoundGroup.FLOWERING_AZALEA)));
     public static final Block POTTED_COFFEE_SHRUB = register("potted_coffee_shrub", new FlowerPotBlock(COFFEE_SHRUB, AbstractBlock.Settings.create().breakInstantly().nonOpaque()));
+    public static final Block CIVET_SCAT = registerBlockWithItem("civet_scat", new ScatBlock(AbstractBlock.Settings.create().mapColor(MapColor.OAK_TAN).sounds(BlockSoundGroup.WART_BLOCK).strength(0.25F)));
     public static final Block COFFEE_BEAN_BLOCK = registerBlockWithItem("coffee_bean_block", new Block(AbstractBlock.Settings.create().mapColor(MapColor.SPRUCE_BROWN).sounds(CaffeinatedBlockSoundGroup.COFFEE_BEAN_BLOCK).strength(1.8F, 3.0F)));
     public static final Block GROUND_COFFEE_BLOCK = registerBlockWithItem("ground_coffee_block", new ColoredFallingBlock(new ColorCode(0x814D2B), AbstractBlock.Settings.create().mapColor(MapColor.SPRUCE_BROWN).strength(0.5F).sounds(CaffeinatedBlockSoundGroup.GROUND_COFFEE_BLOCK)));
     public static final Block COFFEE_STAINED_WOOL = registerBlockWithItem("coffee_stained_wool", new Block(AbstractBlock.Settings.copy(Blocks.WHITE_WOOL).mapColor(MapColor.OFF_WHITE)));

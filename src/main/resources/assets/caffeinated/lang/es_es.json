@@ -6,6 +6,7 @@
 	"advancements.husbandry.brew_coffee.description": "Añade café molido al agua en una hoguera con caldero para preparar café solo.",
 	"advancements.husbandry.brew_coffee.title": "Despierta y huele el café",
 	"block.caffeinated.cauldron_campfire": "Hoguera con caldero",
+	"block.caffeinated.civet_scat": "Heces de civeta",
 	"block.caffeinated.coffee_bean_block": "Bloque de granos de café",
 	"block.caffeinated.coffee_berry_crate": "Cajón de cerezas de café",
 	"block.caffeinated.coffee_cauldron": "Caldero con café",
@@ -56,6 +57,8 @@
 	"subtitles.entity.civet.eat": "Civeta come",
 	"subtitles.entity.civet.hurt": "Civeta herida",
 	"subtitles.entity.civet.idle": "Civeta gruñe",
+	"subtitles.entity.civet.scat_drop": "Civeta deja heces",
+	"subtitles.entity.civet.sniff": "Civeta olfatea",
 	"subtitles.item.coffee_bottle.drink": "Sorbiendo",
 	"subtitles.item.ground_coffee.splash": "Café molido salpica"
 }

@@ -6,6 +6,7 @@
 	"advancements.husbandry.brew_coffee.description": "Añade café molido al agua en una fogata con caldero para preparar café negro",
 	"advancements.husbandry.brew_coffee.title": "Despierta y huele el café",
 	"block.caffeinated.cauldron_campfire": "Fogata con caldero",
+	"block.caffeinated.civet_scat": "Heces de civeta",
 	"block.caffeinated.coffee_bean_block": "Bloque de granos de café",
 	"block.caffeinated.coffee_berry_crate": "Caja de cerezas de café",
 	"block.caffeinated.coffee_cauldron": "Caldero con café",
@@ -56,6 +57,8 @@
 	"subtitles.entity.civet.eat": "Civeta comiendo",
 	"subtitles.entity.civet.hurt": "Civeta herida",
 	"subtitles.entity.civet.idle": "Gruñido de civeta",
+	"subtitles.entity.civet.scat_drop": "Civeta dejando heces",
+	"subtitles.entity.civet.sniff": "Civeta olfateando",
 	"subtitles.item.coffee_bottle.drink": "Sorbiendo",
 	"subtitles.item.ground_coffee.splash": "Café molido salpicando"
 }

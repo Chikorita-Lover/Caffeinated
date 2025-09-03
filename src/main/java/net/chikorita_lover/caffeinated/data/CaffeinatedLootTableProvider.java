@@ -5,10 +5,8 @@ import net.chikorita_lover.caffeinated.registry.CaffeinatedBlocks;
 import net.chikorita_lover.caffeinated.registry.CaffeinatedItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
-import net.minecraft.block.BedBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.enums.BedPart;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
@@ -34,6 +32,7 @@ public class CaffeinatedLootTableProvider extends FabricBlockLootTableProvider {
     public void generate() {
         this.addDrop(CaffeinatedBlocks.FLOWERING_COFFEE_SHRUB, this::floweringCoffeeShrubDrops);
         this.addPottedPlantDrops(CaffeinatedBlocks.POTTED_COFFEE_SHRUB);
+        this.addDrop(CaffeinatedBlocks.CIVET_SCAT);
         this.addDrop(CaffeinatedBlocks.COFFEE_BEAN_BLOCK);
         this.addDrop(CaffeinatedBlocks.GROUND_COFFEE_BLOCK);
         this.addDrop(CaffeinatedBlocks.COFFEE_STAINED_WOOL);
