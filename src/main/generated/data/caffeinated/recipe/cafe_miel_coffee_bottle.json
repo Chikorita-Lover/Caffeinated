@@ -3,7 +3,7 @@
   "brewingtime": 600,
   "experience": 1.0,
   "ingredient": {
-    "tag": "caffeinated:black_coffee_bottles"
+    "item": "caffeinated:coffee_bottle"
   },
   "reagent": {
     "item": "minecraft:honey_bottle"

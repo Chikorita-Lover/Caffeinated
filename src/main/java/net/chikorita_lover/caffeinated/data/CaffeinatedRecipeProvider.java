@@ -4,7 +4,6 @@ import net.chikorita_lover.caffeinated.Caffeinated;
 import net.chikorita_lover.caffeinated.recipe.CoffeeBrewingRecipeJsonBuilder;
 import net.chikorita_lover.caffeinated.registry.CaffeinatedBlocks;
 import net.chikorita_lover.caffeinated.registry.CaffeinatedItems;
-import net.chikorita_lover.caffeinated.registry.tag.CaffeinatedItemTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditions;
@@ -45,13 +44,13 @@ public class CaffeinatedRecipeProvider extends FabricRecipeProvider {
         offerCarpetRecipe(exporter, CaffeinatedBlocks.COFFEE_STAINED_CARPET, CaffeinatedBlocks.COFFEE_STAINED_WOOL);
         ShapelessRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, CaffeinatedBlocks.COFFEE_STAINED_CARPET).input(CaffeinatedItems.COFFEE_BOTTLE).input(Blocks.WHITE_CARPET).criterion(hasItem(CaffeinatedItems.COFFEE_BOTTLE), conditionsFromItem(CaffeinatedItems.COFFEE_BOTTLE)).offerTo(exporter, Caffeinated.of("coffee_stained_carpet_from_white_carpet"));
 
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, CaffeinatedItems.JAVA_BANNER_PATTERN).input(Items.PAPER).input(CaffeinatedItemTags.BLACK_COFFEE_BOTTLES).criterion("has_black_coffee_bottle", conditionsFromTag(CaffeinatedItemTags.BLACK_COFFEE_BOTTLES)).offerTo(exporter);
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, CaffeinatedItems.JAVA_BANNER_PATTERN).input(Items.PAPER).input(CaffeinatedItems.COFFEE_BOTTLE).criterion(hasItem(CaffeinatedItems.COFFEE_BOTTLE), conditionsFromItem(CaffeinatedItems.COFFEE_BOTTLE)).offerTo(exporter);
 
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.FOOD, CaffeinatedItems.TIRAMISU).input(CaffeinatedItemTags.BLACK_COFFEE_BOTTLES).input(Items.WHEAT).input(Items.SUGAR).input(ConventionalItemTags.MILK_BUCKETS).input(Items.EGG).group(getItemPath(CaffeinatedItems.TIRAMISU)).criterion("has_black_coffee_bottle", conditionsFromTag(CaffeinatedItemTags.BLACK_COFFEE_BOTTLES)).offerTo(exporter);
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.FOOD, CaffeinatedItems.TIRAMISU).input(CaffeinatedItems.COFFEE_BOTTLE).input(Items.WHEAT).input(Items.SUGAR).input(ConventionalItemTags.MILK_BUCKETS).input(Items.EGG).group(getItemPath(CaffeinatedItems.TIRAMISU)).criterion(hasItem(CaffeinatedItems.COFFEE_BOTTLE), conditionsFromItem(CaffeinatedItems.COFFEE_BOTTLE)).offerTo(exporter);
         ShapedRecipeJsonBuilder.create(RecipeCategory.FOOD, CaffeinatedItems.TIRAMISU).input('#', CaffeinatedItems.TIRAMISU_SLICE).pattern("##").pattern("##").group(getItemPath(CaffeinatedItems.TIRAMISU)).criterion(hasItem(CaffeinatedItems.TIRAMISU_SLICE), conditionsFromItem(CaffeinatedItems.TIRAMISU_SLICE)).offerTo(farmersDelightExporter, Caffeinated.of("tiramisu_from_slices"));
 
         CoffeeBrewingRecipeJsonBuilder.create(Ingredient.ofItems(Items.POTION), Ingredient.ofItems(CaffeinatedItems.GROUND_COFFEE), RecipeCategory.FOOD, CaffeinatedItems.COFFEE_BOTTLE, 1.0F, 600).criterion(hasItem(CaffeinatedItems.GROUND_COFFEE), conditionsFromItem(CaffeinatedItems.GROUND_COFFEE)).offerTo(exporter);
-        CoffeeBrewingRecipeJsonBuilder.create(Ingredient.fromTag(CaffeinatedItemTags.BLACK_COFFEE_BOTTLES), Ingredient.fromTag(ConventionalItemTags.MILK_BUCKETS), RecipeCategory.FOOD, CaffeinatedItems.LATTE_COFFEE_BOTTLE, 1.0F, 600).criterion(hasItem(Items.MILK_BUCKET), conditionsFromTag(ConventionalItemTags.MILK_BUCKETS)).offerTo(exporter);
-        CoffeeBrewingRecipeJsonBuilder.create(Ingredient.fromTag(CaffeinatedItemTags.BLACK_COFFEE_BOTTLES), Ingredient.ofItems(Items.HONEY_BOTTLE), RecipeCategory.FOOD, CaffeinatedItems.CAFE_MIEL_COFFEE_BOTTLE, 1.0F, 600).criterion(hasItem(Items.HONEY_BOTTLE), conditionsFromItem(Items.HONEY_BOTTLE)).offerTo(exporter);
+        CoffeeBrewingRecipeJsonBuilder.create(Ingredient.ofItems(CaffeinatedItems.COFFEE_BOTTLE), Ingredient.fromTag(ConventionalItemTags.MILK_BUCKETS), RecipeCategory.FOOD, CaffeinatedItems.LATTE_COFFEE_BOTTLE, 1.0F, 600).criterion(hasItem(Items.MILK_BUCKET), conditionsFromTag(ConventionalItemTags.MILK_BUCKETS)).offerTo(exporter);
+        CoffeeBrewingRecipeJsonBuilder.create(Ingredient.ofItems(CaffeinatedItems.COFFEE_BOTTLE), Ingredient.ofItems(Items.HONEY_BOTTLE), RecipeCategory.FOOD, CaffeinatedItems.CAFE_MIEL_COFFEE_BOTTLE, 1.0F, 600).criterion(hasItem(Items.HONEY_BOTTLE), conditionsFromItem(Items.HONEY_BOTTLE)).offerTo(exporter);
     }
 }

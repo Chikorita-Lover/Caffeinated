@@ -1,0 +1,14 @@
+// 1.21.1	2025-09-03T18:20:31.5561391	Caffeinated/Tags for minecraft:block
+a51becefdb60be838a24bbccdb2d54533169edfb data\minecraft\tags\block\camel_sand_step_sound_blocks.json
+28a355c0c955d5e560fbb227b5ad92a007fc7766 data\minecraft\tags\block\bee_growables.json
+80790e06c4671eba1ca38fd150dac9b6f886e283 data\minecraft\tags\block\flower_pots.json
+2098a8d810cf19710a03b3e702f90f1cb8cd310b data\minecraft\tags\block\wool_carpets.json
+6a874f1ee238599ebdfae791b8e6edb96aff4df8 data\caffeinated\tags\block\cauldron_campfires.json
+5a578d94fd7129349f9597f0fec1931e2b8a1551 data\minecraft\tags\block\tall_flowers.json
+12a4c2e67cc09334065e40d26093656f649e57fe data\minecraft\tags\block\cauldrons.json
+3eceb5fd32ee615167a7a5a00e5d610436d4e957 data\minecraft\tags\block\mineable\axe.json
+a23520cb9a9c285863dabcd07bd11fcc3c62f6b4 data\minecraft\tags\block\mineable\hoe.json
+a23520cb9a9c285863dabcd07bd11fcc3c62f6b4 data\minecraft\tags\block\mushroom_grow_block.json
+6d60a3d6afa591133bc396d1444098095408a07b data\minecraft\tags\block\wool.json
+ad643e3e41ff7904b265723c87f5098dabdf5ae0 data\caffeinated\tags\block\civets_spawnable_on.json
+a51becefdb60be838a24bbccdb2d54533169edfb data\minecraft\tags\block\mineable\shovel.json

@@ -4,7 +4,7 @@
     "brew_coffee": {
       "conditions": {
         "result": {
-          "items": "#caffeinated:black_coffee_bottles"
+          "items": "caffeinated:coffee_bottle"
         }
       },
       "trigger": "caffeinated:brew_coffee"

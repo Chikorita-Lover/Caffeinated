@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_black_coffee_bottle": {
+    "has_coffee_bottle": {
       "conditions": {
         "items": [
           {
-            "items": "#caffeinated:black_coffee_bottles"
+            "items": "caffeinated:coffee_bottle"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_black_coffee_bottle"
+      "has_coffee_bottle"
     ]
   ],
   "rewards": {
