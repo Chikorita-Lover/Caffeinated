@@ -15,10 +15,7 @@ import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.Items;
-import net.minecraft.recipe.CampfireCookingRecipe;
 import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.RecipeSerializer;
-import net.minecraft.recipe.SmokingRecipe;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
 
@@ -34,8 +31,6 @@ public class CaffeinatedRecipeProvider extends FabricRecipeProvider {
         final RecipeExporter farmersDelightExporter = this.withConditions(exporter, ResourceConditions.allModsLoaded("farmersdelight"));
 
         CookingRecipeJsonBuilder.createSmelting(Ingredient.ofItems(CaffeinatedItems.COFFEE_BERRIES), RecipeCategory.MISC, CaffeinatedItems.COFFEE_BEANS, 0.35F, 200).group(getItemPath(CaffeinatedItems.COFFEE_BEANS)).criterion(hasItem(CaffeinatedItems.COFFEE_BERRIES), conditionsFromItem(CaffeinatedItems.COFFEE_BERRIES)).offerTo(exporter);
-        CookingRecipeJsonBuilder.create(Ingredient.ofItems(CaffeinatedItems.COFFEE_BERRIES), RecipeCategory.MISC, CaffeinatedItems.COFFEE_BEANS, 0.35F, 100, RecipeSerializer.SMOKING, SmokingRecipe::new).criterion(hasItem(CaffeinatedItems.COFFEE_BERRIES), conditionsFromItem(CaffeinatedItems.COFFEE_BERRIES)).offerTo(exporter, Caffeinated.of(getItemPath(CaffeinatedItems.COFFEE_BEANS) + "_from_smoking"));
-        CookingRecipeJsonBuilder.create(Ingredient.ofItems(CaffeinatedItems.COFFEE_BERRIES), RecipeCategory.MISC, CaffeinatedItems.COFFEE_BEANS, 0.35F, 600, RecipeSerializer.CAMPFIRE_COOKING, CampfireCookingRecipe::new).criterion(hasItem(CaffeinatedItems.COFFEE_BERRIES), conditionsFromItem(CaffeinatedItems.COFFEE_BERRIES)).offerTo(exporter, Caffeinated.of(getItemPath(CaffeinatedItems.COFFEE_BEANS) + "_from_campfire_cooking"));
         CookingRecipeJsonBuilder.createSmelting(Ingredient.ofItems(CaffeinatedBlocks.CIVET_SCAT), RecipeCategory.MISC, CaffeinatedItems.COFFEE_BEANS, 0.35F, 200).criterion(hasItem(CaffeinatedBlocks.CIVET_SCAT), conditionsFromItem(CaffeinatedBlocks.CIVET_SCAT)).offerTo(exporter, Caffeinated.of(convertBetween(CaffeinatedItems.COFFEE_BEANS, CaffeinatedBlocks.CIVET_SCAT)));
 
         offer2x2CompactingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, CaffeinatedBlocks.COFFEE_BEAN_BLOCK, CaffeinatedItems.COFFEE_BEANS);

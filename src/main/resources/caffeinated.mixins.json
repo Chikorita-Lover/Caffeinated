@@ -6,7 +6,6 @@
 	"mixins": [
 		"CampfireBlockMixin",
 		"CauldronBlockMixin",
-		"CookingRecipeJsonBuilderMixin",
 		"GrowCropsGoalMixin",
 		"HungerManagerMixin",
 		"ItemMixin",
@@ -16,8 +15,7 @@
 	],
 	"client": [
 		"ClientRecipeBookMixin",
-		"InGameHudMixin",
-		"RecipeBookGroupMixin"
+		"InGameHudMixin"
 	],
 	"server": [],
 	"injectors": {
