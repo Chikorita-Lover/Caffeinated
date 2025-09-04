@@ -70,7 +70,7 @@ public class GroundCoffeeCauldronBlock extends LeveledCauldronBlock implements H
     @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (HeatableCauldron.isLitFireInRange(world, pos)) {
-            BlockState newState = CaffeinatedBlocks.COFFEE_CAULDRON.getStateWithProperties(state);
+            BlockState newState = CaffeinatedBlocks.COFFEE_CAULDRON.getStateWithProperties(state).with(CoffeeCauldronBlock.HAS_EXPERIENCE, true);
             world.setBlockState(pos, newState);
             world.playSound(null, pos, CaffeinatedSoundEvents.BLOCK_CAULDRON_BREW, SoundCategory.BLOCKS);
             world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(newState));

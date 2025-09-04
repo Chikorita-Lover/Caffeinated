@@ -1,6 +1,6 @@
 package net.chikorita_lover.caffeinated;
 
-import net.chikorita_lover.caffeinated.advancement.BrewCoffeeCriterion;
+import net.chikorita_lover.caffeinated.advancement.BrewedCoffeeCriterion;
 import net.chikorita_lover.caffeinated.block.CoffeeCauldronBlock;
 import net.chikorita_lover.caffeinated.block.GroundCoffeeCauldronBlock;
 import net.chikorita_lover.caffeinated.entity.CivetEntity;
@@ -11,7 +11,6 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.SpawnLocationTypes;
 import net.minecraft.entity.SpawnRestriction;
@@ -32,7 +31,7 @@ import org.slf4j.LoggerFactory;
 public class Caffeinated implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger("Caffeinated");
     public static final String NAMESPACE = "caffeinated";
-    public static final BrewCoffeeCriterion BREW_COFFEE_CRITERION = Registry.register(Registries.CRITERION, of("brew_coffee"), new BrewCoffeeCriterion());
+    public static final BrewedCoffeeCriterion BREWED_COFFEE_CRITERION = Registry.register(Registries.CRITERION, of("brewed_coffee"), new BrewedCoffeeCriterion());
     public static final RecipeSerializer<CoffeeBrewingRecipe> COFFEE_BREWING_SERIALIZER = Registry.register(Registries.RECIPE_SERIALIZER, of("coffee_brewing"), new CoffeeBrewingRecipe.Serializer<CoffeeBrewingRecipe>(CoffeeBrewingRecipe::new, 600) {
     });
 

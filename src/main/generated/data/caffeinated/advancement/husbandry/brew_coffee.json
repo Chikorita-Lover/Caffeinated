@@ -2,12 +2,7 @@
   "parent": "minecraft:husbandry/root",
   "criteria": {
     "brew_coffee": {
-      "conditions": {
-        "result": {
-          "items": "caffeinated:coffee_bottle"
-        }
-      },
-      "trigger": "caffeinated:brew_coffee"
+      "trigger": "caffeinated:brewed_coffee"
     }
   },
   "display": {

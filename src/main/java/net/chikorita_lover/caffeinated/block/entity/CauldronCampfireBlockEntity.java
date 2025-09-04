@@ -1,6 +1,5 @@
 package net.chikorita_lover.caffeinated.block.entity;
 
-import net.chikorita_lover.caffeinated.Caffeinated;
 import net.chikorita_lover.caffeinated.block.CauldronCampfireBlock;
 import net.chikorita_lover.caffeinated.recipe.CoffeeBrewingRecipe;
 import net.chikorita_lover.caffeinated.recipe.CoffeeBrewingRecipeInput;
@@ -228,7 +227,6 @@ public class CauldronCampfireBlockEntity extends BlockEntity implements RecipeUn
             }
             player.onRecipeCrafted(recipe, this.inventory);
             player.incrementStat(Stats.CRAFTED.getOrCreateStat(coffeeBrewingRecipe.getResult(this.world.getRegistryManager()).getItem()));
-            Caffeinated.BREW_COFFEE_CRITERION.trigger(player, coffeeBrewingRecipe.getResult(this.getWorld().getRegistryManager()));
             dropExperience(player.getServerWorld(), player.getPos(), coffeeBrewingRecipe.getExperience());
         }
         this.recipesUsed.clear();

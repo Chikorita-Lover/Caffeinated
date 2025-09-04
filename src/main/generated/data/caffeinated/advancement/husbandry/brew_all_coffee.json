@@ -1,29 +1,28 @@
 {
   "parent": "caffeinated:husbandry/brew_coffee",
   "criteria": {
-    "brew_cafe_miel_coffee_bottle": {
+    "cafe_miel_coffee_bottle": {
       "conditions": {
-        "result": {
-          "items": "caffeinated:cafe_miel_coffee_bottle"
-        }
+        "items": [
+          {
+            "items": "caffeinated:cafe_miel_coffee_bottle"
+          }
+        ]
       },
-      "trigger": "caffeinated:brew_coffee"
+      "trigger": "minecraft:inventory_changed"
     },
-    "brew_coffee_bottle": {
-      "conditions": {
-        "result": {
-          "items": "caffeinated:coffee_bottle"
-        }
-      },
-      "trigger": "caffeinated:brew_coffee"
+    "coffee_bottle": {
+      "trigger": "caffeinated:brewed_coffee"
     },
-    "brew_latte_coffee_bottle": {
+    "latte_coffee_bottle": {
       "conditions": {
-        "result": {
-          "items": "caffeinated:latte_coffee_bottle"
-        }
+        "items": [
+          {
+            "items": "caffeinated:latte_coffee_bottle"
+          }
+        ]
       },
-      "trigger": "caffeinated:brew_coffee"
+      "trigger": "minecraft:inventory_changed"
     }
   },
   "display": {
@@ -41,13 +40,13 @@
   },
   "requirements": [
     [
-      "brew_coffee_bottle"
+      "latte_coffee_bottle"
     ],
     [
-      "brew_latte_coffee_bottle"
+      "cafe_miel_coffee_bottle"
     ],
     [
-      "brew_cafe_miel_coffee_bottle"
+      "coffee_bottle"
     ]
   ],
   "rewards": {
