@@ -70,7 +70,7 @@ public class CauldronCampfireBlockEntity extends BlockEntity implements RecipeUn
                 cauldronCampfire.clear();
                 cauldronCampfire.setStack(0, outputStack);
                 optional.ifPresent(recipe -> cauldronCampfire.recipesUsed.add(recipe.id()));
-                world.playSound(null, pos, CaffeinatedSoundEvents.BLOCK_CAULDRON_CAMPFIRE_BREW, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                world.playSound(null, pos, CaffeinatedSoundEvents.BLOCK_CAULDRON_BREW, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 world.updateListeners(pos, state, state, Block.NOTIFY_ALL);
                 world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(state));
             }
@@ -92,7 +92,7 @@ public class CauldronCampfireBlockEntity extends BlockEntity implements RecipeUn
                 world.addParticle(ParticleTypes.SMOKE, pos.getX() + 0.5 + MathHelper.sin(f) * 0.45, pos.getY() + random.nextBetween(6, 8) / 16.0, pos.getZ() + 0.5 + MathHelper.cos(f) * 0.45, 0.0, 5.0E-4, 0.0);
             }
             if (random.nextInt(50) == 0) {
-                world.playSoundAtBlockCenter(pos, CaffeinatedSoundEvents.BLOCK_CAULDRON_CAMPFIRE_BUBBLE, SoundCategory.BLOCKS, hasReagent ? 0.2F : 0.1F, hasReagent ? 1.0F : 2.0F, false);
+                world.playSoundAtBlockCenter(pos, CaffeinatedSoundEvents.BLOCK_CAULDRON_BUBBLE, SoundCategory.BLOCKS, hasReagent ? 0.2F : 0.1F, hasReagent ? 1.0F : 2.0F, false);
             }
         }
     }

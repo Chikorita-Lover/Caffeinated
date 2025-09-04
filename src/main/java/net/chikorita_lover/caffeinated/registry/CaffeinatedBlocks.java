@@ -24,8 +24,8 @@ public class CaffeinatedBlocks {
     public static final Block COFFEE_STAINED_WOOL = registerBlockWithItem("coffee_stained_wool", new Block(AbstractBlock.Settings.copy(Blocks.WHITE_WOOL).mapColor(MapColor.OFF_WHITE)));
     public static final Block COFFEE_STAINED_CARPET = registerBlockWithItem("coffee_stained_carpet", new DyedCarpetBlock(DyeColor.WHITE, AbstractBlock.Settings.copy(Blocks.WHITE_CARPET).mapColor(MapColor.OFF_WHITE)));
     public static final Block COFFEE_BERRY_CRATE = registerBlockWithItem("coffee_berry_crate", new Block(AbstractBlock.Settings.create().mapColor(MapColor.DARK_CRIMSON).sounds(BlockSoundGroup.WOOD).strength(2.0F, 3.0F)));
+    public static final Block GROUND_COFFEE_CAULDRON = register("ground_coffee_cauldron", new GroundCoffeeCauldronBlock(AbstractBlock.Settings.copy(Blocks.CAULDRON)));
     public static final Block COFFEE_CAULDRON = register("coffee_cauldron", new CoffeeCauldronBlock(AbstractBlock.Settings.copy(Blocks.CAULDRON)));
-    public static final Block GROUND_COFFEE_CAULDRON = register("ground_coffee_cauldron", new CoffeeCauldronBlock(AbstractBlock.Settings.copy(Blocks.CAULDRON)));
 
     public static final Block CAULDRON_CAMPFIRE = register("cauldron_campfire", createCauldronCampfire(Blocks.CAMPFIRE, ParticleTypes.FLAME));
     public static final Block SOUL_CAULDRON_CAMPFIRE = register("soul_cauldron_campfire", createCauldronCampfire(Blocks.SOUL_CAMPFIRE, ParticleTypes.SOUL_FIRE_FLAME));

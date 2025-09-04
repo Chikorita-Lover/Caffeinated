@@ -1,4 +1,4 @@
-// 1.21.1	2025-09-03T18:20:31.5571369	Caffeinated/Model Definitions
+// 1.21.1	2025-09-03T21:00:29.2910491	Caffeinated/Model Definitions
 26f35f3a03b0d53578efd2c555721b08353d75f0 assets\caffeinated\blockstates\coffee_cauldron.json
 b1a481861132973fe035c9b9ce7613e15938034c assets\caffeinated\models\block\coffee_berry_crate.json
 7eea00b3f89da1c214d0719b54a196746bdaef55 assets\caffeinated\models\block\coffee_stained_carpet.json
@@ -11,8 +11,8 @@ cd254ba40cfd07d6c01d66a963e5ec83ed478aef assets\caffeinated\blockstates\coffee_b
 2078aae9dd460adbf0bf14e46615e32012f351e8 assets\caffeinated\blockstates\ground_coffee_cauldron.json
 16db00fbb67b98528c1a99e61640adc411cc4cff assets\caffeinated\models\item\tiramisu.json
 3ef771d34d7bc76165d6a5f7053ea5ff27bc44dd assets\caffeinated\blockstates\coffee_bean_block.json
-2ee0688f44b78a48941720e3223b7bf3a9133161 assets\caffeinated\blockstates\potted_coffee_shrub.json
 5873c2f6e62014035c0873f84f3b32eb1becc76f assets\caffeinated\models\block\civet_scat.json
+2ee0688f44b78a48941720e3223b7bf3a9133161 assets\caffeinated\blockstates\potted_coffee_shrub.json
 50804beb94c1a58c883df514333ff7d2c2807a42 assets\caffeinated\models\item\coffee_bean_block.json
 0dab1d0bc7608970cc968c8f8569497fae0b2295 assets\caffeinated\models\item\ground_coffee.json
 ffcb5afccb3a6b30399f263654799949096594da assets\caffeinated\blockstates\cauldron_campfire.json

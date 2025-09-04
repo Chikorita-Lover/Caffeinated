@@ -1,6 +1,8 @@
 package net.chikorita_lover.caffeinated;
 
 import net.chikorita_lover.caffeinated.advancement.BrewCoffeeCriterion;
+import net.chikorita_lover.caffeinated.block.CoffeeCauldronBlock;
+import net.chikorita_lover.caffeinated.block.GroundCoffeeCauldronBlock;
 import net.chikorita_lover.caffeinated.entity.CivetEntity;
 import net.chikorita_lover.caffeinated.recipe.CoffeeBrewingRecipe;
 import net.chikorita_lover.caffeinated.registry.*;
@@ -52,6 +54,8 @@ public class Caffeinated implements ModInitializer {
         CaffeinatedStats.register();
         CaffeinatedStatusEffects.register();
         CaffeinatedTradeOffers.register();
+        CoffeeCauldronBlock.registerBehavior();
+        GroundCoffeeCauldronBlock.registerBehavior();
 
         SpawnRestriction.register(CaffeinatedEntities.CIVET, SpawnLocationTypes.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, CivetEntity::canSpawn);
 

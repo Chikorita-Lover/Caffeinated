@@ -18,6 +18,7 @@ public class CaffeinatedBlockTagProvider extends FabricTagProvider.BlockTagProvi
     protected void configure(RegistryWrapper.WrapperLookup registries) {
         this.getOrCreateTagBuilder(CaffeinatedBlockTags.CAULDRON_CAMPFIRES).add(CaffeinatedBlocks.CAULDRON_CAMPFIRE, CaffeinatedBlocks.SOUL_CAULDRON_CAMPFIRE);
         this.getOrCreateTagBuilder(CaffeinatedBlockTags.CIVETS_SPAWNABLE_ON).forceAddTag(BlockTags.ANIMALS_SPAWNABLE_ON).forceAddTag(BlockTags.LEAVES).forceAddTag(BlockTags.LOGS);
+        this.getOrCreateTagBuilder(CaffeinatedBlockTags.LIT_FIRES).forceAddTag(BlockTags.CAMPFIRES).forceAddTag(BlockTags.FIRE);
         this.getOrCreateTagBuilder(BlockTags.BEE_GROWABLES).add(CaffeinatedBlocks.COFFEE_SHRUB, CaffeinatedBlocks.FLOWERING_COFFEE_SHRUB);
         this.getOrCreateTagBuilder(BlockTags.CAMEL_SAND_STEP_SOUND_BLOCKS).add(CaffeinatedBlocks.GROUND_COFFEE_BLOCK);
         this.getOrCreateTagBuilder(BlockTags.CAULDRONS).add(CaffeinatedBlocks.GROUND_COFFEE_CAULDRON, CaffeinatedBlocks.COFFEE_CAULDRON);

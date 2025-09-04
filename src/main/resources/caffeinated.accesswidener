@@ -8,3 +8,4 @@ mutable field net/minecraft/loot/LootTable$Builder pools Lcom/google/common/coll
 accessible field net/minecraft/loot/entry/ItemEntry item Lnet/minecraft/registry/entry/RegistryEntry;
 accessible field net/minecraft/loot/LootPool$Builder entries Lcom/google/common/collect/ImmutableList$Builder;
 mutable field net/minecraft/loot/LootPool$Builder entries Lcom/google/common/collect/ImmutableList$Builder;
+accessible method net/minecraft/block/AbstractCauldronBlock getFluidHeight (Lnet/minecraft/block/BlockState;)D
