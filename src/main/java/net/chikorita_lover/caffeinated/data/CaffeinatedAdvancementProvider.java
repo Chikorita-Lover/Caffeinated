@@ -10,6 +10,7 @@ import net.minecraft.advancement.Advancement;
 import net.minecraft.advancement.AdvancementEntry;
 import net.minecraft.advancement.AdvancementFrame;
 import net.minecraft.advancement.AdvancementRewards;
+import net.minecraft.advancement.criterion.ConsumeItemCriterion;
 import net.minecraft.advancement.criterion.InventoryChangedCriterion;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -27,7 +28,7 @@ public class CaffeinatedAdvancementProvider extends FabricAdvancementProvider {
 
     private static Advancement.Builder requireAllCoffeeBottles(Advancement.Builder builder, Item... items) {
         for (Item item : items) {
-            builder.criterion(Registries.ITEM.getId(item).getPath(), InventoryChangedCriterion.Conditions.items(item));
+            builder.criterion(Registries.ITEM.getId(item).getPath(), ConsumeItemCriterion.Conditions.item(item));
         }
         return builder;
     }
@@ -36,7 +37,7 @@ public class CaffeinatedAdvancementProvider extends FabricAdvancementProvider {
     public void generateAdvancement(RegistryWrapper.WrapperLookup registries, Consumer<AdvancementEntry> exporter) {
         AdvancementEntry husbandryRoot = new AdvancementEntry(Identifier.ofVanilla("husbandry/root"), null);
         AdvancementEntry brewCoffee = Advancement.Builder.create().parent(husbandryRoot).display(CaffeinatedItems.COFFEE_BOTTLE, Text.translatable("advancements.husbandry.brew_coffee.title"), Text.translatable("advancements.husbandry.brew_coffee.description"), null, AdvancementFrame.TASK, true, true, false).criterion("brew_coffee", BrewedCoffeeCriterion.Conditions.create()).build(exporter, Caffeinated.NAMESPACE + ":husbandry/brew_coffee");
-        requireAllCoffeeBottles(Advancement.Builder.create().parent(brewCoffee).display(CaffeinatedItems.LATTE_COFFEE_BOTTLE, Text.translatable("advancements.husbandry.brew_all_coffee.title"), Text.translatable("advancements.husbandry.brew_all_coffee.description"), null, AdvancementFrame.CHALLENGE, true, true, false), CaffeinatedItems.LATTE_COFFEE_BOTTLE, CaffeinatedItems.CAFE_MIEL_COFFEE_BOTTLE).criterion("coffee_bottle", BrewedCoffeeCriterion.Conditions.create()).rewards(AdvancementRewards.Builder.experience(100)).build(exporter, Caffeinated.NAMESPACE + ":husbandry/brew_all_coffee");
+        requireAllCoffeeBottles(Advancement.Builder.create().parent(brewCoffee).display(CaffeinatedItems.LATTE_COFFEE_BOTTLE, Text.translatable("advancements.husbandry.drink_all_coffee.title"), Text.translatable("advancements.husbandry.drink_all_coffee.description"), null, AdvancementFrame.CHALLENGE, true, true, false), CaffeinatedItems.COFFEE_BOTTLE, CaffeinatedItems.LATTE_COFFEE_BOTTLE, CaffeinatedItems.CAFE_MIEL_COFFEE_BOTTLE).rewards(AdvancementRewards.Builder.experience(100)).build(exporter, Caffeinated.NAMESPACE + ":husbandry/drink_all_coffee");
         Advancement.Builder.create().parent(brewCoffee).display(CaffeinatedBlocks.TIRAMISU, Text.translatable("advancements.husbandry.bake_tiramisu.title"), Text.translatable("advancements.husbandry.bake_tiramisu.description"), null, AdvancementFrame.TASK, true, true, false).criterion("bake_tiramisu", InventoryChangedCriterion.Conditions.items(CaffeinatedBlocks.TIRAMISU)).build(exporter, Caffeinated.NAMESPACE + ":husbandry/bake_tiramisu");
     }
 }

@@ -1,21 +1,19 @@
 package net.chikorita_lover.caffeinated.registry;
 
 import net.chikorita_lover.caffeinated.Caffeinated;
-import net.chikorita_lover.caffeinated.block.CauldronCampfireBlock;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.item.*;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemGroups;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-
-import java.util.Set;
 
 public class CaffeinatedItemGroups {
     private static final RegistryKey<ItemGroup> CAFFEINATED = RegistryKey.of(RegistryKeys.ITEM_GROUP, Caffeinated.of("caffeinated"));
@@ -53,8 +51,6 @@ public class CaffeinatedItemGroups {
             entries.add(CaffeinatedBlocks.GROUND_COFFEE_BLOCK, parentTabOnly);
             entries.add(CaffeinatedBlocks.COFFEE_STAINED_WOOL, parentTabOnly);
             entries.add(CaffeinatedBlocks.COFFEE_STAINED_CARPET, parentTabOnly);
-            registerCampfiresCauldron(entries, parentTabOnly);
-            entries.add(Items.GLASS_BOTTLE, parentTabOnly);
             entries.add(CaffeinatedItems.COFFEE_BOTTLE, parentTabOnly);
             entries.add(CaffeinatedItems.LATTE_COFFEE_BOTTLE, parentTabOnly);
             entries.add(CaffeinatedItems.CAFE_MIEL_COFFEE_BOTTLE, parentTabOnly);
@@ -78,15 +74,5 @@ public class CaffeinatedItemGroups {
                 }
             }
         });
-    }
-
-    private static void registerCampfiresCauldron(FabricItemGroupEntries entries, ItemGroup.StackVisibility visibility) {
-        Set<ItemStack> set = ItemStackSet.create();
-        for (Block block : CauldronCampfireBlock.CAMPFIRE_TO_CAULDRON_CAMPFIRE.keySet()) {
-            ItemStack stack = block.asItem().getDefaultStack();
-            set.add(stack);
-        }
-        set.add(Items.CAULDRON.getDefaultStack());
-        entries.addAll(set, visibility);
     }
 }

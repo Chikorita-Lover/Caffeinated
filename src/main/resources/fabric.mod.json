@@ -29,9 +29,6 @@
     ],
     "main": [
       "net.chikorita_lover.caffeinated.Caffeinated"
-    ],
-    "mm:early_risers": [
-      "net.chikorita_lover.caffeinated.CaffeinatedEarlyRiser"
     ]
   },
   "mixins": [
@@ -41,8 +38,7 @@
     "fabricloader": ">=0.15.11",
     "fabric-api": "*",
     "minecraft": "~1.21.0",
-    "java": ">=21",
-    "mm": ">=2.3"
+    "java": ">=21"
   },
   "accessWidener" : "caffeinated.accesswidener"
 }

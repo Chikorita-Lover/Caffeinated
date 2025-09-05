@@ -1,7 +1,6 @@
 package net.chikorita_lover.caffeinated.data;
 
 import net.chikorita_lover.caffeinated.Caffeinated;
-import net.chikorita_lover.caffeinated.recipe.CoffeeBrewingRecipeJsonBuilder;
 import net.chikorita_lover.caffeinated.registry.CaffeinatedBlocks;
 import net.chikorita_lover.caffeinated.registry.CaffeinatedItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -48,9 +47,5 @@ public class CaffeinatedRecipeProvider extends FabricRecipeProvider {
 
         ShapelessRecipeJsonBuilder.create(RecipeCategory.FOOD, CaffeinatedItems.TIRAMISU).input(CaffeinatedItems.COFFEE_BOTTLE).input(Items.WHEAT).input(Items.SUGAR).input(ConventionalItemTags.MILK_BUCKETS).input(Items.EGG).group(getItemPath(CaffeinatedItems.TIRAMISU)).criterion(hasItem(CaffeinatedItems.COFFEE_BOTTLE), conditionsFromItem(CaffeinatedItems.COFFEE_BOTTLE)).offerTo(exporter);
         ShapedRecipeJsonBuilder.create(RecipeCategory.FOOD, CaffeinatedItems.TIRAMISU).input('#', CaffeinatedItems.TIRAMISU_SLICE).pattern("##").pattern("##").group(getItemPath(CaffeinatedItems.TIRAMISU)).criterion(hasItem(CaffeinatedItems.TIRAMISU_SLICE), conditionsFromItem(CaffeinatedItems.TIRAMISU_SLICE)).offerTo(farmersDelightExporter, Caffeinated.of("tiramisu_from_slices"));
-
-        CoffeeBrewingRecipeJsonBuilder.create(Ingredient.ofItems(Items.POTION), Ingredient.ofItems(CaffeinatedItems.GROUND_COFFEE), RecipeCategory.FOOD, CaffeinatedItems.COFFEE_BOTTLE, 1.0F, 600).criterion(hasItem(CaffeinatedItems.GROUND_COFFEE), conditionsFromItem(CaffeinatedItems.GROUND_COFFEE)).offerTo(exporter);
-        CoffeeBrewingRecipeJsonBuilder.create(Ingredient.ofItems(CaffeinatedItems.COFFEE_BOTTLE), Ingredient.fromTag(ConventionalItemTags.MILK_BUCKETS), RecipeCategory.FOOD, CaffeinatedItems.LATTE_COFFEE_BOTTLE, 1.0F, 600).criterion(hasItem(Items.MILK_BUCKET), conditionsFromTag(ConventionalItemTags.MILK_BUCKETS)).offerTo(exporter);
-        CoffeeBrewingRecipeJsonBuilder.create(Ingredient.ofItems(CaffeinatedItems.COFFEE_BOTTLE), Ingredient.ofItems(Items.HONEY_BOTTLE), RecipeCategory.FOOD, CaffeinatedItems.CAFE_MIEL_COFFEE_BOTTLE, 1.0F, 600).criterion(hasItem(Items.HONEY_BOTTLE), conditionsFromItem(Items.HONEY_BOTTLE)).offerTo(exporter);
     }
 }

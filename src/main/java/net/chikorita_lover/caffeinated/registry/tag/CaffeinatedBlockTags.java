@@ -6,7 +6,6 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 
 public class CaffeinatedBlockTags {
-    public static final TagKey<Block> CAULDRON_CAMPFIRES = of("cauldron_campfires");
     public static final TagKey<Block> CIVETS_SPAWNABLE_ON = of("civets_spawnable_on");
     public static final TagKey<Block> LIT_FIRES = of("lit_fires");
 

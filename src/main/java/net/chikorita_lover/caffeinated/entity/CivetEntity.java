@@ -3,7 +3,7 @@ package net.chikorita_lover.caffeinated.entity;
 import net.chikorita_lover.caffeinated.Caffeinated;
 import net.chikorita_lover.caffeinated.block.FloweringCoffeeShrubBlock;
 import net.chikorita_lover.caffeinated.registry.CaffeinatedBlocks;
-import net.chikorita_lover.caffeinated.registry.CaffeinatedEntities;
+import net.chikorita_lover.caffeinated.registry.CaffeinatedEntityTypes;
 import net.chikorita_lover.caffeinated.registry.CaffeinatedSoundEvents;
 import net.chikorita_lover.caffeinated.registry.tag.CaffeinatedBlockTags;
 import net.chikorita_lover.caffeinated.registry.tag.CaffeinatedItemTags;
@@ -75,7 +75,7 @@ public class CivetEntity extends AnimalEntity {
 
     @Override
     public CivetEntity createChild(ServerWorld world, PassiveEntity entity) {
-        return CaffeinatedEntities.CIVET.create(world);
+        return CaffeinatedEntityTypes.CIVET.create(world);
     }
 
     @Override

@@ -23,7 +23,7 @@ public class CaffeinatedItems {
     public static final Item TIRAMISU = register("tiramisu", new BlockItem(CaffeinatedBlocks.TIRAMISU, new Item.Settings().maxCount(1)));
     public static final Item TIRAMISU_SLICE = register("tiramisu_slice", new Item(new Item.Settings().food(CaffeinatedFoodComponents.TIRAMISU_SLICE)));
 
-    public static final Item CIVET_SPAWN_EGG = register("civet_spawn_egg", new SpawnEggItem(CaffeinatedEntities.CIVET, 0xDCCE95, 0x6F6A5F, new Item.Settings()));
+    public static final Item CIVET_SPAWN_EGG = register("civet_spawn_egg", new SpawnEggItem(CaffeinatedEntityTypes.CIVET, 0xDCCE95, 0x6F6A5F, new Item.Settings()));
 
     private static Item register(String id, Item item) {
         return Registry.register(Registries.ITEM, Caffeinated.of(id), item);

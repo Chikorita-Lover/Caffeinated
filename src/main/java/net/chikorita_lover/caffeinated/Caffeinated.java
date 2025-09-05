@@ -4,8 +4,8 @@ import net.chikorita_lover.caffeinated.advancement.BrewedCoffeeCriterion;
 import net.chikorita_lover.caffeinated.block.CoffeeCauldronBlock;
 import net.chikorita_lover.caffeinated.block.GroundCoffeeCauldronBlock;
 import net.chikorita_lover.caffeinated.entity.CivetEntity;
-import net.chikorita_lover.caffeinated.recipe.CoffeeBrewingRecipe;
 import net.chikorita_lover.caffeinated.registry.*;
+import net.chikorita_lover.caffeinated.registry.tag.CaffeinatedBiomeTags;
 import net.chikorita_lover.caffeinated.util.LootModificationUtils;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
@@ -20,7 +20,6 @@ import net.minecraft.loot.entry.EmptyEntry;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
-import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -32,8 +31,6 @@ public class Caffeinated implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger("Caffeinated");
     public static final String NAMESPACE = "caffeinated";
     public static final BrewedCoffeeCriterion BREWED_COFFEE_CRITERION = Registry.register(Registries.CRITERION, of("brewed_coffee"), new BrewedCoffeeCriterion());
-    public static final RecipeSerializer<CoffeeBrewingRecipe> COFFEE_BREWING_SERIALIZER = Registry.register(Registries.RECIPE_SERIALIZER, of("coffee_brewing"), new CoffeeBrewingRecipe.Serializer<CoffeeBrewingRecipe>(CoffeeBrewingRecipe::new, 600) {
-    });
 
     public static Identifier of(String id) {
         return Identifier.of(NAMESPACE, id);
@@ -41,14 +38,12 @@ public class Caffeinated implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        CaffeinatedBlockEntityTypes.register();
         CaffeinatedBlocks.register();
-        CaffeinatedEntities.register();
+        CaffeinatedEntityTypes.register();
         CaffeinatedItemGroups.register();
         CaffeinatedItems.register();
         CaffeinatedParticleTypes.register();
         CaffeinatedPlacedFeatures.register();
-        CaffeinatedRecipeTypes.register();
         CaffeinatedSoundEvents.register();
         CaffeinatedStats.register();
         CaffeinatedStatusEffects.register();
@@ -56,9 +51,9 @@ public class Caffeinated implements ModInitializer {
         CoffeeCauldronBlock.registerBehavior();
         GroundCoffeeCauldronBlock.registerBehavior();
 
-        SpawnRestriction.register(CaffeinatedEntities.CIVET, SpawnLocationTypes.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, CivetEntity::canSpawn);
+        SpawnRestriction.register(CaffeinatedEntityTypes.CIVET, SpawnLocationTypes.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, CivetEntity::canSpawn);
 
-        BiomeModifications.addSpawn(BiomeSelectors.tag(CaffeinatedBiomeTags.SPAWNS_CIVETS), SpawnGroup.CREATURE, CaffeinatedEntities.CIVET, 4, 1, 2);
+        BiomeModifications.addSpawn(BiomeSelectors.tag(CaffeinatedBiomeTags.SPAWNS_CIVETS), SpawnGroup.CREATURE, CaffeinatedEntityTypes.CIVET, 4, 1, 2);
 
         LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
             if (key.equals(LootTables.JUNGLE_TEMPLE_CHEST)) {

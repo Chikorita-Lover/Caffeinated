@@ -6,8 +6,6 @@ import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.block.*;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
@@ -27,15 +25,7 @@ public class CaffeinatedBlocks {
     public static final Block GROUND_COFFEE_CAULDRON = register("ground_coffee_cauldron", new GroundCoffeeCauldronBlock(AbstractBlock.Settings.copy(Blocks.CAULDRON)));
     public static final Block COFFEE_CAULDRON = register("coffee_cauldron", new CoffeeCauldronBlock(AbstractBlock.Settings.copy(Blocks.CAULDRON)));
 
-    public static final Block CAULDRON_CAMPFIRE = register("cauldron_campfire", createCauldronCampfire(Blocks.CAMPFIRE, ParticleTypes.FLAME));
-    public static final Block SOUL_CAULDRON_CAMPFIRE = register("soul_cauldron_campfire", createCauldronCampfire(Blocks.SOUL_CAMPFIRE, ParticleTypes.SOUL_FIRE_FLAME));
-
     public static final Block TIRAMISU = register("tiramisu", new TiramisuBlock(AbstractBlock.Settings.copy(Blocks.CAKE)));
-
-    private static CauldronCampfireBlock createCauldronCampfire(Block campfireBlock, SimpleParticleType particle) {
-        Block cauldronBlock = Blocks.CAULDRON;
-        return new CauldronCampfireBlock(campfireBlock, particle, AbstractBlock.Settings.copy(campfireBlock).sounds(cauldronBlock.getDefaultState().getSoundGroup()));
-    }
 
     private static Block registerBlockWithItem(String id, Block block) {
         register(id, block);

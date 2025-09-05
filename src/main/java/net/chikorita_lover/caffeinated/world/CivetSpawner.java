@@ -2,8 +2,8 @@ package net.chikorita_lover.caffeinated.world;
 
 import net.chikorita_lover.caffeinated.Caffeinated;
 import net.chikorita_lover.caffeinated.entity.CivetEntity;
-import net.chikorita_lover.caffeinated.registry.CaffeinatedBiomeTags;
-import net.chikorita_lover.caffeinated.registry.CaffeinatedEntities;
+import net.chikorita_lover.caffeinated.registry.tag.CaffeinatedBiomeTags;
+import net.chikorita_lover.caffeinated.registry.CaffeinatedEntityTypes;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.RegistryKeys;
@@ -93,7 +93,7 @@ public class CivetSpawner implements SpecialSpawner {
      * @return the number of civets spawned
      */
     private static int spawn(BlockPos pos, ServerWorld world) {
-        CivetEntity civetEntity = CaffeinatedEntities.CIVET.create(world);
+        CivetEntity civetEntity = CaffeinatedEntityTypes.CIVET.create(world);
         if (civetEntity == null) {
             return 0;
         }
