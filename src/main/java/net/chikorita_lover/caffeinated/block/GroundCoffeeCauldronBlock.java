@@ -11,6 +11,7 @@ import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.stat.Stats;
@@ -24,7 +25,7 @@ import net.minecraft.world.event.GameEvent;
 
 import java.util.Map;
 
-public class GroundCoffeeCauldronBlock extends LeveledCauldronBlock implements HeatableCauldron {
+public class GroundCoffeeCauldronBlock extends LeveledCauldronBlock {
     private static final CauldronBehavior.CauldronBehaviorMap GROUND_COFFEE_CAULDRON_BEHAVIOR = CauldronBehavior.createMap("ground_coffee");
 
     public GroundCoffeeCauldronBlock(Settings settings) {
@@ -51,7 +52,7 @@ public class GroundCoffeeCauldronBlock extends LeveledCauldronBlock implements H
     }
 
     private void scheduleFinishBrewing(World world, BlockPos pos) {
-        if (HeatableCauldron.isLitFireInRange(world, pos)) {
+        if (HeatableCauldronEffects.isLitFireInRange(world, pos)) {
             Random random = world.getRandom();
             world.scheduleBlockTick(pos, this, 300 + random.nextInt(300));
         }
@@ -69,7 +70,7 @@ public class GroundCoffeeCauldronBlock extends LeveledCauldronBlock implements H
 
     @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if (HeatableCauldron.isLitFireInRange(world, pos)) {
+        if (HeatableCauldronEffects.isLitFireInRange(world, pos)) {
             BlockState newState = CaffeinatedBlocks.COFFEE_CAULDRON.getStateWithProperties(state).with(CoffeeCauldronBlock.HAS_EXPERIENCE, true);
             world.setBlockState(pos, newState);
             world.playSound(null, pos, CaffeinatedSoundEvents.BLOCK_CAULDRON_BREW, SoundCategory.BLOCKS);
@@ -84,6 +85,13 @@ public class GroundCoffeeCauldronBlock extends LeveledCauldronBlock implements H
 
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        this.randomCauldronEffects(state, world, pos, random);
+        super.randomDisplayTick(state, world, pos, random);
+        HeatableCauldronEffects.tryCauldronEffects(state, world, pos, random);
+        if (HeatableCauldronEffects.isLitFireInRange(world, pos)) {
+            double x = pos.getX() + random.nextDouble();
+            double y = pos.getY() + 0.5 + random.nextDouble() * 0.5;
+            double z = pos.getZ() + random.nextDouble();
+            world.addParticle(ParticleTypes.LARGE_SMOKE, x, y, z, 0.0, 0.0, 0.0);
+        }
     }
 }

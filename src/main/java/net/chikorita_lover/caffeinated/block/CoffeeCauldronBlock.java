@@ -14,7 +14,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
 import net.minecraft.item.Items;
-import net.minecraft.particle.ParticleEffect;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -32,9 +31,9 @@ import net.minecraft.world.event.GameEvent;
 
 import java.util.Map;
 
-public class CoffeeCauldronBlock extends LeveledCauldronBlock implements HeatableCauldron {
-    private static final CauldronBehavior.CauldronBehaviorMap COFFEE_CAULDRON_BEHAVIOR = CauldronBehavior.createMap("coffee");
+public class CoffeeCauldronBlock extends LeveledCauldronBlock {
     public static final BooleanProperty HAS_EXPERIENCE = BooleanProperty.of("has_experience");
+    private static final CauldronBehavior.CauldronBehaviorMap COFFEE_CAULDRON_BEHAVIOR = CauldronBehavior.createMap("coffee");
 
     public CoffeeCauldronBlock(Settings settings) {
         super(null, COFFEE_CAULDRON_BEHAVIOR, settings);
@@ -89,6 +88,10 @@ public class CoffeeCauldronBlock extends LeveledCauldronBlock implements Heatabl
         });
     }
 
+    private static int getExperienceSize(World world) {
+        return 1 + world.getRandom().nextInt(3);
+    }
+
     @Override
     public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state) {
         return new ItemStack(Blocks.CAULDRON);
@@ -102,10 +105,6 @@ public class CoffeeCauldronBlock extends LeveledCauldronBlock implements Heatabl
         }
     }
 
-    private static int getExperienceSize(World world) {
-        return 1 + world.getRandom().nextInt(3);
-    }
-
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         super.appendProperties(builder);
@@ -114,11 +113,7 @@ public class CoffeeCauldronBlock extends LeveledCauldronBlock implements Heatabl
 
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        this.randomCauldronEffects(state, world, pos, random);
-    }
-
-    @Override
-    public ParticleEffect getBubbleEffect() {
-        return CaffeinatedParticleTypes.COFFEE_POP;
+        super.randomDisplayTick(state, world, pos, random);
+        HeatableCauldronEffects.tryCauldronEffects(state, world, pos, random, CaffeinatedParticleTypes.COFFEE_POP);
     }
 }

@@ -7,6 +7,7 @@ import net.minecraft.registry.tag.TagKey;
 
 public class CaffeinatedBlockTags {
     public static final TagKey<Block> CIVETS_SPAWNABLE_ON = of("civets_spawnable_on");
+    public static final TagKey<Block> HEATABLE_WATER_CAULDRONS = of("heatable_water_cauldrons");
     public static final TagKey<Block> LIT_FIRES = of("lit_fires");
 
     private static TagKey<Block> of(String id) {

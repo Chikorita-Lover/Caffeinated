@@ -1,10 +1,11 @@
-// 1.21.1	2025-09-05T15:35:17.173422	Caffeinated/Tags for minecraft:block
+// 1.21.1	2025-09-06T11:09:22.0059722	Caffeinated/Tags for minecraft:block
 4b5dce83143a2d7c235f74dacfe4ae117545a11d data\caffeinated\tags\block\lit_fires.json
 a51becefdb60be838a24bbccdb2d54533169edfb data\minecraft\tags\block\camel_sand_step_sound_blocks.json
 28a355c0c955d5e560fbb227b5ad92a007fc7766 data\minecraft\tags\block\bee_growables.json
 80790e06c4671eba1ca38fd150dac9b6f886e283 data\minecraft\tags\block\flower_pots.json
 2098a8d810cf19710a03b3e702f90f1cb8cd310b data\minecraft\tags\block\wool_carpets.json
 5a578d94fd7129349f9597f0fec1931e2b8a1551 data\minecraft\tags\block\tall_flowers.json
+351b812f7f9acc4d4f9a9d784075eb945d60eee5 data\caffeinated\tags\block\heatable_water_cauldrons.json
 12a4c2e67cc09334065e40d26093656f649e57fe data\minecraft\tags\block\cauldrons.json
 f988b0a4c7357b96edc8a02226b10077a57f7144 data\minecraft\tags\block\mineable\axe.json
 a23520cb9a9c285863dabcd07bd11fcc3c62f6b4 data\minecraft\tags\block\mineable\hoe.json

@@ -4,6 +4,7 @@ import net.chikorita_lover.caffeinated.registry.CaffeinatedBlocks;
 import net.chikorita_lover.caffeinated.registry.tag.CaffeinatedBlockTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.minecraft.block.Blocks;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.BlockTags;
 
@@ -17,6 +18,7 @@ public class CaffeinatedBlockTagProvider extends FabricTagProvider.BlockTagProvi
     @Override
     protected void configure(RegistryWrapper.WrapperLookup registries) {
         this.getOrCreateTagBuilder(CaffeinatedBlockTags.CIVETS_SPAWNABLE_ON).forceAddTag(BlockTags.ANIMALS_SPAWNABLE_ON).forceAddTag(BlockTags.LEAVES).forceAddTag(BlockTags.LOGS);
+        this.getOrCreateTagBuilder(CaffeinatedBlockTags.HEATABLE_WATER_CAULDRONS).add(Blocks.WATER_CAULDRON);
         this.getOrCreateTagBuilder(CaffeinatedBlockTags.LIT_FIRES).forceAddTag(BlockTags.CAMPFIRES).forceAddTag(BlockTags.FIRE);
         this.getOrCreateTagBuilder(BlockTags.BEE_GROWABLES).add(CaffeinatedBlocks.COFFEE_SHRUB, CaffeinatedBlocks.FLOWERING_COFFEE_SHRUB);
         this.getOrCreateTagBuilder(BlockTags.CAMEL_SAND_STEP_SOUND_BLOCKS).add(CaffeinatedBlocks.GROUND_COFFEE_BLOCK);
