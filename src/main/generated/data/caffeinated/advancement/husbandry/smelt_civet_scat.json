@@ -1,0 +1,29 @@
+{
+  "parent": "minecraft:husbandry/root",
+  "criteria": {
+    "smelt_civet_scat": {
+      "conditions": {
+        "recipe_id": "caffeinated:coffee_beans_from_civet_scat"
+      },
+      "trigger": "minecraft:recipe_crafted"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.husbandry.smelt_civet_scat.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "caffeinated:civet_scat"
+    },
+    "title": {
+      "translate": "advancements.husbandry.smelt_civet_scat.title"
+    }
+  },
+  "requirements": [
+    [
+      "smelt_civet_scat"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

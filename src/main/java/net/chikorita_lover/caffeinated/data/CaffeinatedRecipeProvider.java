@@ -16,10 +16,13 @@ import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.util.Identifier;
 
 import java.util.concurrent.CompletableFuture;
 
 public class CaffeinatedRecipeProvider extends FabricRecipeProvider {
+    protected static final Identifier COFFEE_BEANS_FROM_CIVET_SCAT = Caffeinated.of(convertBetween(CaffeinatedItems.COFFEE_BEANS, CaffeinatedBlocks.CIVET_SCAT));
+
     public CaffeinatedRecipeProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
         super(output, registriesFuture);
     }
@@ -29,7 +32,7 @@ public class CaffeinatedRecipeProvider extends FabricRecipeProvider {
         final RecipeExporter farmersDelightExporter = this.withConditions(exporter, ResourceConditions.allModsLoaded("farmersdelight"));
 
         CookingRecipeJsonBuilder.createSmelting(Ingredient.ofItems(CaffeinatedItems.COFFEE_BERRIES), RecipeCategory.MISC, CaffeinatedItems.COFFEE_BEANS, 0.35F, 200).group(getItemPath(CaffeinatedItems.COFFEE_BEANS)).criterion(hasItem(CaffeinatedItems.COFFEE_BERRIES), conditionsFromItem(CaffeinatedItems.COFFEE_BERRIES)).offerTo(exporter);
-        CookingRecipeJsonBuilder.createSmelting(Ingredient.ofItems(CaffeinatedBlocks.CIVET_SCAT), RecipeCategory.MISC, CaffeinatedItems.COFFEE_BEANS, 0.35F, 200).criterion(hasItem(CaffeinatedBlocks.CIVET_SCAT), conditionsFromItem(CaffeinatedBlocks.CIVET_SCAT)).offerTo(exporter, Caffeinated.of(convertBetween(CaffeinatedItems.COFFEE_BEANS, CaffeinatedBlocks.CIVET_SCAT)));
+        CookingRecipeJsonBuilder.createSmelting(Ingredient.ofItems(CaffeinatedBlocks.CIVET_SCAT), RecipeCategory.MISC, CaffeinatedItems.COFFEE_BEANS, 0.35F, 200).criterion(hasItem(CaffeinatedBlocks.CIVET_SCAT), conditionsFromItem(CaffeinatedBlocks.CIVET_SCAT)).offerTo(exporter, COFFEE_BEANS_FROM_CIVET_SCAT);
 
         offer2x2CompactingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, CaffeinatedBlocks.COFFEE_BEAN_BLOCK, CaffeinatedItems.COFFEE_BEANS);
         offer2x2CompactingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, CaffeinatedBlocks.GROUND_COFFEE_BLOCK, CaffeinatedItems.GROUND_COFFEE);
