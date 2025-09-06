@@ -4,6 +4,7 @@
 	"package": "net.chikorita_lover.caffeinated.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
+		"DispenserBlockMixin",
 		"GrowCropsGoalMixin",
 		"HungerManagerMixin",
 		"ItemMixin",

@@ -9,3 +9,4 @@ accessible field net/minecraft/loot/entry/ItemEntry item Lnet/minecraft/registry
 accessible field net/minecraft/loot/LootPool$Builder entries Lcom/google/common/collect/ImmutableList$Builder;
 mutable field net/minecraft/loot/LootPool$Builder entries Lcom/google/common/collect/ImmutableList$Builder;
 accessible method net/minecraft/block/AbstractCauldronBlock getFluidHeight (Lnet/minecraft/block/BlockState;)D
+accessible method net/minecraft/block/dispenser/ItemDispenserBehavior addStackOrSpawn (Lnet/minecraft/util/math/BlockPointer;Lnet/minecraft/item/ItemStack;)V
