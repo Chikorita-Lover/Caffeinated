@@ -19,7 +19,7 @@ public class CaffeinatedItemTagProvider extends FabricTagProvider.ItemTagProvide
     @Override
     protected void configure(RegistryWrapper.WrapperLookup registries) {
         this.getOrCreateTagBuilder(CaffeinatedItemTags.CIVET_FOOD).forceAddTag(ConventionalItemTags.BERRY_FOODS);
-        this.getOrCreateTagBuilder(CaffeinatedItemTags.COFFEE_BOTTLES).add(CaffeinatedItems.COFFEE_BOTTLE, CaffeinatedItems.LATTE_COFFEE_BOTTLE, CaffeinatedItems.CAFE_MIEL_COFFEE_BOTTLE);
+        this.getOrCreateTagBuilder(CaffeinatedItemTags.COFFEE_BOTTLES).add(CaffeinatedItems.COFFEE_BOTTLE, CaffeinatedItems.MILK_COFFEE_BOTTLE, CaffeinatedItems.HONEY_COFFEE_BOTTLE);
         this.getOrCreateTagBuilder(CaffeinatedItemTags.COFFEE_FOOD).addTag(CaffeinatedItemTags.COFFEE_BOTTLES).add(CaffeinatedItems.COFFEE_BERRIES).add(CaffeinatedItems.TIRAMISU).add(CaffeinatedItems.TIRAMISU_SLICE);
         this.getOrCreateTagBuilder(ItemTags.WOOL).add(CaffeinatedBlocks.COFFEE_STAINED_WOOL.asItem());
         this.getOrCreateTagBuilder(ItemTags.WOOL_CARPETS).add(CaffeinatedBlocks.COFFEE_STAINED_CARPET.asItem());

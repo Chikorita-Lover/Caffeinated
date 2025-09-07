@@ -7,19 +7,20 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class CaffeLatteBottleItem extends CoffeeBottleItem {
-    public CaffeLatteBottleItem(Settings settings) {
-        super(settings, true);
+public class MilkCoffeeBottleItem extends CoffeeBottleItem {
+    public MilkCoffeeBottleItem(Settings settings) {
+        super(settings);
     }
 
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
         stack = super.finishUsing(stack, world, user);
         if (!world.isClient()) {
-            ArrayList<StatusEffectInstance> statusEffects = new ArrayList<>(user.getStatusEffects());
+            List<StatusEffectInstance> effects = new ArrayList<>(user.getStatusEffects());
             user.clearStatusEffects();
-            for (StatusEffectInstance effect : statusEffects) {
+            for (StatusEffectInstance effect : effects) {
                 if (effect.getEffectType() == CaffeinatedStatusEffects.CAFFEINE) {
                     user.addStatusEffect(effect);
                 } else if (effect.getAmplifier() > 0) {

@@ -1,14 +1,6 @@
 {
   "parent": "caffeinated:husbandry/brew_coffee",
   "criteria": {
-    "cafe_miel_coffee_bottle": {
-      "conditions": {
-        "item": {
-          "items": "caffeinated:cafe_miel_coffee_bottle"
-        }
-      },
-      "trigger": "minecraft:consume_item"
-    },
     "coffee_bottle": {
       "conditions": {
         "item": {
@@ -17,10 +9,18 @@
       },
       "trigger": "minecraft:consume_item"
     },
-    "latte_coffee_bottle": {
+    "honey_coffee_bottle": {
       "conditions": {
         "item": {
-          "items": "caffeinated:latte_coffee_bottle"
+          "items": "caffeinated:honey_coffee_bottle"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "milk_coffee_bottle": {
+      "conditions": {
+        "item": {
+          "items": "caffeinated:milk_coffee_bottle"
         }
       },
       "trigger": "minecraft:consume_item"
@@ -33,7 +33,7 @@
     "frame": "challenge",
     "icon": {
       "count": 1,
-      "id": "caffeinated:latte_coffee_bottle"
+      "id": "caffeinated:milk_coffee_bottle"
     },
     "title": {
       "translate": "advancements.husbandry.drink_all_coffee.title"
@@ -44,10 +44,10 @@
       "coffee_bottle"
     ],
     [
-      "latte_coffee_bottle"
+      "milk_coffee_bottle"
     ],
     [
-      "cafe_miel_coffee_bottle"
+      "honey_coffee_bottle"
     ]
   ],
   "rewards": {

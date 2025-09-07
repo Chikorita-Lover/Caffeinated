@@ -5,9 +5,9 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class CafeMielBottleItem extends CoffeeBottleItem {
-    public CafeMielBottleItem(Settings settings) {
-        super(settings, false);
+public class HoneyCoffeeBottleItem extends CoffeeBottleItem {
+    public HoneyCoffeeBottleItem(Settings settings) {
+        super(settings);
     }
 
     @Override

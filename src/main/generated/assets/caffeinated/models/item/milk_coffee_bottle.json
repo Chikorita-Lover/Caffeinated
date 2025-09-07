@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "caffeinated:item/cafe_miel_coffee_bottle"
+    "layer0": "caffeinated:item/milk_coffee_bottle"
   }
 }
