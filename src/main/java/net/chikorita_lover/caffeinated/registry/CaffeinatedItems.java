@@ -30,16 +30,9 @@ public class CaffeinatedItems {
     }
 
     public static void register() {
-        registerCompostingChances();
-    }
-
-    public static void registerCompostingChances() {
-        CompostingChanceRegistry.INSTANCE.add(CaffeinatedBlocks.COFFEE_BEAN_BLOCK, 0.65F);
-        CompostingChanceRegistry.INSTANCE.add(CaffeinatedBlocks.GROUND_COFFEE_BLOCK, 0.65F);
-        CompostingChanceRegistry.INSTANCE.add(CaffeinatedBlocks.CIVET_SCAT, 0.85F);
-        CompostingChanceRegistry.INSTANCE.add(COFFEE_BEANS, 0.5F);
+        CompostingChanceRegistry.INSTANCE.add(COFFEE_BEANS, 0.3F);
         CompostingChanceRegistry.INSTANCE.add(GROUND_COFFEE, 0.5F);
-        CompostingChanceRegistry.INSTANCE.add(COFFEE_BERRIES, 0.65F);
+        CompostingChanceRegistry.INSTANCE.add(COFFEE_BERRIES, 0.3F);
         CompostingChanceRegistry.INSTANCE.add(TIRAMISU, 1.0F);
         CompostingChanceRegistry.INSTANCE.add(TIRAMISU_SLICE, 0.85F);
     }

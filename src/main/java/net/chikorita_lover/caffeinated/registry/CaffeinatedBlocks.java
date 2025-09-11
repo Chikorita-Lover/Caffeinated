@@ -2,6 +2,7 @@ package net.chikorita_lover.caffeinated.registry;
 
 import net.chikorita_lover.caffeinated.Caffeinated;
 import net.chikorita_lover.caffeinated.block.*;
+import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.block.*;
 import net.minecraft.item.BlockItem;
@@ -39,6 +40,9 @@ public class CaffeinatedBlocks {
 
     public static void register() {
         registerFlammableBlocks();
+        CompostingChanceRegistry.INSTANCE.add(COFFEE_BEAN_BLOCK, 0.5F);
+        CompostingChanceRegistry.INSTANCE.add(GROUND_COFFEE_BLOCK, 0.65F);
+        CompostingChanceRegistry.INSTANCE.add(CIVET_SCAT, 0.85F);
     }
 
     private static void registerFlammableBlocks() {
