@@ -48,7 +48,7 @@ public class CaffeinatedRecipeProvider extends FabricRecipeProvider {
 
         ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, CaffeinatedItems.JAVA_BANNER_PATTERN).input(Items.PAPER).input(CaffeinatedItems.COFFEE_BOTTLE).criterion(hasItem(CaffeinatedItems.COFFEE_BOTTLE), conditionsFromItem(CaffeinatedItems.COFFEE_BOTTLE)).offerTo(exporter);
 
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.FOOD, CaffeinatedItems.TIRAMISU).input(CaffeinatedItems.COFFEE_BOTTLE).input(Items.WHEAT).input(Items.SUGAR).input(ConventionalItemTags.MILK_BUCKETS).input(Items.EGG).group(getItemPath(CaffeinatedItems.TIRAMISU)).criterion(hasItem(CaffeinatedItems.COFFEE_BOTTLE), conditionsFromItem(CaffeinatedItems.COFFEE_BOTTLE)).offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.FOOD, CaffeinatedItems.TIRAMISU).input('#', CaffeinatedItems.COFFEE_BOTTLE).input('W', Items.WHEAT).input('S', Items.SUGAR).input('M', ConventionalItemTags.MILK_DRINKS).input('C', Items.COCOA_BEANS).pattern("CCC").pattern("SMS").pattern("W#W").group(getItemPath(CaffeinatedItems.TIRAMISU)).criterion(hasItem(CaffeinatedItems.COFFEE_BOTTLE), conditionsFromItem(CaffeinatedItems.COFFEE_BOTTLE)).offerTo(exporter);
         ShapedRecipeJsonBuilder.create(RecipeCategory.FOOD, CaffeinatedItems.TIRAMISU).input('#', CaffeinatedItems.TIRAMISU_SLICE).pattern("##").pattern("##").group(getItemPath(CaffeinatedItems.TIRAMISU)).criterion(hasItem(CaffeinatedItems.TIRAMISU_SLICE), conditionsFromItem(CaffeinatedItems.TIRAMISU_SLICE)).offerTo(farmersDelightExporter, Caffeinated.of("tiramisu_from_slices"));
     }
 }

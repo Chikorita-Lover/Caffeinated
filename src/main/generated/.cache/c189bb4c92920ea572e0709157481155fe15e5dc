@@ -1,4 +1,4 @@
-// 1.21.1	2025-09-07T00:25:45.5345011	Caffeinated/Recipes
+// 1.21.1	2025-09-10T22:31:36.3886899	Caffeinated/Recipes
 c773cd5c995b67602b5f054f551a8f5d6f33d139 data\caffeinated\advancement\recipes\misc\coffee_beans.json
 fc02282e1585581cdd7b7c61a868bceed7db5d1b data\caffeinated\advancement\recipes\misc\coffee_beans_from_civet_scat.json
 6061a7a2ef7b2febcca08d801ffce55d131fda2b data\caffeinated\recipe\tiramisu_from_slices.json
@@ -23,7 +23,7 @@ a3089cb10cc080957830e10d1b276e6fb8e2845c data\caffeinated\advancement\recipes\fo
 e6061a3a68f93067a4057874be4ca45d0c759b01 data\caffeinated\recipe\java_banner_pattern.json
 1c90d5214cc2f466be11d17a52cde3d40f7d15d5 data\caffeinated\advancement\recipes\building_blocks\coffee_stained_wool.json
 514280f7d04586c23693c1dae8cf30241a810a24 data\caffeinated\advancement\recipes\building_blocks\coffee_berry_crate.json
-37dcb51343202c8b1a7ea94e22cdcf6c99a462ad data\caffeinated\recipe\tiramisu.json
+c6e969e3c23d8806aca925da5056e76cecd79ee9 data\caffeinated\recipe\tiramisu.json
 28fbe891feaa35e46b5015bbcd4693e28b79ab4c data\caffeinated\advancement\recipes\food\tiramisu.json
 c2ed0c8fa9984d704ee6bba4d60cf985da40fee8 data\caffeinated\advancement\recipes\food\coffee_berries.json
 ea5881f924bd7cef6e6da660f1fd92cdf3e2584a data\caffeinated\advancement\recipes\misc\java_banner_pattern.json
