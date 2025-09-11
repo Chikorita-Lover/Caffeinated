@@ -57,10 +57,7 @@ public class Caffeinated implements ModInitializer {
 
         LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
             if (key.equals(LootTables.JUNGLE_TEMPLE_CHEST)) {
-                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(CaffeinatedItems.COFFEE_BERRIES)).with(EmptyEntry.builder()));
-            }
-            if (key.equals(LootTables.SHIPWRECK_SUPPLY_CHEST)) {
-                LootModificationUtils.modifyPool(tableBuilder, 0, builder -> builder.with(ItemEntry.builder(CaffeinatedItems.COFFEE_BERRIES).weight(2).apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 5.0F)))));
+                tableBuilder.pool(LootPool.builder().with(ItemEntry.builder(CaffeinatedItems.COFFEE_BERRIES).apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 3.0F)))).with(EmptyEntry.builder()));
             }
             if (key.equals(LootTables.VILLAGE_SAVANNA_HOUSE_CHEST)) {
                 LootModificationUtils.modifyPool(tableBuilder, 0, builder -> builder.with(ItemEntry.builder(CaffeinatedItems.COFFEE_BERRIES).weight(5).apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 7.0F)))));
