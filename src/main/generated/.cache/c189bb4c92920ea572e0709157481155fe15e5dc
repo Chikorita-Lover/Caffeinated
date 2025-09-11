@@ -1,9 +1,9 @@
-// 1.21.1	2025-09-10T22:31:36.3886899	Caffeinated/Recipes
+// 1.21.1	2025-09-11T10:46:39.7507364	Caffeinated/Recipes
 c773cd5c995b67602b5f054f551a8f5d6f33d139 data\caffeinated\advancement\recipes\misc\coffee_beans.json
 fc02282e1585581cdd7b7c61a868bceed7db5d1b data\caffeinated\advancement\recipes\misc\coffee_beans_from_civet_scat.json
 6061a7a2ef7b2febcca08d801ffce55d131fda2b data\caffeinated\recipe\tiramisu_from_slices.json
 9e061efc3626a119413e61ca86a53990ab4f8a8a data\caffeinated\advancement\recipes\misc\ground_coffee_from_coffee_beans.json
-cffafb17fcb8dfbab6d4ea283a6ed1e9910cc606 data\caffeinated\recipe\coffee_beans_from_civet_scat.json
+3cbe6fadc8a831548bebd1e621f138fd5bde4a48 data\caffeinated\recipe\coffee_beans_from_civet_scat.json
 b8e94b6ab3e5b643e335a6036992426d7e3ed11c data\caffeinated\advancement\recipes\building_blocks\coffee_bean_block.json
 861e142a5a287eba94cf46a7d37342304f9ad285 data\caffeinated\recipe\ground_coffee_block.json
 c0c226ce1854c1aa133ac5392a6a40d18419bc37 data\caffeinated\advancement\recipes\building_blocks\coffee_stained_carpet_from_white_carpet.json

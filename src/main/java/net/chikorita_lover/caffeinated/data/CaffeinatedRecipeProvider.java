@@ -32,7 +32,7 @@ public class CaffeinatedRecipeProvider extends FabricRecipeProvider {
         final RecipeExporter farmersDelightExporter = this.withConditions(exporter, ResourceConditions.allModsLoaded("farmersdelight"));
 
         CookingRecipeJsonBuilder.createSmelting(Ingredient.ofItems(CaffeinatedItems.COFFEE_BERRIES), RecipeCategory.MISC, CaffeinatedItems.COFFEE_BEANS, 0.35F, 200).group(getItemPath(CaffeinatedItems.COFFEE_BEANS)).criterion(hasItem(CaffeinatedItems.COFFEE_BERRIES), conditionsFromItem(CaffeinatedItems.COFFEE_BERRIES)).offerTo(exporter);
-        CookingRecipeJsonBuilder.createSmelting(Ingredient.ofItems(CaffeinatedBlocks.CIVET_SCAT), RecipeCategory.MISC, CaffeinatedItems.COFFEE_BEANS, 0.35F, 200).criterion(hasItem(CaffeinatedBlocks.CIVET_SCAT), conditionsFromItem(CaffeinatedBlocks.CIVET_SCAT)).offerTo(exporter, COFFEE_BEANS_FROM_CIVET_SCAT);
+        CookingRecipeJsonBuilder.createSmelting(Ingredient.ofItems(CaffeinatedBlocks.CIVET_SCAT), RecipeCategory.MISC, CaffeinatedItems.COFFEE_BEANS, 0.35F, 200).group(getItemPath(CaffeinatedItems.COFFEE_BEANS)).criterion(hasItem(CaffeinatedBlocks.CIVET_SCAT), conditionsFromItem(CaffeinatedBlocks.CIVET_SCAT)).offerTo(exporter, COFFEE_BEANS_FROM_CIVET_SCAT);
 
         offer2x2CompactingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, CaffeinatedBlocks.COFFEE_BEAN_BLOCK, CaffeinatedItems.COFFEE_BEANS);
         offer2x2CompactingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, CaffeinatedBlocks.GROUND_COFFEE_BLOCK, CaffeinatedItems.GROUND_COFFEE);

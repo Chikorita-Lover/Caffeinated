@@ -3,6 +3,7 @@
   "category": "misc",
   "cookingtime": 200,
   "experience": 0.35,
+  "group": "coffee_beans",
   "ingredient": {
     "item": "caffeinated:civet_scat"
   },
